@@ -21,6 +21,7 @@ def setup():
             '--name=%s' % application_name,
             '--icon=icon.ico',
             '--add-data=%s' % database_path,
+            '--onefile',
             '--windowed',
         ])
     except:
