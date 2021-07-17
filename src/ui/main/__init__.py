@@ -7,8 +7,10 @@ from PyQt5.QtGui import QKeyEvent
 from PyQt5.QtWidgets import QDesktopWidget, QMainWindow
 from src.dao.verse_dao import VerseDAO
 from src.dao.version_dao import VersionDAO
+from src.error.invalid_reference import InvalidReferenceError
 from src.models.chapter_reference import ChapterReference
 from src.models.verse import Verse
+from src.models.verse_reference import VerseReference
 from src.ui.main.window import Ui_MainWindow
 from src.ui.projector import ProjectorWindow
 from src.ui.settings import SettingsWindow
@@ -120,12 +122,17 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def search(self):
         search_text = self.pesquisaLineEdit.text()
         if search_text != '':
-            with suppress(IndexError):
-                verses = verse_dao.search(
-                    search_text,
-                    self.current_version,
-                    limit=100
-                )
-                self.current_verse = verses[0]
-                self.set_occurrences(verses)
+            try:
+                version = self.current_version
+                verse_reference = VerseReference.from_str(search_text, version)
+                verse = verse_dao.get_by_verse_reference(verse_reference)
+                self.current_verse = verse
                 self.update_chapter()
+            except InvalidReferenceError:
+                with suppress(IndexError):
+                    verses = verse_dao.filter({
+                        'q': search_text,
+                        'version': self.current_version,
+                    }, limit=100)
+                    self.current_verse = verses[0]
+                    self.set_occurrences(verses)

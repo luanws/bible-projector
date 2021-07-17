@@ -1,5 +1,9 @@
 from __future__ import annotations
 
+import re
+
+from src.error.invalid_reference import InvalidReferenceError
+
 
 class VerseReference:
     book_name: str
@@ -15,6 +19,20 @@ class VerseReference:
 
     def __str__(self) -> str:
         return f'{self.book_name} {self.chapter_number}:{self.verse_number}'
+
+    def from_str(reference_str: str, version: str) -> VerseReference:
+        try:
+            regex = r'^(.+)\s+(\d+)[\s|:]+(\d+)$'
+            book, chapter_number, verse_number = re.search(
+                regex, reference_str).groups()
+            return VerseReference(
+                book_name=book,
+                chapter_number=int(chapter_number),
+                verse_number=int(verse_number),
+                version=version
+            )
+        except AttributeError:
+            raise InvalidReferenceError()
 
     def previous(self) -> VerseReference:
         return VerseReference(
