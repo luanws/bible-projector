@@ -35,7 +35,7 @@ def setup():
 
 class SetupScript(Script):
     def __str__(self) -> str:
-        return 'Setup'
+        return 'setup'
 
     def __call__(self):
         setup()
