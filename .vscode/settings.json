@@ -7,5 +7,9 @@
         "**/.DS_Store": true,
         "**/.mypy_cache": true,
         "**/__pycache__": true,
-    }
+    },
+    "cSpell.words": [
+        "isnumeric",
+        "pymenu"
+    ]
 }
