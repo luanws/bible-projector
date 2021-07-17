@@ -5,7 +5,7 @@ from scripts import Script
 
 class UpdateWindowsScript(Script):
     def __str__(self) -> str:
-        return 'Atualizar janelas do PyQt'
+        return 'atualizar janelas do PyQt'
 
     def __call__(self):
         current_path = os.path.abspath(os.getcwd())
