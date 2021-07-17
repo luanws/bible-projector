@@ -3,8 +3,7 @@ from typing import List, Optional
 
 import PyQt5.QtGui as QtGui
 from PyQt5 import QtCore
-from PyQt5.QtGui import QKeyEvent
-from PyQt5.QtWidgets import QDesktopWidget, QMainWindow
+from PyQt5.QtWidgets import QDesktopWidget, QMainWindow, QShortcut
 from src.dao.verse_dao import VerseDAO
 from src.dao.version_dao import VersionDAO
 from src.error.invalid_reference import InvalidReferenceError
@@ -42,6 +41,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.pesquisaLineEdit.returnPressed.connect(self.search)
         self.versoesComboBox.currentTextChanged.connect(self.update_version)
 
+        self.configure_hot_keys()
+
     @property
     def current_verse(self):
         return self.__current_verse
@@ -58,21 +59,27 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def update_version(self):
         self.current_version = self.versoesComboBox.currentText()
 
-    def keyPressEvent(self, event: QKeyEvent):
-        key = event.key()
-        if key == QtCore.Qt.Key_F4:
-            self.pesquisaLineEdit.setFocus(True)
-            self.pesquisaLineEdit.selectAll()
-        elif key == QtCore.Qt.Key_F5:
-            self.project()
-        elif key == QtCore.Qt.Key_Escape:
-            self.close_projector()
-        elif key == QtCore.Qt.Key_F6:
-            self.update_projector_text()
-        elif key == QtCore.Qt.Key_PageUp:
-            self.next_verse()
-        elif key == QtCore.Qt.Key_PageDown:
-            self.previous_verse()
+    def configure_hot_keys(self):
+        QShortcut(QtCore.Qt.Key_PageUp, self.projector_window).activated.connect(
+            self.next_verse)
+        QShortcut(QtCore.Qt.Key_PageDown, self.projector_window).activated.connect(
+            self.previous_verse)
+        QShortcut(QtCore.Qt.Key_PageUp, self).activated.connect(
+            self.next_verse)
+        QShortcut(QtCore.Qt.Key_PageDown, self).activated.connect(
+            self.previous_verse)
+        QShortcut(QtCore.Qt.Key_F4, self).activated.connect(
+            self.search_input_request_focus)
+        QShortcut(QtCore.Qt.Key_F5, self).activated.connect(
+            self.project)
+        QShortcut(QtCore.Qt.Key_Escape, self).activated.connect(
+            self.close_projector)
+        QShortcut(QtCore.Qt.Key_F6, self).activated.connect(
+            self.update_projector_text)
+
+    def search_input_request_focus(self):
+        self.pesquisaLineEdit.setFocus(True)
+        self.pesquisaLineEdit.selectAll()
 
     def previous_verse(self):
         try:
