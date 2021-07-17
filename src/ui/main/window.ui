@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>709</width>
+    <height>578</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Projetor bíblico</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_3">
+      <item>
+       <widget class="QComboBox" name="versoesComboBox">
+        <property name="styleSheet">
+         <string notr="true">* {
+	border-style: solid;
+	border-color: gray;
+	border-width: 1px;
+	border-radius: 3px;
+	padding: 4px;
+	background-color: rgb(220, 220, 220);
+	color: black;
+	width: 30px
+}</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="pesquisaLineEdit">
+        <property name="styleSheet">
+         <string notr="true">* {
+	border-style: solid;
+	border-color: gray;
+	border-width: 1px;
+	border-radius: 3px;
+	padding: 3px;
+	background-color: white;
+	color: black;
+}</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pesquisarButton">
+        <property name="cursor">
+         <cursorShape>PointingHandCursor</cursorShape>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">* {
+	border-style: solid;
+	border-color: gray;
+	border-width: 1px;
+	border-radius: 3px;
+	padding: 4px;
+	background-color: rgb(220, 220, 220);
+	color: black;
+}
+
+*:hover {
+	background-color: gray;
+	color: white;
+}</string>
+        </property>
+        <property name="text">
+         <string>Pesquisar</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="projetarButton">
+        <property name="cursor">
+         <cursorShape>PointingHandCursor</cursorShape>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">* {
+	border-style: solid;
+	border-color: gray;
+	border-width: 1px;
+	border-radius: 3px;
+	padding: 4px;
+	background-color: rgb(220, 220, 220);
+	color: black;
+}
+
+*:hover {
+	background-color: gray;
+	color: white;
+}</string>
+        </property>
+        <property name="text">
+         <string>Projetar</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="atualizarButton">
+        <property name="cursor">
+         <cursorShape>PointingHandCursor</cursorShape>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">* {
+	border-style: solid;
+	border-color: gray;
+	border-width: 1px;
+	border-radius: 3px;
+	padding: 4px;
+	background-color: rgb(220, 220, 220);
+	color: black;
+}
+
+*:hover {
+	background-color: gray;
+	color: white;
+}</string>
+        </property>
+        <property name="text">
+         <string>Atualizar</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="configuracoesButton">
+        <property name="cursor">
+         <cursorShape>PointingHandCursor</cursorShape>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">* {
+	border-style: solid;
+	border-color: gray;
+	border-width: 1px;
+	border-radius: 3px;
+	padding: 4px;
+	background-color: rgb(220, 220, 220);
+	color: black;
+}
+
+*:hover {
+	background-color: gray;
+	color: white;
+}</string>
+        </property>
+        <property name="text">
+         <string>Configurações</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QGridLayout" name="gridLayout" rowstretch="0,0,0,0" columnstretch="0,0,0,0">
+      <item row="3" column="0">
+       <widget class="QListView" name="chapterListView">
+        <property name="styleSheet">
+         <string notr="true">* {
+	border-style: solid;
+	border-color: gray;
+	border-width: 1px;
+	border-radius: 3px;
+	padding: 3px;
+	background-color: white;
+	color: black;
+	font-size: 10pt;
+}</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="3" rowspan="3">
+       <widget class="QListView" name="occurrencesListView">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>500</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">* {
+	border-style: solid;
+	border-color: gray;
+	border-width: 1px;
+	border-radius: 3px;
+	padding: 3px;
+	background-color: white;
+	color: black;
+	font-size: 10pt;
+}
+
+*:item {
+	margin-bottom: 10px;
+}</string>
+        </property>
+        <property name="editTriggers">
+         <set>QAbstractItemView::SelectedClicked</set>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="3">
+       <widget class="QLabel" name="ocorrenciasLabel">
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="text">
+         <string>Ocorrências</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="label_3">
+        <property name="text">
+         <string>Capítulo</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QTextEdit" name="previewTextEdit">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>200</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">* {
+	border-style: solid;
+	border-color: gray;
+	border-width: 1px;
+	border-radius: 3px;
+	background-color: white;
+	color: black;
+	font-size: 10pt;
+}</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_2">
+        <property name="text">
+         <string>Pré-visualização</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <spacer name="horizontalSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeType">
+         <enum>QSizePolicy::Fixed</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>5</width>
+          <height>0</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+  <action name="actionSair">
+   <property name="text">
+    <string>Sair</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
