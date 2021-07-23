@@ -109,19 +109,6 @@ class Ui_MainWindow(object):
         self.verticalLayout.addLayout(self.horizontalLayout_3)
         self.gridLayout = QtWidgets.QGridLayout()
         self.gridLayout.setObjectName("gridLayout")
-        self.chapter_list_view = QtWidgets.QListView(self.centralwidget)
-        self.chapter_list_view.setStyleSheet("* {\n"
-"    border-style: solid;\n"
-"    border-color: gray;\n"
-"    border-width: 1px;\n"
-"    border-radius: 3px;\n"
-"    padding: 3px;\n"
-"    background-color: white;\n"
-"    color: black;\n"
-"    font-size: 10pt;\n"
-"}")
-        self.chapter_list_view.setObjectName("chapter_list_view")
-        self.gridLayout.addWidget(self.chapter_list_view, 3, 0, 1, 1)
         self.occurrences_list_view = QtWidgets.QListView(self.centralwidget)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(0)
@@ -177,6 +164,9 @@ class Ui_MainWindow(object):
         self.gridLayout.addWidget(self.preview_label, 0, 0, 1, 1)
         spacerItem = QtWidgets.QSpacerItem(5, 0, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Minimum)
         self.gridLayout.addItem(spacerItem, 2, 1, 1, 1)
+        self.chapter_list_widget = QtWidgets.QListWidget(self.centralwidget)
+        self.chapter_list_widget.setObjectName("chapter_list_widget")
+        self.gridLayout.addWidget(self.chapter_list_widget, 3, 0, 1, 1)
         self.verticalLayout.addLayout(self.gridLayout)
         MainWindow.setCentralWidget(self.centralwidget)
         self.actionSair = QtWidgets.QAction(MainWindow)

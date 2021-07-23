@@ -156,22 +156,6 @@
     </item>
     <item>
      <layout class="QGridLayout" name="gridLayout" rowstretch="0,0,0,0" columnstretch="0,0,0,0">
-      <item row="3" column="0">
-       <widget class="QListView" name="chapter_list_view">
-        <property name="styleSheet">
-         <string notr="true">* {
-	border-style: solid;
-	border-color: gray;
-	border-width: 1px;
-	border-radius: 3px;
-	padding: 3px;
-	background-color: white;
-	color: black;
-	font-size: 10pt;
-}</string>
-        </property>
-       </widget>
-      </item>
       <item row="1" column="3" rowspan="3">
        <widget class="QListView" name="occurrences_list_view">
         <property name="sizePolicy">
@@ -276,6 +260,9 @@
          </size>
         </property>
        </spacer>
+      </item>
+      <item row="3" column="0">
+       <widget class="QListWidget" name="chapter_list_widget"/>
       </item>
      </layout>
     </item>

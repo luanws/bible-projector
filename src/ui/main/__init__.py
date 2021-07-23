@@ -1,8 +1,8 @@
 from contextlib import suppress
+from src.ui.main.widgets.chapter_widget import ChapterWidget
 from typing import List, Optional
 
-import PyQt5.QtGui as QtGui
-from PyQt5 import QtCore
+from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QDesktopWidget, QMainWindow, QShortcut
 from src.dao.verse_dao import VerseDAO
 from src.dao.version_dao import VersionDAO
@@ -104,7 +104,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             model.appendRow(item)
 
         self.occurrences_list_view.setModel(model)
-        self.ocorrenciasLabel.setText(f'Ocorrências: {len(verses)}')
+        self.occurrences_label.setText(f'Ocorrências: {len(verses)}')
 
     def update_projector_text(self):
         self.projector_window.text = self.preview_text_edit.toPlainText()
@@ -119,12 +119,14 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         current_chapter = verse_dao.get_by_chapter_reference(
             ChapterReference.from_verse_reference(self.current_verse.reference))
         self.current_chapter = current_chapter
-        model = QtGui.QStandardItemModel()
         for verse in current_chapter:
-            item = QtGui.QStandardItem()
-            item.setText(f"{verse.text} ({verse.reference})")
-            model.appendRow(item)
-        self.chapter_list_view.setModel(model)
+            chapter_widget = ChapterWidget(verse=verse)
+            list_widget_item = QtWidgets.QListWidgetItem(
+                self.chapter_list_widget)
+            list_widget_item.setSizeHint(chapter_widget.sizeHint())
+            self.chapter_list_widget.addItem(list_widget_item)
+            self.chapter_list_widget.setItemWidget(
+                list_widget_item, chapter_widget)
 
     def search(self):
         search_text = self.search_line_edit.text()
