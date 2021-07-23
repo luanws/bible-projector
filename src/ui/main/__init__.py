@@ -33,13 +33,13 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         screen = QDesktopWidget().screenGeometry(2)
         self.projector_window.move(screen.left(), screen.top())
 
-        self.versoesComboBox.addItems(self.versions)
+        self.versions_combo_box.addItems(self.versions)
         self.pesquisarButton.clicked.connect(self.search)
         self.projetarButton.clicked.connect(self.project)
         self.atualizarButton.clicked.connect(self.update_projector_text)
         self.configuracoesButton.clicked.connect(self.show_settings)
         self.pesquisaLineEdit.returnPressed.connect(self.search)
-        self.versoesComboBox.currentTextChanged.connect(self.update_version)
+        self.versions_combo_box.currentTextChanged.connect(self.update_version)
 
         self.configure_hot_keys()
 
@@ -57,7 +57,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.settings_window.show()
 
     def update_version(self):
-        self.current_version = self.versoesComboBox.currentText()
+        self.current_version = self.versions_combo_box.currentText()
 
     def configure_hot_keys(self):
         QShortcut(QtCore.Qt.Key_PageUp, self.projector_window).activated.connect(

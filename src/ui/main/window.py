@@ -1,6 +1,4 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
-
-
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
@@ -11,8 +9,8 @@ class Ui_MainWindow(object):
         self.verticalLayout.setObjectName("verticalLayout")
         self.horizontalLayout_3 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_3.setObjectName("horizontalLayout_3")
-        self.versoesComboBox = QtWidgets.QComboBox(self.centralwidget)
-        self.versoesComboBox.setStyleSheet("* {\n"
+        self.versions_combo_box = QtWidgets.QComboBox(self.centralwidget)
+        self.versions_combo_box.setStyleSheet("* {\n"
 "    border-style: solid;\n"
 "    border-color: gray;\n"
 "    border-width: 1px;\n"
@@ -22,8 +20,8 @@ class Ui_MainWindow(object):
 "    color: black;\n"
 "    width: 30px\n"
 "}")
-        self.versoesComboBox.setObjectName("versoesComboBox")
-        self.horizontalLayout_3.addWidget(self.versoesComboBox)
+        self.versions_combo_box.setObjectName("versions_combo_box")
+        self.horizontalLayout_3.addWidget(self.versions_combo_box)
         self.pesquisaLineEdit = QtWidgets.QLineEdit(self.centralwidget)
         self.pesquisaLineEdit.setStyleSheet("* {\n"
 "    border-style: solid;\n"
@@ -183,10 +181,8 @@ class Ui_MainWindow(object):
         MainWindow.setCentralWidget(self.centralwidget)
         self.actionSair = QtWidgets.QAction(MainWindow)
         self.actionSair.setObjectName("actionSair")
-
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
-
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Projetor bíblico"))

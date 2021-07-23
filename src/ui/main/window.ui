@@ -18,7 +18,7 @@
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout_3">
       <item>
-       <widget class="QComboBox" name="versoesComboBox">
+       <widget class="QComboBox" name="versions_combo_box">
         <property name="styleSheet">
          <string notr="true">* {
 	border-style: solid;
