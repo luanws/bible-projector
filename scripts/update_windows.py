@@ -18,8 +18,8 @@ def remove_comments_from_python_file(path: str):
     with open(path) as file:
         content = file.read()
 
-    content = re.sub(r'^#.*', '', content)
-    content = re.sub(r'^\n+', '', content)
+    content = re.sub(r'^#.*', '', content, flags=re.MULTILINE)
+    content = re.sub(r'^\n+', '', content, flags=re.MULTILINE)
 
     with open(path, 'w') as file:
         file.write(content)
