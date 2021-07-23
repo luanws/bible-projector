@@ -34,11 +34,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.projector_window.move(screen.left(), screen.top())
 
         self.versions_combo_box.addItems(self.versions)
-        self.pesquisarButton.clicked.connect(self.search)
-        self.projetarButton.clicked.connect(self.project)
-        self.atualizarButton.clicked.connect(self.update_projector_text)
-        self.configuracoesButton.clicked.connect(self.show_settings)
-        self.pesquisaLineEdit.returnPressed.connect(self.search)
+        self.search_button.clicked.connect(self.search)
+        self.project_button.clicked.connect(self.project)
+        self.update_button.clicked.connect(self.update_projector_text)
+        self.settings_button.clicked.connect(self.show_settings)
+        self.search_line_edit.returnPressed.connect(self.search)
         self.versions_combo_box.currentTextChanged.connect(self.update_version)
 
         self.configure_hot_keys()
@@ -50,7 +50,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     @current_verse.setter
     def current_verse(self, verse: Verse):
         self.__current_verse = verse
-        self.previewTextEdit.setText(f"{verse.text} ({verse.reference})")
+        self.preview_text_edit.setText(f"{verse.text} ({verse.reference})")
         self.update_projector_text()
 
     def show_settings(self):
@@ -78,22 +78,22 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.update_projector_text)
 
     def search_input_request_focus(self):
-        self.pesquisaLineEdit.setFocus(True)
-        self.pesquisaLineEdit.selectAll()
+        self.search_line_edit.setFocus(True)
+        self.search_line_edit.selectAll()
 
     def previous_verse(self):
         try:
             reference = self.current_verse.reference.previous()
             self.current_verse = verse_dao.get_by_verse_reference(reference)
         except Exception:
-            self.previewTextEdit.setText('Verso não encontrado')
+            self.preview_text_edit.setText('Verso não encontrado')
 
     def next_verse(self):
         try:
             reference = self.current_verse.reference.next()
             self.current_verse = verse_dao.get_by_verse_reference(reference)
         except Exception:
-            self.previewTextEdit.setText('Verso não encontrado')
+            self.preview_text_edit.setText('Verso não encontrado')
 
     def set_occurrences(self, verses: List[Verse]):
         model = QtGui.QStandardItemModel()
@@ -103,11 +103,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             item.setText(f"{verse.text} ({verse.reference})")
             model.appendRow(item)
 
-        self.occurrencesListView.setModel(model)
+        self.occurrences_list_view.setModel(model)
         self.ocorrenciasLabel.setText(f'Ocorrências: {len(verses)}')
 
     def update_projector_text(self):
-        self.projector_window.text = self.previewTextEdit.toPlainText()
+        self.projector_window.text = self.preview_text_edit.toPlainText()
 
     def close_projector(self):
         self.projector_window.close()
@@ -124,10 +124,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             item = QtGui.QStandardItem()
             item.setText(f"{verse.text} ({verse.reference})")
             model.appendRow(item)
-        self.chapterListView.setModel(model)
+        self.chapter_list_view.setModel(model)
 
     def search(self):
-        search_text = self.pesquisaLineEdit.text()
+        search_text = self.search_line_edit.text()
         if search_text != '':
             try:
                 version = self.current_version
