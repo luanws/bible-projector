@@ -3,8 +3,17 @@ from src.models.verse import Verse
 
 
 class ChapterVerseWidget (QtWidgets.QWidget):
-    def __init__(self, parent=None, *, verse: Verse):
+    def __init__(
+        self, parent=None, *,
+        verse: Verse,
+        list_widget_item: QtWidgets.QListWidgetItem,
+        list_widget: QtWidgets.QListWidget
+    ):
         super(ChapterVerseWidget, self).__init__(parent)
+
+        self.list_widget_item = list_widget_item
+        self.list_widget = list_widget
+
         self.container = QtWidgets.QHBoxLayout()
         self.verse_label = QtWidgets.QLabel()
         self.verse_number_label = QtWidgets.QLabel()
@@ -24,6 +33,7 @@ class ChapterVerseWidget (QtWidgets.QWidget):
         ''')
 
     def select(self):
+        self.list_widget.scrollToItem(self.list_widget_item)
         self.verse_label.setStyleSheet('''
             color: green;
         ''')

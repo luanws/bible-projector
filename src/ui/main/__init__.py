@@ -3,6 +3,7 @@ from typing import List, Optional
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QDesktopWidget, QMainWindow, QShortcut
+from sqlalchemy.orm.exc import NoResultFound
 from src.dao.verse_dao import VerseDAO
 from src.dao.version_dao import VersionDAO
 from src.error.invalid_reference import InvalidReferenceError
@@ -13,13 +14,14 @@ from src.ui.main.widgets.chapter_widget import ChapterVerseWidget
 from src.ui.main.window import Ui_MainWindow
 from src.ui.projector import ProjectorWindow
 from src.ui.settings import SettingsWindow
-from sqlalchemy.orm.exc import NoResultFound
 
 version_dao = VersionDAO()
 verse_dao = VerseDAO()
 
 
 class MainWindow(QMainWindow, Ui_MainWindow):
+    chapter_verse_widgets: Optional[List[ChapterVerseWidget]]
+
     def __init__(self, parent=None):
         super().__init__(parent)
         super().setupUi(self)
@@ -28,7 +30,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.current_version = self.versions[0]
         self.__current_verse: Optional[Verse] = None
         self.current_chapter: Optional[List[Verse]] = None
-        self.chapter_verse_widgets: Optional[List[ChapterVerseWidget]] = None
 
         self.settings_window = SettingsWindow()
         self.projector_window = ProjectorWindow()
@@ -131,15 +132,21 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         current_chapter = verse_dao.get_by_chapter_reference(
             ChapterReference.from_verse_reference(self.current_verse.reference))
         self.current_chapter = current_chapter
-        self.chapter_verse_widgets = [ChapterVerseWidget(
-            verse=verse) for verse in current_chapter]
-        for chapter_verse_widget in self.chapter_verse_widgets:
+        chapter_verse_widgets = []
+        for verse in current_chapter:
             list_widget_item = QtWidgets.QListWidgetItem(
                 self.chapter_list_widget)
+            chapter_verse_widget = ChapterVerseWidget(
+                verse=verse,
+                list_widget_item=list_widget_item,
+                list_widget=self.chapter_list_widget
+            )
             list_widget_item.setSizeHint(chapter_verse_widget.sizeHint())
             self.chapter_list_widget.addItem(list_widget_item)
             self.chapter_list_widget.setItemWidget(
                 list_widget_item, chapter_verse_widget)
+            chapter_verse_widgets.append(chapter_verse_widget)
+        self.chapter_verse_widgets = chapter_verse_widgets
 
     def search(self):
         search_text = self.search_line_edit.text()
