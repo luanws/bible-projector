@@ -16,6 +16,7 @@ class ChapterWidget (QtWidgets.QWidget):
         self.container.addWidget(self.verse_label)
         self.setLayout(self.container)
 
+        self.verse_label.setWordWrap(True)
         self.verse_number_label.setFixedWidth(24)
         self.verse_number_label.setStyleSheet('''
             color: #000088;
