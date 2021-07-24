@@ -1,5 +1,4 @@
 from contextlib import suppress
-from src.ui.main.widgets.chapter_widget import ChapterWidget
 from typing import List, Optional
 
 from PyQt5 import QtCore, QtGui, QtWidgets
@@ -10,6 +9,7 @@ from src.error.invalid_reference import InvalidReferenceError
 from src.models.chapter_reference import ChapterReference
 from src.models.verse import Verse
 from src.models.verse_reference import VerseReference
+from src.ui.main.widgets.chapter_widget import ChapterWidget
 from src.ui.main.window import Ui_MainWindow
 from src.ui.projector import ProjectorWindow
 from src.ui.settings import SettingsWindow
