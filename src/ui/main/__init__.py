@@ -9,7 +9,7 @@ from src.error.invalid_reference import InvalidReferenceError
 from src.models.chapter_reference import ChapterReference
 from src.models.verse import Verse
 from src.models.verse_reference import VerseReference
-from src.ui.main.widgets.chapter_widget import ChapterWidget
+from src.ui.main.widgets.chapter_widget import ChapterVerseWidget
 from src.ui.main.window import Ui_MainWindow
 from src.ui.projector import ProjectorWindow
 from src.ui.settings import SettingsWindow
@@ -27,6 +27,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.current_version = self.versions[0]
         self.__current_verse: Optional[Verse] = None
         self.current_chapter: Optional[List[Verse]] = None
+        self.chapter_verse_widgets: Optional[List[ChapterVerseWidget]] = None
 
         self.settings_window = SettingsWindow()
         self.projector_window = ProjectorWindow()
@@ -119,14 +120,15 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         current_chapter = verse_dao.get_by_chapter_reference(
             ChapterReference.from_verse_reference(self.current_verse.reference))
         self.current_chapter = current_chapter
-        for verse in current_chapter:
-            chapter_widget = ChapterWidget(verse=verse)
+        chapter_verse_widgets = [ChapterVerseWidget(
+            verse=verse) for verse in current_chapter]
+        for chapter_verse_widget in chapter_verse_widgets:
             list_widget_item = QtWidgets.QListWidgetItem(
                 self.chapter_list_widget)
-            list_widget_item.setSizeHint(chapter_widget.sizeHint())
+            list_widget_item.setSizeHint(chapter_verse_widget.sizeHint())
             self.chapter_list_widget.addItem(list_widget_item)
             self.chapter_list_widget.setItemWidget(
-                list_widget_item, chapter_widget)
+                list_widget_item, chapter_verse_widget)
 
     def search(self):
         search_text = self.search_line_edit.text()
