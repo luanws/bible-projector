@@ -22,3 +22,13 @@ class ChapterVerseWidget (QtWidgets.QWidget):
         self.verse_number_label.setStyleSheet('''
             color: #000088;
         ''')
+
+    def select(self):
+        self.verse_label.setStyleSheet('''
+            color: green;
+        ''')
+
+    def unselect(self):
+        self.verse_label.setStyleSheet('''
+            color: black;
+        ''')
