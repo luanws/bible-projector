@@ -2,9 +2,9 @@ from PyQt5 import QtWidgets
 from src.models.verse import Verse
 
 
-class ChapterWidget (QtWidgets.QWidget):
+class ChapterVerseWidget (QtWidgets.QWidget):
     def __init__(self, parent=None, *, verse: Verse):
-        super(ChapterWidget, self).__init__(parent)
+        super(ChapterVerseWidget, self).__init__(parent)
         self.container = QtWidgets.QHBoxLayout()
         self.verse_label = QtWidgets.QLabel()
         self.verse_number_label = QtWidgets.QLabel()
