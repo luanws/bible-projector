@@ -13,6 +13,7 @@ from src.ui.main.widgets.chapter_widget import ChapterVerseWidget
 from src.ui.main.window import Ui_MainWindow
 from src.ui.projector import ProjectorWindow
 from src.ui.settings import SettingsWindow
+from sqlalchemy.orm.exc import NoResultFound
 
 version_dao = VersionDAO()
 verse_dao = VerseDAO()
@@ -54,6 +55,13 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.preview_text_edit.setText(f"{verse.text} ({verse.reference})")
         self.update_projector_text()
 
+    def select_current_verse(self):
+        if self.chapter_verse_widgets is not None:
+            for chapter_verse_widget in self.chapter_verse_widgets:
+                chapter_verse_widget.unselect()
+            current_verse_number = self.current_verse.verse_number
+            self.chapter_verse_widgets[current_verse_number - 1].select()
+
     def show_settings(self):
         self.settings_window.show()
 
@@ -86,6 +94,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         try:
             reference = self.current_verse.reference.previous()
             self.current_verse = verse_dao.get_by_verse_reference(reference)
+            self.select_current_verse()
         except Exception:
             self.preview_text_edit.setText('Verso não encontrado')
 
@@ -93,6 +102,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         try:
             reference = self.current_verse.reference.next()
             self.current_verse = verse_dao.get_by_verse_reference(reference)
+            self.select_current_verse()
         except Exception:
             self.preview_text_edit.setText('Verso não encontrado')
 
@@ -117,12 +127,13 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.projector_window.showFullScreen()
 
     def update_chapter(self):
+        self.chapter_list_widget.clear()
         current_chapter = verse_dao.get_by_chapter_reference(
             ChapterReference.from_verse_reference(self.current_verse.reference))
         self.current_chapter = current_chapter
-        chapter_verse_widgets = [ChapterVerseWidget(
+        self.chapter_verse_widgets = [ChapterVerseWidget(
             verse=verse) for verse in current_chapter]
-        for chapter_verse_widget in chapter_verse_widgets:
+        for chapter_verse_widget in self.chapter_verse_widgets:
             list_widget_item = QtWidgets.QListWidgetItem(
                 self.chapter_list_widget)
             list_widget_item.setSizeHint(chapter_verse_widget.sizeHint())
@@ -139,6 +150,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 verse = verse_dao.get_by_verse_reference(verse_reference)
                 self.current_verse = verse
                 self.update_chapter()
+                self.select_current_verse()
             except InvalidReferenceError:
                 with suppress(IndexError):
                     verses = verse_dao.filter({
@@ -147,3 +159,5 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                     }, limit=100)
                     self.current_verse = verses[0]
                     self.set_occurrences(verses)
+            except NoResultFound:
+                self.preview_text_edit.setText('Texto não encontrado')
