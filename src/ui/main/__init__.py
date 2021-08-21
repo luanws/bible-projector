@@ -2,7 +2,8 @@ from contextlib import suppress
 from typing import List, Optional
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import QDesktopWidget, QMainWindow, QShortcut
+from PyQt5.QtWidgets import (QApplication, QDesktopWidget, QMainWindow,
+                             QShortcut)
 from sqlalchemy.orm.exc import NoResultFound
 from src.dao.verse_dao import VerseDAO
 from src.dao.version_dao import VersionDAO
@@ -125,9 +126,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.projector_window.close()
 
     def project(self):
-        screen = QDesktopWidget().screenGeometry(1)
-        self.projector_window.move(screen.left()*3/2, screen.top())
-        self.projector_window.showMaximized()
+        screen = QApplication.screens()[1]
+        self.projector_window.show()
+        self.projector_window.windowHandle().setScreen(screen)
         self.projector_window.showFullScreen()
 
     def update_chapter(self):
