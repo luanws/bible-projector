@@ -125,6 +125,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.projector_window.close()
 
     def project(self):
+        screen = QDesktopWidget().screenGeometry(1)
+        self.projector_window.move(screen.left()*3/2, screen.top())
+        self.projector_window.showMaximized()
         self.projector_window.showFullScreen()
 
     def update_chapter(self):
