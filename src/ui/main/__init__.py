@@ -2,6 +2,7 @@ from contextlib import suppress
 from typing import List, Optional
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtCore import QCoreApplication
 from PyQt5.QtWidgets import (QApplication, QDesktopWidget, QMainWindow,
                              QShortcut)
 from sqlalchemy.orm.exc import NoResultFound
@@ -26,6 +27,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def __init__(self, parent=None):
         super().__init__(parent)
         super().setupUi(self)
+
+        self.application: QCoreApplication = QCoreApplication.instance()
 
         self.versions = [v.version for v in version_dao.get_all()]
         self.current_version = self.versions[0]
@@ -91,6 +94,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def search_input_request_focus(self):
         self.search_line_edit.setFocus(True)
         self.search_line_edit.selectAll()
+
+    def closeEvent(self, a0: QtGui.QCloseEvent) -> None:
+        self.application.quit()
 
     def previous_verse(self):
         try:
