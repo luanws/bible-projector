@@ -11,7 +11,6 @@ application_name = 'Projetor bíblico'
 
 assets_folder_path = os.path.join('data')
 dist_folder_path = os.path.join('dist')
-database_path = os.path.join('data', 'bible.db;.', 'data')
 
 
 def setup():
@@ -20,7 +19,6 @@ def setup():
             'main.py',
             '--name=%s' % application_name,
             '--icon=icon.ico',
-            '--add-data=%s' % database_path,
             '--onefile',
             '--windowed',
         ])
