@@ -2,7 +2,7 @@ from contextlib import suppress
 from typing import List, Optional
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtCore import QCoreApplication
+from PyQt5.QtCore import QCoreApplication, Qt
 from PyQt5.QtWidgets import (QApplication, QDesktopWidget, QMainWindow,
                              QShortcut)
 from sqlalchemy.orm.exc import NoResultFound
@@ -74,22 +74,17 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.current_version = self.versions_combo_box.currentText()
 
     def configure_hot_keys(self):
-        QShortcut(QtCore.Qt.Key_PageUp, self.projector_window).activated.connect(
-            self.next_verse)
-        QShortcut(QtCore.Qt.Key_PageDown, self.projector_window).activated.connect(
-            self.previous_verse)
-        QShortcut(QtCore.Qt.Key_PageUp, self).activated.connect(
-            self.next_verse)
-        QShortcut(QtCore.Qt.Key_PageDown, self).activated.connect(
-            self.previous_verse)
-        QShortcut(QtCore.Qt.Key_F4, self).activated.connect(
-            self.search_input_request_focus)
-        QShortcut(QtCore.Qt.Key_F5, self).activated.connect(
-            self.project)
-        QShortcut(QtCore.Qt.Key_Escape, self).activated.connect(
-            self.close_projector)
-        QShortcut(QtCore.Qt.Key_F6, self).activated.connect(
-            self.update_projector_text)
+        hot_keys = [
+            (Qt.Key_PageUp, self.next_verse, self),
+            (Qt.Key_PageDown, self.previous_verse, self),
+            (Qt.Key_F4, self.search_input_request_focus, self),
+            (Qt.Key_F5, self.project, self),
+            (Qt.Key_F6, self.close_projector, self),
+            (Qt.Key_PageUp, self.next_verse, self.projector_window),
+            (Qt.Key_PageDown, self.previous_verse, self.projector_window),
+        ]
+        for hot_key, action, window in hot_keys:
+            QShortcut(hot_key, window).activated.connect(action)
 
     def search_input_request_focus(self):
         self.search_line_edit.setFocus(True)
