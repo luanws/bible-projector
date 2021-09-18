@@ -154,7 +154,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.chapter_verse_widgets = chapter_verse_widgets
 
     def search(self):
-        search_text = self.search_line_edit.text()
+        search_text: str = self.search_line_edit.text()
+        while search_text.__contains__('  '):
+            search_text = search_text.replace('  ', ' ')
         if search_text != '':
             try:
                 version = self.current_version
@@ -163,6 +165,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 self.current_verse = verse
                 self.update_chapter()
                 self.select_current_verse()
+                self.search_line_edit.setText(str(verse.reference))
             except InvalidReferenceError:
                 with suppress(IndexError):
                     verses = verse_dao.filter({
