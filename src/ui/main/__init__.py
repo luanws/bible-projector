@@ -82,6 +82,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             (Qt.Key_F6, self.close_projector, self),
             (Qt.Key_PageUp, self.next_verse, self.projector_window),
             (Qt.Key_PageDown, self.previous_verse, self.projector_window),
+            (Qt.Key_Escape, self.projector_window.close, self),
         ]
         for hot_key, action, window in hot_keys:
             QShortcut(hot_key, window).activated.connect(action)
