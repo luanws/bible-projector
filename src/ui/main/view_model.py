@@ -4,6 +4,7 @@ from PyQt5.QtCore import QCoreApplication
 from src.dao.verse_dao import VerseDAO
 from src.dao.version_dao import VersionDAO
 from src.error.invalid_reference import InvalidReferenceError
+from src.models.chapter_reference import ChapterReference
 from src.models.verse import Verse
 from src.models.verse_reference import VerseReference
 from src.models.version import Version
@@ -35,5 +36,11 @@ class MainViewModel:
             verse_reference = VerseReference.from_str(search_text, version)
             verse = self.verse_dao.get_by_verse_reference(verse_reference)
             self.current_verse = verse
+            self.__update_current_chapter(verse)
             return verse
         raise InvalidReferenceError
+
+    def __update_current_chapter(self, verse: Verse):
+        self.current_chapter = self.verse_dao.get_by_chapter_reference(
+            ChapterReference.from_verse_reference(verse.reference))
+        return self.current_chapter
