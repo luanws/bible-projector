@@ -32,8 +32,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         self.view_model = MainViewModel()
 
-        self.application: QCoreApplication = QCoreApplication.instance()
-
         self.settings_window = SettingsWindow()
         self.projector_window = ProjectorWindow()
         screen = QDesktopWidget().screenGeometry(2)
@@ -91,7 +89,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.search_line_edit.selectAll()
 
     def closeEvent(self, a0: QtGui.QCloseEvent) -> None:
-        self.application.quit()
+        self.view_model.application.quit()
 
     def previous_verse(self):
         try:
