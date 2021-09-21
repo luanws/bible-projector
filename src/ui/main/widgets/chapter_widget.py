@@ -38,11 +38,17 @@ class ChapterVerseWidget (QtWidgets.QWidget):
             color: #000088;
         ''')
 
+        self.verse_label.setStyleSheet('''
+            font-size: 12px;
+        ''')
+
     def select(self):
         if not self.selected:
             self.list_widget.scrollToItem(self.list_widget_item)
             self.verse_label.setStyleSheet('''
-                color: green;
+                color: #004;
+                font-size: 12px;
+                font-weight: bold;
             ''')
             self.selected = True
 
@@ -50,5 +56,7 @@ class ChapterVerseWidget (QtWidgets.QWidget):
         if self.selected:
             self.verse_label.setStyleSheet('''
                 color: black;
+                font-size: 12px;
+                font-weight: unset;
             ''')
             self.selected = False
