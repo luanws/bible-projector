@@ -1,4 +1,5 @@
 from contextlib import suppress
+from src.ui.main.view_model import MainViewModel
 from typing import List, Optional
 
 from PyQt5 import QtGui, QtWidgets
@@ -23,24 +24,22 @@ verse_dao = VerseDAO()
 
 class MainWindow(QMainWindow, Ui_MainWindow):
     chapter_verse_widgets: Optional[List[ChapterVerseWidget]]
+    view_model: MainViewModel
 
     def __init__(self, parent=None):
         super().__init__(parent)
         super().setupUi(self)
 
-        self.application: QCoreApplication = QCoreApplication.instance()
+        self.view_model = MainViewModel()
 
-        self.versions = [v.version for v in version_dao.get_all()]
-        self.current_version = self.versions[0]
-        self.__current_verse: Optional[Verse] = None
-        self.current_chapter: Optional[List[Verse]] = None
+        self.application: QCoreApplication = QCoreApplication.instance()
 
         self.settings_window = SettingsWindow()
         self.projector_window = ProjectorWindow()
         screen = QDesktopWidget().screenGeometry(2)
         self.projector_window.move(screen.left(), screen.top())
 
-        self.versions_combo_box.addItems(self.versions)
+        self.versions_combo_box.addItems(self.view_model.versions)
         self.search_button.clicked.connect(self.search)
         self.project_button.clicked.connect(self.project)
         self.update_button.clicked.connect(self.update_projector_text)
@@ -52,11 +51,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     @property
     def current_verse(self):
-        return self.__current_verse
+        return self.view_model.current_verse
 
     @current_verse.setter
     def current_verse(self, verse: Verse):
-        self.__current_verse = verse
+        self.view_model.current_verse = verse
         self.preview_text_edit.setText(f"{verse.text} ({verse.reference})")
         self.update_projector_text()
 
@@ -71,7 +70,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.settings_window.show()
 
     def update_version(self):
-        self.current_version = self.versions_combo_box.currentText()
+        self.view_model.current_version = self.versions_combo_box.currentText()
 
     def configure_hot_keys(self):
         hot_keys = [
@@ -137,7 +136,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.chapter_list_widget.clear()
         current_chapter = verse_dao.get_by_chapter_reference(
             ChapterReference.from_verse_reference(self.current_verse.reference))
-        self.current_chapter = current_chapter
+        self.view_model.current_chapter = current_chapter
         chapter_verse_widgets = []
         for verse in current_chapter:
             list_widget_item = QtWidgets.QListWidgetItem(
@@ -156,24 +155,13 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     def search(self):
         search_text: str = self.search_line_edit.text()
-        while search_text.__contains__('  '):
-            search_text = search_text.replace('  ', ' ')
-        if search_text != '':
-            try:
-                version = self.current_version
-                verse_reference = VerseReference.from_str(search_text, version)
-                verse = verse_dao.get_by_verse_reference(verse_reference)
-                self.current_verse = verse
-                self.update_chapter()
-                self.select_current_verse()
-                self.search_line_edit.setText(str(verse.reference))
-            except InvalidReferenceError:
-                with suppress(IndexError):
-                    verses = verse_dao.filter({
-                        'q': search_text,
-                        'version': self.current_version,
-                    }, limit=100)
-                    self.current_verse = verses[0]
-                    self.set_occurrences(verses)
-            except NoResultFound:
-                self.preview_text_edit.setText('Texto não encontrado')
+        try:
+            verse = self.view_model.search(search_text)
+            self.current_verse = verse
+            self.update_chapter()
+            self.select_current_verse()
+            self.search_line_edit.setText(str(verse.reference))
+        except InvalidReferenceError:
+            self.preview_text_edit.setText('Referência bíblica inválida')
+        except NoResultFound:
+            self.preview_text_edit.setText('Texto não encontrado')
