@@ -132,11 +132,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     def update_chapter(self):
         self.chapter_list_widget.clear()
-        current_chapter = verse_dao.get_by_chapter_reference(
-            ChapterReference.from_verse_reference(self.current_verse.reference))
-        self.view_model.current_chapter = current_chapter
         chapter_verse_widgets = []
-        for verse in current_chapter:
+        for verse in self.view_model.current_chapter:
             list_widget_item = QtWidgets.QListWidgetItem(
                 self.chapter_list_widget)
             chapter_verse_widget = ChapterVerseWidget(
