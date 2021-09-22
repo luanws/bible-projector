@@ -49,7 +49,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.preview_text_edit.setText(f"{verse.text} ({verse.reference})")
         self.update_projector_text()
 
-    def select_current_verse(self):
+    def select_current_verse_in_chapter(self):
         if self.chapter_verse_widgets is not None:
             for chapter_verse_widget in self.chapter_verse_widgets:
                 chapter_verse_widget.unselect()
@@ -86,14 +86,14 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def previous_verse(self):
         try:
             self.view_model.previous_verse()
-            self.select_current_verse()
+            self.select_current_verse_in_chapter()
         except Exception:
             self.preview_text_edit.setText('Verso não encontrado')
 
     def next_verse(self):
         try:
             self.view_model.next_verse()
-            self.select_current_verse()
+            self.select_current_verse_in_chapter()
         except Exception:
             self.preview_text_edit.setText('Verso não encontrado')
 
@@ -144,7 +144,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             verse = self.view_model.search(search_text)
             self.current_verse = verse
             self.update_chapter()
-            self.select_current_verse()
+            self.select_current_verse_in_chapter()
             self.search_line_edit.setText(str(verse.reference))
         except InvalidReferenceError:
             self.preview_text_edit.setText('Referência bíblica inválida')
