@@ -44,3 +44,15 @@ class MainViewModel:
         self.current_chapter = self.verse_dao.get_by_chapter_reference(
             ChapterReference.from_verse_reference(verse.reference))
         return self.current_chapter
+
+    def previous_verse(self) -> Verse:
+        if self.current_verse is None:
+            raise InvalidReferenceError('Nenhum verso selecionado')
+        reference = self.current_verse.reference.previous()
+        self.current_verse = self.verse_dao.get_by_verse_reference(reference)
+        return self.current_verse
+
+    def next_verse(self):
+        reference = self.current_verse.reference.next()
+        self.current_verse = self.verse_dao.get_by_verse_reference(reference)
+        return self.current_verse

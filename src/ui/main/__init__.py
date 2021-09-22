@@ -1,25 +1,17 @@
-from contextlib import suppress
-from src.ui.main.view_model import MainViewModel
 from typing import List, Optional
 
 from PyQt5 import QtGui, QtWidgets
-from PyQt5.QtCore import QCoreApplication, Qt
+from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import (QApplication, QDesktopWidget, QMainWindow,
                              QShortcut)
 from sqlalchemy.orm.exc import NoResultFound
-from src.dao.verse_dao import VerseDAO
-from src.dao.version_dao import VersionDAO
 from src.error.invalid_reference import InvalidReferenceError
-from src.models.chapter_reference import ChapterReference
 from src.models.verse import Verse
-from src.models.verse_reference import VerseReference
+from src.ui.main.view_model import MainViewModel
 from src.ui.main.widgets.chapter_widget import ChapterVerseWidget
 from src.ui.main.window import Ui_MainWindow
 from src.ui.projector import ProjectorWindow
 from src.ui.settings import SettingsWindow
-
-version_dao = VersionDAO()
-verse_dao = VerseDAO()
 
 
 class MainWindow(QMainWindow, Ui_MainWindow):
@@ -93,16 +85,14 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     def previous_verse(self):
         try:
-            reference = self.current_verse.reference.previous()
-            self.current_verse = verse_dao.get_by_verse_reference(reference)
+            self.view_model.previous_verse()
             self.select_current_verse()
         except Exception:
             self.preview_text_edit.setText('Verso não encontrado')
 
     def next_verse(self):
         try:
-            reference = self.current_verse.reference.next()
-            self.current_verse = verse_dao.get_by_verse_reference(reference)
+            self.view_model.next_verse()
             self.select_current_verse()
         except Exception:
             self.preview_text_edit.setText('Verso não encontrado')
