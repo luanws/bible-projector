@@ -1,4 +1,4 @@
-from typing import List, Optional
+from typing import Callable, List, Optional
 
 from PyQt5.QtCore import QCoreApplication
 from src.dao.verse_dao import VerseDAO
@@ -14,8 +14,20 @@ class MainViewModel:
     version_dao: VersionDAO
     verse_dao: VerseDAO
     current_version: Version
-    current_verse: Optional[Verse]
+    __current_verse: Optional[Verse]
     current_chapter: Optional[List[Verse]]
+    __on_change_current_verse_callable: Optional[Callable[[
+        Verse], None]] = None
+
+    @property
+    def current_verse(self) -> Optional[Verse]:
+        return self.__current_verse
+
+    @current_verse.setter
+    def current_verse(self, verse: Verse):
+        self.__current_verse = verse
+        if self.__on_change_current_verse_callable is not None:
+            self.__on_change_current_verse_callable(verse)
 
     def __init__(self):
         self.version_dao = VersionDAO()
@@ -27,6 +39,9 @@ class MainViewModel:
         self.current_version = self.versions[0]
         self.current_verse: Optional[Verse] = None
         self.current_chapter: Optional[List[Verse]] = None
+
+    def on_change_current_verse(self, callable: Callable[[Verse], None]):
+        self.__on_change_current_verse_callable = callable
 
     def search(self, search_text: str) -> Verse:
         if search_text != '':

@@ -23,6 +23,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         super().setupUi(self)
 
         self.view_model = MainViewModel()
+        self.view_model.on_change_current_verse(self.on_change_current_verse)
 
         self.settings_window = SettingsWindow()
         self.projector_window = ProjectorWindow()
@@ -39,13 +40,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         self.configure_hot_keys()
 
-    @property
-    def current_verse(self):
-        return self.view_model.current_verse
-
-    @current_verse.setter
-    def current_verse(self, verse: Verse):
-        self.view_model.current_verse = verse
+    def on_change_current_verse(self, verse: Verse):
         self.preview_text_edit.setText(f"{verse.text} ({verse.reference})")
         self.update_projector_text()
 
@@ -53,7 +48,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         if self.chapter_verse_widgets is not None:
             for chapter_verse_widget in self.chapter_verse_widgets:
                 chapter_verse_widget.unselect()
-            current_verse_number = self.current_verse.verse_number
+            current_verse_number = self.view_model.current_verse.verse_number
             self.chapter_verse_widgets[current_verse_number - 1].select()
 
     def show_settings(self):
@@ -142,7 +137,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         search_text: str = self.search_line_edit.text()
         try:
             verse = self.view_model.search(search_text)
-            self.current_verse = verse
+            self.view_model.current_verse = verse
             self.update_chapter()
             self.select_current_verse_in_chapter()
             self.search_line_edit.setText(str(verse.reference))
