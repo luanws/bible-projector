@@ -6,7 +6,7 @@ class ChapterVerseWidget(QtWidgets.QWidget):
     verse: Verse
     list_widget_item: QtWidgets.QListWidgetItem
     list_widget: QtWidgets.QListWidget
-    selected: bool
+    __selected: bool
 
     def __init__(
         self, parent=None, *,
@@ -16,7 +16,7 @@ class ChapterVerseWidget(QtWidgets.QWidget):
         super(ChapterVerseWidget, self).__init__(parent)
 
         self.list_widget_item = list_widget_item
-        self.selected = False
+        self.__selected = False
 
         self.container = QtWidgets.QHBoxLayout()
         self.verse_label = QtWidgets.QLabel()
@@ -41,19 +41,19 @@ class ChapterVerseWidget(QtWidgets.QWidget):
         ''')
 
     def select(self):
-        if not self.selected:
+        if not self.__selected:
             self.verse_label.setStyleSheet('''
                 color: #004;
                 font-size: 12px;
                 font-weight: bold;
             ''')
-            self.selected = True
+            self.__selected = True
 
     def unselect(self):
-        if self.selected:
+        if self.__selected:
             self.verse_label.setStyleSheet('''
                 color: black;
                 font-size: 12px;
                 font-weight: unset;
             ''')
-            self.selected = False
+            self.__selected = False
