@@ -20,11 +20,14 @@ class VerseReference:
     def __str__(self) -> str:
         return f'{self.book_name} {self.chapter_number}:{self.verse_number}'
 
+    @staticmethod
     def from_str(reference_str: str, version: str) -> VerseReference:
         try:
             regex = r'^(.+)\s+(\d+)[\s|:]+(\d+)$'
-            book, chapter_number, verse_number = re.search(
-                regex, reference_str).groups()
+            search_result = re.search(regex, reference_str)
+            if search_result is None:
+                raise InvalidReferenceError()
+            book, chapter_number, verse_number = search_result.groups()
             return VerseReference(
                 book_name=book,
                 chapter_number=int(chapter_number),
