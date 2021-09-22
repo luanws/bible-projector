@@ -82,13 +82,21 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def closeEvent(self, a0: QtGui.QCloseEvent) -> None:
         self.view_model.application.quit()
 
+    def scroll_to_chapter_verse_widget_by_index(self, index: int):
+        if self.chapter_verse_widgets is not None:
+            chapter_verse_widget = self.chapter_verse_widgets[index]
+            if chapter_verse_widget.visibleRegion().isEmpty():
+                self.chapter_list_widget.scrollToItem(
+                    self.current_chapter_verse_widget.list_widget_item)
+            else:
+                self.chapter_list_widget.scrollToItem(
+                    chapter_verse_widget.list_widget_item)
+
     def previous_verse(self):
         try:
             index = self.view_model.previous_verse()
             self.select_current_verse_in_chapter()
-            chapter_verse_widget = self.chapter_verse_widgets[index]
-            self.chapter_list_widget.scrollToItem(
-                chapter_verse_widget.list_widget_item)
+            self.scroll_to_chapter_verse_widget_by_index(index)
         except Exception:
             self.preview_text_edit.setText('Verso não encontrado')
 
@@ -96,9 +104,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         try:
             index = self.view_model.next_verse()
             self.select_current_verse_in_chapter()
-            chapter_verse_widget = self.chapter_verse_widgets[index]
-            self.chapter_list_widget.scrollToItem(
-                chapter_verse_widget.list_widget_item)
+            self.scroll_to_chapter_verse_widget_by_index(index)
         except Exception:
             self.preview_text_edit.setText('Verso não encontrado')
 
