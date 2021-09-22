@@ -40,6 +40,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         self.configure_hot_keys()
 
+    @property
+    def current_chapter_verse_widget(self):
+        return self.chapter_verse_widgets[self.view_model.current_verse.verse_number - 1]
+
     def on_change_current_verse(self, verse: Verse):
         self.preview_text_edit.setText(f"{verse.text} ({verse.reference})")
         self.update_projector_text()
@@ -48,8 +52,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         if self.chapter_verse_widgets is not None:
             for chapter_verse_widget in self.chapter_verse_widgets:
                 chapter_verse_widget.unselect()
-            current_verse_number = self.view_model.current_verse.verse_number
-            self.chapter_verse_widgets[current_verse_number - 1].select()
+            chapter_verse_widget = self.current_chapter_verse_widget
+            chapter_verse_widget.select()
 
     def show_settings(self):
         self.settings_window.show()
@@ -80,15 +84,21 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     def previous_verse(self):
         try:
-            self.view_model.previous_verse()
+            index = self.view_model.previous_verse()
             self.select_current_verse_in_chapter()
+            chapter_verse_widget = self.chapter_verse_widgets[index]
+            self.chapter_list_widget.scrollToItem(
+                chapter_verse_widget.list_widget_item)
         except Exception:
             self.preview_text_edit.setText('Verso não encontrado')
 
     def next_verse(self):
         try:
-            self.view_model.next_verse()
+            index = self.view_model.next_verse()
             self.select_current_verse_in_chapter()
+            chapter_verse_widget = self.chapter_verse_widgets[index]
+            self.chapter_list_widget.scrollToItem(
+                chapter_verse_widget.list_widget_item)
         except Exception:
             self.preview_text_edit.setText('Verso não encontrado')
 
@@ -124,7 +134,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             chapter_verse_widget = ChapterVerseWidget(
                 verse=verse,
                 list_widget_item=list_widget_item,
-                list_widget=self.chapter_list_widget
             )
             list_widget_item.setSizeHint(chapter_verse_widget.sizeHint())
             self.chapter_list_widget.addItem(list_widget_item)
@@ -140,6 +149,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.view_model.current_verse = verse
             self.update_chapter()
             self.select_current_verse_in_chapter()
+            self.chapter_list_widget.scrollToItem(
+                self.current_chapter_verse_widget.list_widget_item)
             self.search_line_edit.setText(str(verse.reference))
         except InvalidReferenceError:
             self.preview_text_edit.setText('Referência bíblica inválida')

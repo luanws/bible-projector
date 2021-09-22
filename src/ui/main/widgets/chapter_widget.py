@@ -2,7 +2,7 @@ from PyQt5 import QtWidgets
 from src.models.verse import Verse
 
 
-class ChapterVerseWidget (QtWidgets.QWidget):
+class ChapterVerseWidget(QtWidgets.QWidget):
     verse: Verse
     list_widget_item: QtWidgets.QListWidgetItem
     list_widget: QtWidgets.QListWidget
@@ -12,12 +12,10 @@ class ChapterVerseWidget (QtWidgets.QWidget):
         self, parent=None, *,
         verse: Verse,
         list_widget_item: QtWidgets.QListWidgetItem,
-        list_widget: QtWidgets.QListWidget
     ):
         super(ChapterVerseWidget, self).__init__(parent)
 
         self.list_widget_item = list_widget_item
-        self.list_widget = list_widget
         self.selected = False
 
         self.container = QtWidgets.QHBoxLayout()
@@ -44,7 +42,6 @@ class ChapterVerseWidget (QtWidgets.QWidget):
 
     def select(self):
         if not self.selected:
-            self.list_widget.scrollToItem(self.list_widget_item)
             self.verse_label.setStyleSheet('''
                 color: #004;
                 font-size: 12px;
