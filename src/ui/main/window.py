@@ -176,6 +176,7 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Projetor bíblico"))
+        self.search_line_edit.setPlaceholderText(_translate("MainWindow", "Referência (F4)"))
         self.search_button.setText(_translate("MainWindow", "Pesquisar"))
         self.project_button.setText(_translate("MainWindow", "Projetar"))
         self.update_button.setText(_translate("MainWindow", "Atualizar"))

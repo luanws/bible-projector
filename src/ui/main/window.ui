@@ -46,6 +46,9 @@
 	color: black;
 }</string>
         </property>
+        <property name="placeholderText">
+         <string>Referência (F4)</string>
+        </property>
        </widget>
       </item>
       <item>
