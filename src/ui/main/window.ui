@@ -159,51 +159,13 @@
     </item>
     <item>
      <layout class="QGridLayout" name="gridLayout" rowstretch="0,0,0,0" columnstretch="0,0,0,0">
-      <item row="1" column="3" rowspan="3">
-       <widget class="QListView" name="occurrences_list_view">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>500</width>
-          <height>16777215</height>
-         </size>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">* {
-	border-style: solid;
-	border-color: gray;
-	border-width: 1px;
-	border-radius: 3px;
-	padding: 3px;
-	background-color: white;
-	color: black;
-	font-size: 10pt;
-}
-
-*:item {
-	margin-bottom: 10px;
-}</string>
-        </property>
-        <property name="editTriggers">
-         <set>QAbstractItemView::SelectedClicked</set>
-        </property>
-        <property name="wordWrap">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
       <item row="0" column="3">
-       <widget class="QLabel" name="occurrences_label">
+       <widget class="QLabel" name="historic_label">
         <property name="styleSheet">
          <string notr="true"/>
         </property>
         <property name="text">
-         <string>Ocorrências</string>
+         <string>Histórico</string>
         </property>
        </widget>
       </item>
@@ -225,7 +187,7 @@
         <property name="maximumSize">
          <size>
           <width>16777215</width>
-          <height>200</height>
+          <height>160</height>
          </size>
         </property>
         <property name="styleSheet">
@@ -265,7 +227,48 @@
        </spacer>
       </item>
       <item row="3" column="0">
-       <widget class="QListWidget" name="chapter_list_widget"/>
+       <widget class="QListWidget" name="chapter_list_widget">
+        <property name="styleSheet">
+         <string notr="true">#chapter_list_widget {
+	border-style: solid;
+	border-color: gray;
+	border-width: 1px;
+	border-radius: 3px;
+	background-color: white;
+	color: black;
+	font-size: 10pt;
+	padding: 8px;
+}</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="3" rowspan="3">
+       <widget class="QListWidget" name="historic_list_widget">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>240</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">#historic_list_widget {
+	border-style: solid;
+	border-color: gray;
+	border-width: 1px;
+	border-radius: 3px;
+	background-color: white;
+	color: black;
+	font-size: 10pt;
+	padding: 8px;
+}</string>
+        </property>
+       </widget>
       </item>
      </layout>
     </item>

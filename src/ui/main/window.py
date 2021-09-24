@@ -109,35 +109,10 @@ class Ui_MainWindow(object):
         self.verticalLayout.addLayout(self.horizontalLayout_3)
         self.gridLayout = QtWidgets.QGridLayout()
         self.gridLayout.setObjectName("gridLayout")
-        self.occurrences_list_view = QtWidgets.QListView(self.centralwidget)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.occurrences_list_view.sizePolicy().hasHeightForWidth())
-        self.occurrences_list_view.setSizePolicy(sizePolicy)
-        self.occurrences_list_view.setMaximumSize(QtCore.QSize(500, 16777215))
-        self.occurrences_list_view.setStyleSheet("* {\n"
-"    border-style: solid;\n"
-"    border-color: gray;\n"
-"    border-width: 1px;\n"
-"    border-radius: 3px;\n"
-"    padding: 3px;\n"
-"    background-color: white;\n"
-"    color: black;\n"
-"    font-size: 10pt;\n"
-"}\n"
-"\n"
-"*:item {\n"
-"    margin-bottom: 10px;\n"
-"}")
-        self.occurrences_list_view.setEditTriggers(QtWidgets.QAbstractItemView.SelectedClicked)
-        self.occurrences_list_view.setWordWrap(True)
-        self.occurrences_list_view.setObjectName("occurrences_list_view")
-        self.gridLayout.addWidget(self.occurrences_list_view, 1, 3, 3, 1)
-        self.occurrences_label = QtWidgets.QLabel(self.centralwidget)
-        self.occurrences_label.setStyleSheet("")
-        self.occurrences_label.setObjectName("occurrences_label")
-        self.gridLayout.addWidget(self.occurrences_label, 0, 3, 1, 1)
+        self.historic_label = QtWidgets.QLabel(self.centralwidget)
+        self.historic_label.setStyleSheet("")
+        self.historic_label.setObjectName("historic_label")
+        self.gridLayout.addWidget(self.historic_label, 0, 3, 1, 1)
         self.chapter_label = QtWidgets.QLabel(self.centralwidget)
         self.chapter_label.setObjectName("chapter_label")
         self.gridLayout.addWidget(self.chapter_label, 2, 0, 1, 1)
@@ -147,7 +122,7 @@ class Ui_MainWindow(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.preview_text_edit.sizePolicy().hasHeightForWidth())
         self.preview_text_edit.setSizePolicy(sizePolicy)
-        self.preview_text_edit.setMaximumSize(QtCore.QSize(16777215, 200))
+        self.preview_text_edit.setMaximumSize(QtCore.QSize(16777215, 160))
         self.preview_text_edit.setStyleSheet("* {\n"
 "    border-style: solid;\n"
 "    border-color: gray;\n"
@@ -165,8 +140,37 @@ class Ui_MainWindow(object):
         spacerItem = QtWidgets.QSpacerItem(5, 0, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Minimum)
         self.gridLayout.addItem(spacerItem, 2, 1, 1, 1)
         self.chapter_list_widget = QtWidgets.QListWidget(self.centralwidget)
+        self.chapter_list_widget.setStyleSheet("#chapter_list_widget {\n"
+"    border-style: solid;\n"
+"    border-color: gray;\n"
+"    border-width: 1px;\n"
+"    border-radius: 3px;\n"
+"    background-color: white;\n"
+"    color: black;\n"
+"    font-size: 10pt;\n"
+"    padding: 8px;\n"
+"}")
         self.chapter_list_widget.setObjectName("chapter_list_widget")
         self.gridLayout.addWidget(self.chapter_list_widget, 3, 0, 1, 1)
+        self.historic_list_widget = QtWidgets.QListWidget(self.centralwidget)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.historic_list_widget.sizePolicy().hasHeightForWidth())
+        self.historic_list_widget.setSizePolicy(sizePolicy)
+        self.historic_list_widget.setMaximumSize(QtCore.QSize(240, 16777215))
+        self.historic_list_widget.setStyleSheet("#historic_list_widget {\n"
+"    border-style: solid;\n"
+"    border-color: gray;\n"
+"    border-width: 1px;\n"
+"    border-radius: 3px;\n"
+"    background-color: white;\n"
+"    color: black;\n"
+"    font-size: 10pt;\n"
+"    padding: 8px;\n"
+"}")
+        self.historic_list_widget.setObjectName("historic_list_widget")
+        self.gridLayout.addWidget(self.historic_list_widget, 1, 3, 3, 1)
         self.verticalLayout.addLayout(self.gridLayout)
         MainWindow.setCentralWidget(self.centralwidget)
         self.actionSair = QtWidgets.QAction(MainWindow)
@@ -181,7 +185,7 @@ class Ui_MainWindow(object):
         self.project_button.setText(_translate("MainWindow", "Projetar"))
         self.update_button.setText(_translate("MainWindow", "Atualizar"))
         self.settings_button.setText(_translate("MainWindow", "Configurações"))
-        self.occurrences_label.setText(_translate("MainWindow", "Ocorrências"))
+        self.historic_label.setText(_translate("MainWindow", "Histórico"))
         self.chapter_label.setText(_translate("MainWindow", "Capítulo"))
         self.preview_label.setText(_translate("MainWindow", "Pré-visualização"))
         self.actionSair.setText(_translate("MainWindow", "Sair"))
