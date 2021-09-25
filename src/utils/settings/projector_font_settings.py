@@ -1,7 +1,6 @@
 from src.utils.settings import Settings
 
 
-class FontSettings(Settings):
-    font_size: int = 12
+class ProjectorFontSettings(Settings):
+    font_size: int = 28
     font_family: str = 'Arial'
-

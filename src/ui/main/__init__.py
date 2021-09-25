@@ -15,22 +15,22 @@ from src.ui.settings import SettingsWindow
 
 
 class MainWindow(QMainWindow, Ui_MainWindow):
+    __view_model: MainViewModel
     chapter_verse_widgets: Optional[List[ChapterVerseWidget]]
-    view_model: MainViewModel
 
     def __init__(self, parent=None):
         super().__init__(parent)
         super().setupUi(self)
 
-        self.view_model = MainViewModel()
-        self.view_model.on_change_current_verse(self.on_change_current_verse)
+        self.__view_model = MainViewModel()
+        self.__view_model.on_change_current_verse(self.on_change_current_verse)
 
         self.settings_window = SettingsWindow()
         self.projector_window = ProjectorWindow()
         screen = QDesktopWidget().screenGeometry(2)
         self.projector_window.move(screen.left(), screen.top())
 
-        self.versions_combo_box.addItems(self.view_model.versions)
+        self.versions_combo_box.addItems(self.__view_model.versions)
         self.search_button.clicked.connect(self.search)
         self.project_button.clicked.connect(self.project)
         self.update_button.clicked.connect(self.update_projector_text)
@@ -42,7 +42,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     @property
     def current_chapter_verse_widget(self):
-        return self.chapter_verse_widgets[self.view_model.current_verse.verse_number - 1]
+        return self.chapter_verse_widgets[self.__view_model.current_verse.verse_number - 1]
 
     def on_change_current_verse(self, verse: Verse):
         self.preview_text_edit.setText(f"{verse.text} ({verse.reference})")
@@ -59,7 +59,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.settings_window.show()
 
     def update_version(self):
-        self.view_model.current_version = self.versions_combo_box.currentText()
+        self.__view_model.current_version = self.versions_combo_box.currentText()
 
     def configure_hot_keys(self):
         hot_keys = [
@@ -80,7 +80,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.search_line_edit.selectAll()
 
     def closeEvent(self, a0: QtGui.QCloseEvent) -> None:
-        self.view_model.application.quit()
+        self.__view_model.application.quit()
 
     def scroll_to_chapter_verse_widget_by_index(self, index: int):
         if self.chapter_verse_widgets is not None:
@@ -94,7 +94,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     def previous_verse(self):
         try:
-            index = self.view_model.previous_verse()
+            index = self.__view_model.previous_verse()
             self.select_current_verse_in_chapter()
             self.scroll_to_chapter_verse_widget_by_index(index)
         except Exception:
@@ -102,7 +102,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     def next_verse(self):
         try:
-            index = self.view_model.next_verse()
+            index = self.__view_model.next_verse()
             self.select_current_verse_in_chapter()
             self.scroll_to_chapter_verse_widget_by_index(index)
         except Exception:
@@ -134,7 +134,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def update_chapter(self):
         self.chapter_list_widget.clear()
         chapter_verse_widgets = []
-        for verse in self.view_model.current_chapter:
+        for verse in self.__view_model.current_chapter:
             list_widget_item = QtWidgets.QListWidgetItem(
                 self.chapter_list_widget)
             chapter_verse_widget = ChapterVerseWidget(
@@ -151,8 +151,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def search(self):
         search_text: str = self.search_line_edit.text()
         try:
-            verse = self.view_model.search(search_text)
-            self.view_model.current_verse = verse
+            verse = self.__view_model.search(search_text)
+            self.__view_model.current_verse = verse
             self.update_chapter()
             self.select_current_verse_in_chapter()
             self.chapter_list_widget.scrollToItem(
