@@ -59,11 +59,11 @@ class MainViewModel:
             verse = self.verse_dao.get_by_verse_reference(verse_reference)
             self.__add_verse_in_history(verse)
             self.current_verse = verse
-            self.__update_current_chapter(verse)
+            self.update_current_chapter(verse)
             return verse
         raise InvalidReferenceError
 
-    def __update_current_chapter(self, verse: Verse):
+    def update_current_chapter(self, verse: Verse):
         self.current_chapter = self.verse_dao.get_by_chapter_reference(
             ChapterReference.from_verse_reference(verse.reference))
         return self.current_chapter

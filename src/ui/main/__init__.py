@@ -51,6 +51,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     def on_history_click(self, verse: Verse):
         self.__view_model.current_verse = verse
+        self.__view_model.update_current_chapter(verse)
+        self.update_chapter()
+        self.select_current_verse_in_chapter()
 
     def select_current_verse_in_chapter(self):
         if self.chapter_verse_widgets is not None:
