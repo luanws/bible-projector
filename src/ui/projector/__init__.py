@@ -1,4 +1,4 @@
-from PyQt5 import QtCore
+from PyQt5 import QtCore, QtGui
 from PyQt5.QtGui import QKeyEvent
 from PyQt5.QtWidgets import QMainWindow
 from src.ui.projector.view_model import ProjectorViewModel
@@ -9,6 +9,8 @@ class ProjectorWindow(QMainWindow, Ui_MainWindow):
     def __init__(self, parent=None):
         super().__init__(parent)
         super().setupUi(self)
+
+        self.setWindowIcon(QtGui.QIcon('icon.ico'))
 
         self.__view_model = ProjectorViewModel()
         self.__view_model.on_change_text(self.on_change_text)
