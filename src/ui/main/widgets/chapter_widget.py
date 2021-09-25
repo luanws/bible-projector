@@ -29,13 +29,19 @@ class ChapterVerseWidget(QtWidgets.QWidget):
         self.container.addWidget(self.verse_label)
         self.setLayout(self.container)
 
-        self.container.setContentsMargins(0, 0, 0, 8)
-        self.verse_label.setWordWrap(True)
+        self.configure_stylesheets()
+
+    def configure_stylesheets(self):
+        self.container.setContentsMargins(8, 8, 8, 8)
+
         self.verse_number_label.setFixedWidth(24)
         self.verse_number_label.setStyleSheet('''
             color: #000088;
         ''')
 
+        self.verse_label.setWordWrap(True)
+        self.verse_label.setMaximumHeight(48)
+        self.verse_label.setMinimumHeight(48)
         self.verse_label.setStyleSheet('''
             font-size: 12px;
         ''')

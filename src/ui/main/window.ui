@@ -237,7 +237,6 @@
 	background-color: white;
 	color: black;
 	font-size: 10pt;
-	padding: 8px;
 }</string>
         </property>
        </widget>

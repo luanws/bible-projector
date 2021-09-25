@@ -148,7 +148,6 @@ class Ui_MainWindow(object):
 "    background-color: white;\n"
 "    color: black;\n"
 "    font-size: 10pt;\n"
-"    padding: 8px;\n"
 "}")
         self.chapter_list_widget.setObjectName("chapter_list_widget")
         self.gridLayout.addWidget(self.chapter_list_widget, 3, 0, 1, 1)
