@@ -6,7 +6,7 @@ from src.models.verse import Verse
 class HistoryWidget(QtWidgets.QWidget):
     verse: Verse
     list_widget_item: QtWidgets.QListWidgetItem
-    on_click_callable: Optional[Callable[[Verse], None]]
+    __on_click_callable: Optional[Callable[[Verse], None]]
 
     def __init__(
         self, parent=None, *,
@@ -18,7 +18,7 @@ class HistoryWidget(QtWidgets.QWidget):
 
         self.verse = verse
         self.list_widget_item = list_widget_item
-        self.on_click_callable = on_click
+        self.__on_click_callable = on_click
 
         self.container = QtWidgets.QHBoxLayout()
         self.reference_button = QtWidgets.QPushButton()
@@ -35,8 +35,8 @@ class HistoryWidget(QtWidgets.QWidget):
         self.reference_button.clicked.connect(self.on_reference_label_click)
 
     def on_reference_label_click(self):
-        if self.on_click_callable:
-            self.on_click_callable(self.verse)
+        if self.__on_click_callable:
+            self.__on_click_callable(self.verse)
 
     def configure_stylesheets(self):
         self.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))

@@ -57,6 +57,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.chapter_list_widget.scrollToItem(
             self.current_chapter_verse_widget.list_widget_item)
 
+    def on_chapter_verse_click(self, verse: Verse):
+        self.__view_model.current_verse = verse
+        self.select_current_verse_in_chapter()
+
     def select_current_verse_in_chapter(self):
         if self.chapter_verse_widgets is not None:
             for chapter_verse_widget in self.chapter_verse_widgets:
@@ -149,6 +153,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             chapter_verse_widget = ChapterVerseWidget(
                 verse=verse,
                 list_widget_item=list_widget_item,
+                on_click=self.on_chapter_verse_click,
             )
             list_widget_item.setSizeHint(chapter_verse_widget.sizeHint())
             self.chapter_list_widget.addItem(list_widget_item)
