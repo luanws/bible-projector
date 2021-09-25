@@ -26,46 +26,11 @@ class Ui_MainWindow(object):
         self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
         self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContents)
         self.verticalLayout_2.setObjectName("verticalLayout_2")
-        self.label = QtWidgets.QLabel(self.scrollAreaWidgetContents)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.label.sizePolicy().hasHeightForWidth())
-        self.label.setSizePolicy(sizePolicy)
-        self.label.setObjectName("label")
-        self.verticalLayout_2.addWidget(self.label)
-        self.horizontalLayout = QtWidgets.QHBoxLayout()
-        self.horizontalLayout.setObjectName("horizontalLayout")
-        self.preview_text_line_edit = QtWidgets.QLineEdit(self.scrollAreaWidgetContents)
-        self.preview_text_line_edit.setStyleSheet("* {\n"
-"    border-style: solid;\n"
-"    border-color: gray;\n"
-"    border-width: 1px;\n"
-"    border-radius: 3px;\n"
-"    padding: 3px;\n"
-"    background-color: white;\n"
-"    color: black;\n"
-"}")
-        self.preview_text_line_edit.setPlaceholderText("")
-        self.preview_text_line_edit.setObjectName("preview_text_line_edit")
-        self.horizontalLayout.addWidget(self.preview_text_line_edit)
-        self.font_family_combo_box = QtWidgets.QFontComboBox(self.scrollAreaWidgetContents)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.font_family_combo_box.sizePolicy().hasHeightForWidth())
-        self.font_family_combo_box.setSizePolicy(sizePolicy)
-        self.font_family_combo_box.setStyleSheet("* {\n"
-"    border-style: solid;\n"
-"    border-color: gray;\n"
-"    border-width: 1px;\n"
-"    border-radius: 3px;\n"
-"    padding: 3px;\n"
-"    background-color: white;\n"
-"    color: black;\n"
-"}")
-        self.font_family_combo_box.setObjectName("font_family_combo_box")
-        self.horizontalLayout.addWidget(self.font_family_combo_box)
+        self.verticalLayout_3 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_3.setObjectName("verticalLayout_3")
+        self.gridLayout = QtWidgets.QGridLayout()
+        self.gridLayout.setSpacing(8)
+        self.gridLayout.setObjectName("gridLayout")
         self.font_size_spin_box = QtWidgets.QSpinBox(self.scrollAreaWidgetContents)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
@@ -83,14 +48,55 @@ class Ui_MainWindow(object):
 "    background-color: white;\n"
 "    color: black;\n"
 "}")
+        self.font_size_spin_box.setMaximum(1638)
         self.font_size_spin_box.setObjectName("font_size_spin_box")
-        self.horizontalLayout.addWidget(self.font_size_spin_box)
+        self.gridLayout.addWidget(self.font_size_spin_box, 3, 1, 1, 1)
+        self.font_family_combo_box = QtWidgets.QFontComboBox(self.scrollAreaWidgetContents)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.font_family_combo_box.sizePolicy().hasHeightForWidth())
+        self.font_family_combo_box.setSizePolicy(sizePolicy)
+        self.font_family_combo_box.setStyleSheet("* {\n"
+"    border-style: solid;\n"
+"    border-color: gray;\n"
+"    border-width: 1px;\n"
+"    border-radius: 3px;\n"
+"    padding: 3px;\n"
+"    background-color: white;\n"
+"    color: black;\n"
+"}")
+        self.font_family_combo_box.setObjectName("font_family_combo_box")
+        self.gridLayout.addWidget(self.font_family_combo_box, 3, 0, 1, 1)
+        self.label_2 = QtWidgets.QLabel(self.scrollAreaWidgetContents)
+        self.label_2.setObjectName("label_2")
+        self.gridLayout.addWidget(self.label_2, 2, 2, 1, 1)
+        self.margin_spin_box = QtWidgets.QSpinBox(self.scrollAreaWidgetContents)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.margin_spin_box.sizePolicy().hasHeightForWidth())
+        self.margin_spin_box.setSizePolicy(sizePolicy)
+        self.margin_spin_box.setMinimumSize(QtCore.QSize(50, 0))
+        self.margin_spin_box.setStyleSheet("* {\n"
+"    border-style: solid;\n"
+"    border-color: gray;\n"
+"    border-width: 1px;\n"
+"    border-radius: 3px;\n"
+"    padding: 3px;\n"
+"    background-color: white;\n"
+"    color: black;\n"
+"}")
+        self.margin_spin_box.setMaximum(1000000)
+        self.margin_spin_box.setObjectName("margin_spin_box")
+        self.gridLayout.addWidget(self.margin_spin_box, 3, 2, 1, 1)
         self.apply_button = QtWidgets.QPushButton(self.scrollAreaWidgetContents)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.apply_button.sizePolicy().hasHeightForWidth())
         self.apply_button.setSizePolicy(sizePolicy)
+        self.apply_button.setMinimumSize(QtCore.QSize(71, 0))
         self.apply_button.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.apply_button.setStyleSheet("* {\n"
 "    border-style: solid;\n"
@@ -107,8 +113,32 @@ class Ui_MainWindow(object):
 "    color: white;\n"
 "}")
         self.apply_button.setObjectName("apply_button")
-        self.horizontalLayout.addWidget(self.apply_button)
-        self.verticalLayout_2.addLayout(self.horizontalLayout)
+        self.gridLayout.addWidget(self.apply_button, 1, 2, 1, 1)
+        self.preview_text_line_edit = QtWidgets.QLineEdit(self.scrollAreaWidgetContents)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.preview_text_line_edit.sizePolicy().hasHeightForWidth())
+        self.preview_text_line_edit.setSizePolicy(sizePolicy)
+        self.preview_text_line_edit.setStyleSheet("border-style: solid;\n"
+"border-color: gray;\n"
+"border-width: 1px;\n"
+"border-radius: 3px;\n"
+"padding: 3px;\n"
+"background-color: white;\n"
+"color: black;")
+        self.preview_text_line_edit.setPlaceholderText("")
+        self.preview_text_line_edit.setObjectName("preview_text_line_edit")
+        self.gridLayout.addWidget(self.preview_text_line_edit, 1, 0, 1, 2)
+        self.label = QtWidgets.QLabel(self.scrollAreaWidgetContents)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.label.sizePolicy().hasHeightForWidth())
+        self.label.setSizePolicy(sizePolicy)
+        self.label.setObjectName("label")
+        self.gridLayout.addWidget(self.label, 2, 0, 1, 2)
+        self.verticalLayout_3.addLayout(self.gridLayout)
         self.preview_label = QtWidgets.QLabel(self.scrollAreaWidgetContents)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(0)
@@ -127,7 +157,8 @@ class Ui_MainWindow(object):
         self.preview_label.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.preview_label.setWordWrap(True)
         self.preview_label.setObjectName("preview_label")
-        self.verticalLayout_2.addWidget(self.preview_label)
+        self.verticalLayout_3.addWidget(self.preview_label)
+        self.verticalLayout_2.addLayout(self.verticalLayout_3)
         self.scrollArea.setWidget(self.scrollAreaWidgetContents)
         self.verticalLayout.addWidget(self.scrollArea)
         MainWindow.setCentralWidget(self.centralwidget)
@@ -136,7 +167,8 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Configurações"))
-        self.label.setText(_translate("MainWindow", "Fonte:"))
-        self.preview_text_line_edit.setText(_translate("MainWindow", "Texto de teste"))
+        self.label_2.setText(_translate("MainWindow", "Margem"))
         self.apply_button.setText(_translate("MainWindow", "Aplicar"))
+        self.preview_text_line_edit.setText(_translate("MainWindow", "Texto de teste"))
+        self.label.setText(_translate("MainWindow", "Fonte:"))
         self.preview_label.setText(_translate("MainWindow", "Texto de teste"))

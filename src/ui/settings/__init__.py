@@ -16,6 +16,7 @@ class SettingsWindow(QMainWindow, Ui_MainWindow):
 
         self.apply_button.clicked.connect(self.on_click_apply)
         self.font_size_spin_box.valueChanged.connect(self.on_change_font_size)
+        self.margin_spin_box.valueChanged.connect(self.on_change_margin)
         self.font_family_combo_box.currentTextChanged.connect(
             self.on_change_font_family)
         self.preview_text_line_edit.textChanged.connect(
@@ -31,8 +32,10 @@ class SettingsWindow(QMainWindow, Ui_MainWindow):
     def configure_start_values(self):
         font_size = self.view_model.projector_font_settings.font_size
         font_family = self.view_model.projector_font_settings.font_family
+        margin = self.view_model.projector_font_settings.margin
         self.font_size_spin_box.setValue(font_size)
         self.font_family_combo_box.setCurrentText(font_family)
+        self.margin_spin_box.setValue(margin)
 
     def update_preview_label(self):
         text: str = self.preview_text_line_edit.text()
@@ -60,4 +63,9 @@ class SettingsWindow(QMainWindow, Ui_MainWindow):
     def on_change_font_family(self):
         font_family = self.font_family_combo_box.currentText()
         self.view_model.projector_font_settings.font_family = font_family
+        self.update_preview_label()
+
+    def on_change_margin(self):
+        margin = self.margin_spin_box.value()
+        self.view_model.projector_font_settings.margin = margin
         self.update_preview_label()
