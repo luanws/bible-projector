@@ -3,11 +3,11 @@ from __future__ import annotations
 from abc import ABC
 from configparser import ConfigParser
 from contextlib import suppress
-from typing import Any, Dict, List
+from typing import Any, Dict
 
 
-def filter_dict_by_keys(d: Dict[str, Any], keys: List[str]) -> Dict[str, Any]:
-    return {k: v for k, v in d.items() if k in keys}
+def filter_dict_not_starts_with_underscore(d: Dict[str, Any]) -> Dict[str, Any]:
+    return {k: v for k, v in d.items() if not k.startswith('_')}
 
 
 class Settings(ABC):
@@ -24,10 +24,9 @@ class Settings(ABC):
             Settings.config.read('config.ini')
 
     def __load_config_by_defaults(self):
-        if not Settings.config.sections():
+        if not Settings.config.sections().__contains__(self.__class__.__name__):
             cls = self.__class__
-            keys = cls.__annotations__.keys()
-            config_dict = filter_dict_by_keys(cls.__dict__, keys)
+            config_dict = filter_dict_not_starts_with_underscore(cls.__dict__)
             Settings.config[cls.__name__] = config_dict
 
     def init_subclass(self):
