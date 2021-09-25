@@ -17,8 +17,8 @@ class Ui_MainWindow(object):
         self.scrollArea.setAlignment(QtCore.Qt.AlignHCenter|QtCore.Qt.AlignTop)
         self.scrollArea.setObjectName("scrollArea")
         self.scrollAreaWidgetContents = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 780, 269))
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed)
+        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 780, 580))
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.scrollAreaWidgetContents.sizePolicy().hasHeightForWidth())
@@ -85,45 +85,6 @@ class Ui_MainWindow(object):
 "}")
         self.font_size_spin_box.setObjectName("font_size_spin_box")
         self.horizontalLayout.addWidget(self.font_size_spin_box)
-        self.label_3 = QtWidgets.QLabel(self.scrollAreaWidgetContents)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Preferred)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.label_3.sizePolicy().hasHeightForWidth())
-        self.label_3.setSizePolicy(sizePolicy)
-        self.label_3.setMinimumSize(QtCore.QSize(25, 0))
-        self.label_3.setMaximumSize(QtCore.QSize(25, 16777215))
-        self.label_3.setStyleSheet("* {\n"
-"    border: 1px solid black;\n"
-"    border-radius: 2px;\n"
-"    background-color: white;\n"
-"}")
-        self.label_3.setText("")
-        self.label_3.setObjectName("label_3")
-        self.horizontalLayout.addWidget(self.label_3)
-        self.view_button = QtWidgets.QPushButton(self.scrollAreaWidgetContents)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.view_button.sizePolicy().hasHeightForWidth())
-        self.view_button.setSizePolicy(sizePolicy)
-        self.view_button.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.view_button.setStyleSheet("* {\n"
-"    border-style: solid;\n"
-"    border-color: gray;\n"
-"    border-width: 1px;\n"
-"    border-radius: 3px;\n"
-"    padding: 4px;\n"
-"    background-color: rgb(220, 220, 220);\n"
-"    color: black;\n"
-"}\n"
-"\n"
-"*:hover {\n"
-"    background-color: gray;\n"
-"    color: white;\n"
-"}")
-        self.view_button.setObjectName("view_button")
-        self.horizontalLayout.addWidget(self.view_button)
         self.apply_button = QtWidgets.QPushButton(self.scrollAreaWidgetContents)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
@@ -149,22 +110,22 @@ class Ui_MainWindow(object):
         self.horizontalLayout.addWidget(self.apply_button)
         self.verticalLayout_2.addLayout(self.horizontalLayout)
         self.preview_label = QtWidgets.QLabel(self.scrollAreaWidgetContents)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.preview_label.sizePolicy().hasHeightForWidth())
         self.preview_label.setSizePolicy(sizePolicy)
         self.preview_label.setMinimumSize(QtCore.QSize(0, 200))
         font = QtGui.QFont()
-        font.setFamily("Berlin Sans FB")
+        font.setFamily("Arial")
         font.setPointSize(20)
         self.preview_label.setFont(font)
         self.preview_label.setLayoutDirection(QtCore.Qt.LeftToRight)
-        self.preview_label.setStyleSheet("*{\n"
-"    background-color: black;\n"
-"    color: white;\n"
-"}")
-        self.preview_label.setAlignment(QtCore.Qt.AlignCenter)
+        self.preview_label.setStyleSheet("background-color: black;\n"
+"color: white;\n"
+"padding: 16px;")
+        self.preview_label.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
+        self.preview_label.setWordWrap(True)
         self.preview_label.setObjectName("preview_label")
         self.verticalLayout_2.addWidget(self.preview_label)
         self.scrollArea.setWidget(self.scrollAreaWidgetContents)
@@ -177,6 +138,5 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(_translate("MainWindow", "Configurações"))
         self.label.setText(_translate("MainWindow", "Fonte:"))
         self.preview_text_line_edit.setText(_translate("MainWindow", "Texto de teste"))
-        self.view_button.setText(_translate("MainWindow", "Visualizar"))
         self.apply_button.setText(_translate("MainWindow", "Aplicar"))
         self.preview_label.setText(_translate("MainWindow", "Texto de teste"))
