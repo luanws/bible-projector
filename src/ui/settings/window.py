@@ -36,8 +36,8 @@ class Ui_MainWindow(object):
         self.verticalLayout_2.addWidget(self.label)
         self.horizontalLayout = QtWidgets.QHBoxLayout()
         self.horizontalLayout.setObjectName("horizontalLayout")
-        self.lineEdit = QtWidgets.QLineEdit(self.scrollAreaWidgetContents)
-        self.lineEdit.setStyleSheet("* {\n"
+        self.preview_text_line_edit = QtWidgets.QLineEdit(self.scrollAreaWidgetContents)
+        self.preview_text_line_edit.setStyleSheet("* {\n"
 "    border-style: solid;\n"
 "    border-color: gray;\n"
 "    border-width: 1px;\n"
@@ -46,16 +46,16 @@ class Ui_MainWindow(object):
 "    background-color: white;\n"
 "    color: black;\n"
 "}")
-        self.lineEdit.setPlaceholderText("")
-        self.lineEdit.setObjectName("lineEdit")
-        self.horizontalLayout.addWidget(self.lineEdit)
-        self.fontComboBox = QtWidgets.QFontComboBox(self.scrollAreaWidgetContents)
+        self.preview_text_line_edit.setPlaceholderText("")
+        self.preview_text_line_edit.setObjectName("preview_text_line_edit")
+        self.horizontalLayout.addWidget(self.preview_text_line_edit)
+        self.font_family_combo_box = QtWidgets.QFontComboBox(self.scrollAreaWidgetContents)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.fontComboBox.sizePolicy().hasHeightForWidth())
-        self.fontComboBox.setSizePolicy(sizePolicy)
-        self.fontComboBox.setStyleSheet("* {\n"
+        sizePolicy.setHeightForWidth(self.font_family_combo_box.sizePolicy().hasHeightForWidth())
+        self.font_family_combo_box.setSizePolicy(sizePolicy)
+        self.font_family_combo_box.setStyleSheet("* {\n"
 "    border-style: solid;\n"
 "    border-color: gray;\n"
 "    border-width: 1px;\n"
@@ -64,17 +64,17 @@ class Ui_MainWindow(object):
 "    background-color: white;\n"
 "    color: black;\n"
 "}")
-        self.fontComboBox.setObjectName("fontComboBox")
-        self.horizontalLayout.addWidget(self.fontComboBox)
-        self.spinBox = QtWidgets.QSpinBox(self.scrollAreaWidgetContents)
+        self.font_family_combo_box.setObjectName("font_family_combo_box")
+        self.horizontalLayout.addWidget(self.font_family_combo_box)
+        self.font_size_spin_box = QtWidgets.QSpinBox(self.scrollAreaWidgetContents)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.spinBox.sizePolicy().hasHeightForWidth())
-        self.spinBox.setSizePolicy(sizePolicy)
-        self.spinBox.setMinimumSize(QtCore.QSize(50, 0))
-        self.spinBox.setMaximumSize(QtCore.QSize(50, 16777215))
-        self.spinBox.setStyleSheet("* {\n"
+        sizePolicy.setHeightForWidth(self.font_size_spin_box.sizePolicy().hasHeightForWidth())
+        self.font_size_spin_box.setSizePolicy(sizePolicy)
+        self.font_size_spin_box.setMinimumSize(QtCore.QSize(50, 0))
+        self.font_size_spin_box.setMaximumSize(QtCore.QSize(50, 16777215))
+        self.font_size_spin_box.setStyleSheet("* {\n"
 "    border-style: solid;\n"
 "    border-color: gray;\n"
 "    border-width: 1px;\n"
@@ -83,8 +83,8 @@ class Ui_MainWindow(object):
 "    background-color: white;\n"
 "    color: black;\n"
 "}")
-        self.spinBox.setObjectName("spinBox")
-        self.horizontalLayout.addWidget(self.spinBox)
+        self.font_size_spin_box.setObjectName("font_size_spin_box")
+        self.horizontalLayout.addWidget(self.font_size_spin_box)
         self.label_3 = QtWidgets.QLabel(self.scrollAreaWidgetContents)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
@@ -101,14 +101,14 @@ class Ui_MainWindow(object):
         self.label_3.setText("")
         self.label_3.setObjectName("label_3")
         self.horizontalLayout.addWidget(self.label_3)
-        self.pushButton = QtWidgets.QPushButton(self.scrollAreaWidgetContents)
+        self.view_button = QtWidgets.QPushButton(self.scrollAreaWidgetContents)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.pushButton.sizePolicy().hasHeightForWidth())
-        self.pushButton.setSizePolicy(sizePolicy)
-        self.pushButton.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.pushButton.setStyleSheet("* {\n"
+        sizePolicy.setHeightForWidth(self.view_button.sizePolicy().hasHeightForWidth())
+        self.view_button.setSizePolicy(sizePolicy)
+        self.view_button.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.view_button.setStyleSheet("* {\n"
 "    border-style: solid;\n"
 "    border-color: gray;\n"
 "    border-width: 1px;\n"
@@ -122,16 +122,16 @@ class Ui_MainWindow(object):
 "    background-color: gray;\n"
 "    color: white;\n"
 "}")
-        self.pushButton.setObjectName("pushButton")
-        self.horizontalLayout.addWidget(self.pushButton)
-        self.pushButton_2 = QtWidgets.QPushButton(self.scrollAreaWidgetContents)
+        self.view_button.setObjectName("view_button")
+        self.horizontalLayout.addWidget(self.view_button)
+        self.apply_button = QtWidgets.QPushButton(self.scrollAreaWidgetContents)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.pushButton_2.sizePolicy().hasHeightForWidth())
-        self.pushButton_2.setSizePolicy(sizePolicy)
-        self.pushButton_2.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.pushButton_2.setStyleSheet("* {\n"
+        sizePolicy.setHeightForWidth(self.apply_button.sizePolicy().hasHeightForWidth())
+        self.apply_button.setSizePolicy(sizePolicy)
+        self.apply_button.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.apply_button.setStyleSheet("* {\n"
 "    border-style: solid;\n"
 "    border-color: gray;\n"
 "    border-width: 1px;\n"
@@ -145,28 +145,28 @@ class Ui_MainWindow(object):
 "    background-color: gray;\n"
 "    color: white;\n"
 "}")
-        self.pushButton_2.setObjectName("pushButton_2")
-        self.horizontalLayout.addWidget(self.pushButton_2)
+        self.apply_button.setObjectName("apply_button")
+        self.horizontalLayout.addWidget(self.apply_button)
         self.verticalLayout_2.addLayout(self.horizontalLayout)
-        self.label_2 = QtWidgets.QLabel(self.scrollAreaWidgetContents)
+        self.preview_label = QtWidgets.QLabel(self.scrollAreaWidgetContents)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.label_2.sizePolicy().hasHeightForWidth())
-        self.label_2.setSizePolicy(sizePolicy)
-        self.label_2.setMinimumSize(QtCore.QSize(0, 200))
+        sizePolicy.setHeightForWidth(self.preview_label.sizePolicy().hasHeightForWidth())
+        self.preview_label.setSizePolicy(sizePolicy)
+        self.preview_label.setMinimumSize(QtCore.QSize(0, 200))
         font = QtGui.QFont()
         font.setFamily("Berlin Sans FB")
         font.setPointSize(20)
-        self.label_2.setFont(font)
-        self.label_2.setLayoutDirection(QtCore.Qt.LeftToRight)
-        self.label_2.setStyleSheet("*{\n"
+        self.preview_label.setFont(font)
+        self.preview_label.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.preview_label.setStyleSheet("*{\n"
 "    background-color: black;\n"
 "    color: white;\n"
 "}")
-        self.label_2.setAlignment(QtCore.Qt.AlignCenter)
-        self.label_2.setObjectName("label_2")
-        self.verticalLayout_2.addWidget(self.label_2)
+        self.preview_label.setAlignment(QtCore.Qt.AlignCenter)
+        self.preview_label.setObjectName("preview_label")
+        self.verticalLayout_2.addWidget(self.preview_label)
         self.scrollArea.setWidget(self.scrollAreaWidgetContents)
         self.verticalLayout.addWidget(self.scrollArea)
         MainWindow.setCentralWidget(self.centralwidget)
@@ -176,7 +176,7 @@ class Ui_MainWindow(object):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Configurações"))
         self.label.setText(_translate("MainWindow", "Fonte:"))
-        self.lineEdit.setText(_translate("MainWindow", "Texto de teste"))
-        self.pushButton.setText(_translate("MainWindow", "Visualizar"))
-        self.pushButton_2.setText(_translate("MainWindow", "Aplicar"))
-        self.label_2.setText(_translate("MainWindow", "Texto de teste"))
+        self.preview_text_line_edit.setText(_translate("MainWindow", "Texto de teste"))
+        self.view_button.setText(_translate("MainWindow", "Visualizar"))
+        self.apply_button.setText(_translate("MainWindow", "Aplicar"))
+        self.preview_label.setText(_translate("MainWindow", "Texto de teste"))
