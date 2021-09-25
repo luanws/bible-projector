@@ -11,7 +11,6 @@ class ProjectorViewModel:
     def __init__(self) -> None:
         self.__text: str = ''
         self.font_settings = ProjectorFontSettings()
-        self.font_settings.save()
 
     @property
     def text(self) -> str:
