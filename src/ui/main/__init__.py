@@ -152,7 +152,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         search_text: str = self.search_line_edit.text()
         try:
             verse = self.__view_model.search(search_text)
-            self.__view_model.current_verse = verse
             self.update_chapter()
             self.select_current_verse_in_chapter()
             self.chapter_list_widget.scrollToItem(
