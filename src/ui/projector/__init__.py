@@ -12,6 +12,8 @@ class ProjectorWindow(QMainWindow, Ui_MainWindow):
 
         self.__view_model = ProjectorViewModel()
         self.__view_model.on_change_text(self.on_change_text)
+        self.__view_model.font_settings.on_change_settings(
+            self.configure_text_label_styles)
 
         self.textLabel.setText('')
         self.configure_text_label_styles()
