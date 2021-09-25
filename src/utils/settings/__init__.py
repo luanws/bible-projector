@@ -11,6 +11,7 @@ def filter_dict_not_starts_with_underscore(d: Dict[str, Any]) -> Dict[str, Any]:
 
 
 class Settings(ABC):
+    CONFIG_FILE_NAME = 'config.ini'
     config: ConfigParser = ConfigParser()
     settings_instances: Dict[
         str, List[Tuple[Settings, Optional[Callable]]]] = {}
@@ -23,7 +24,7 @@ class Settings(ABC):
 
     def __load_config(self):
         if not Settings.config.sections():
-            Settings.config.read('config.ini')
+            Settings.config.read(Settings.CONFIG_FILE_NAME)
 
     def __load_config_by_defaults(self):
         if not Settings.config.sections().__contains__(self.__class__.__name__):
@@ -41,7 +42,7 @@ class Settings(ABC):
         Settings.config[self.__class__.__name__] = self.to_dict()
         self.update_settings_instances()
         self.notify_settings_instances()
-        with open('config.ini', 'w') as file:
+        with open(Settings.CONFIG_FILE_NAME, 'w') as file:
             Settings.config.write(file)
 
     def to_dict(self) -> Dict[str, Any]:
