@@ -12,21 +12,14 @@ def filter_dict_not_starts_with_underscore(d: Dict[str, Any]) -> Dict[str, Any]:
 
 class Settings(ABC):
     config: ConfigParser = ConfigParser()
-    settings_instances: Dict[str,
-                             List[Tuple[Settings, Optional[Callable]]]] = {}
+    settings_instances: Dict[
+        str, List[Tuple[Settings, Optional[Callable]]]] = {}
 
-    def __init__(self, on_change_settings: Optional[Callable] = None) -> None:
+    def __init__(self) -> None:
         super().__init__()
-        self.__add_setting_instance(on_change_settings)
         self.__load_config()
         self.__load_config_by_defaults()
         self.__init_subclass()
-
-    def __add_setting_instance(self, on_change_settings: Optional[Callable]):
-        if not Settings.settings_instances.__contains__(self.__class__.__name__):
-            Settings.settings_instances[self.__class__.__name__] = []
-        Settings.settings_instances[self.__class__.__name__].append(
-            (self, on_change_settings))
 
     def __load_config(self):
         if not Settings.config.sections():
@@ -68,3 +61,9 @@ class Settings(ABC):
         for _, on_change_settings in Settings.settings_instances[self.__class__.__name__]:
             if on_change_settings is not None:
                 on_change_settings()
+
+    def on_change_settings(self, callable: Callable):
+        class_name = self.__class__.__name__
+        if not Settings.settings_instances.__contains__(class_name):
+            Settings.settings_instances[class_name] = []
+        Settings.settings_instances[class_name].append((self, callable))
