@@ -45,6 +45,11 @@ class MainViewModel:
     def on_change_current_verse(self, callable: Callable[[Verse], None]):
         self.__on_change_current_verse_callable = callable
 
+    def __add_verse_in_history(self, verse: Verse):
+        if self.history_list.__contains__(verse):
+            self.history_list.remove(verse)
+        self.history_list.append(verse)
+
     def search(self, search_text: str) -> Verse:
         if search_text != '':
             while search_text.__contains__('  '):
@@ -52,7 +57,7 @@ class MainViewModel:
             version = self.current_version
             verse_reference = VerseReference.from_str(search_text, version)
             verse = self.verse_dao.get_by_verse_reference(verse_reference)
-            self.history_list.append(verse)
+            self.__add_verse_in_history(verse)
             self.current_verse = verse
             self.__update_current_chapter(verse)
             return verse
