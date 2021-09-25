@@ -14,6 +14,8 @@ class SettingsWindow(QMainWindow, Ui_MainWindow):
 
         self.apply_button.clicked.connect(self.on_click_apply)
         self.font_size_spin_box.valueChanged.connect(self.on_change_font_size)
+        self.font_family_combo_box.currentTextChanged.connect(
+            self.on_change_font_family)
 
         self.configure_start_values()
 
@@ -23,7 +25,9 @@ class SettingsWindow(QMainWindow, Ui_MainWindow):
 
     def configure_start_values(self):
         font_size = self.view_model.projector_font_settings.font_size
+        font_family = self.view_model.projector_font_settings.font_family
         self.font_size_spin_box.setValue(font_size)
+        self.font_family_combo_box.setCurrentText(font_family)
 
     def on_click_apply(self):
         self.view_model.save_settings()
@@ -31,3 +35,7 @@ class SettingsWindow(QMainWindow, Ui_MainWindow):
     def on_change_font_size(self):
         font_size = self.font_size_spin_box.value()
         self.view_model.projector_font_settings.font_size = font_size
+
+    def on_change_font_family(self):
+        font_family = self.font_family_combo_box.currentText()
+        self.view_model.projector_font_settings.font_family = font_family
