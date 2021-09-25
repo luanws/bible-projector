@@ -40,7 +40,7 @@ class ProjectorWindow(QMainWindow, Ui_MainWindow):
         font_settings = self.__view_model.font_settings
         self.textLabel.setAlignment(QtCore.Qt.AlignVCenter)
         self.textLabel.setStyleSheet(f"""
-            color: white;
+            color: {font_settings.color};
             font-size: {font_settings.font_size}pt;
             font-family: '{font_settings.font_family}';
             margin: {font_settings.margin}px;
