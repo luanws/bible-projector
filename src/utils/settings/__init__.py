@@ -44,4 +44,6 @@ class Settings(ABC):
         return self.__dict__
 
     def from_dict(self, config_dict: Dict[str, Any]):
+        for k, v in self.__annotations__.items():
+            config_dict[k] = v(config_dict[k])
         self.__dict__ = config_dict
