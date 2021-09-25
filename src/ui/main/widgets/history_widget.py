@@ -45,6 +45,6 @@ class HistoryWidget(QtWidgets.QWidget):
             text-align: left;
             font-size: 12px;
             padding: 8px;
-            height: 12px;
+            height: 14px;
             background-color: transparent;
         ''')
