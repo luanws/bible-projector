@@ -54,6 +54,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.__view_model.update_current_chapter(verse)
         self.update_chapter()
         self.select_current_verse_in_chapter()
+        self.chapter_list_widget.scrollToItem(
+            self.current_chapter_verse_widget.list_widget_item)
 
     def select_current_verse_in_chapter(self):
         if self.chapter_verse_widgets is not None:
