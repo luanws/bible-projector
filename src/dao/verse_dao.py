@@ -1,5 +1,5 @@
 from contextlib import suppress
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Optional
 
 from sqlalchemy.orm.exc import NoResultFound
 from sqlalchemy.sql.expression import func, or_
@@ -51,10 +51,13 @@ class VerseDAO:
         }
         verse_filter = query_filter_to_sql_filter_list(
             query_filter, filter_dict)
-        return db.session.query(Verse)\
+        verse: Optional[Verse] = db.session.query(Verse)\
             .join(Version)\
             .join(Book)\
             .filter(*verse_filter).first()
+        if verse is None:
+            raise NoResultFound
+        return verse
 
     def get_by_chapter_reference(self, chapter_reference: ChapterReference) -> List[Verse]:
         verse_filter = (
