@@ -13,6 +13,7 @@ from src.models.version import Version
 class MainViewModel:
     version_dao: VersionDAO
     verse_dao: VerseDAO
+    history_list: List[Version]
     current_version: Version
     __current_verse: Optional[Verse]
     current_chapter: Optional[List[Verse]]
@@ -35,9 +36,10 @@ class MainViewModel:
 
         self.application: QCoreApplication = QCoreApplication.instance()
 
+        self.history_list = []
         self.versions = [v.version for v in self.version_dao.get_all()]
         self.current_version = self.versions[0]
-        self.current_verse: Optional[Verse] = None
+        self.__current_verse: Optional[Verse] = None
         self.current_chapter: Optional[List[Verse]] = None
 
     def on_change_current_verse(self, callable: Callable[[Verse], None]):
@@ -50,6 +52,7 @@ class MainViewModel:
             version = self.current_version
             verse_reference = VerseReference.from_str(search_text, version)
             verse = self.verse_dao.get_by_verse_reference(verse_reference)
+            self.history_list.append(verse)
             self.current_verse = verse
             self.__update_current_chapter(verse)
             return verse

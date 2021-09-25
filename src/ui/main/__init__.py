@@ -9,6 +9,7 @@ from src.error.invalid_reference import InvalidReferenceError
 from src.models.verse import Verse
 from src.ui.main.view_model import MainViewModel
 from src.ui.main.widgets.chapter_widget import ChapterVerseWidget
+from src.ui.main.widgets.history_widget import HistoryWidget
 from src.ui.main.window import Ui_MainWindow
 from src.ui.projector import ProjectorWindow
 from src.ui.settings import SettingsWindow
@@ -47,6 +48,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def on_change_current_verse(self, verse: Verse):
         self.preview_text_edit.setText(f"{verse.text} ({verse.reference})")
         self.update_projector_text()
+
+    def on_history_click(self, verse: Verse):
+        self.__view_model.current_verse = verse
 
     def select_current_verse_in_chapter(self):
         if self.chapter_verse_widgets is not None:
@@ -148,10 +152,26 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             chapter_verse_widgets.append(chapter_verse_widget)
         self.chapter_verse_widgets = chapter_verse_widgets
 
+    def update_history(self):
+        self.history_list_widget.clear()
+        for verse in self.__view_model.history_list:
+            list_widget_item = QtWidgets.QListWidgetItem(
+                self.history_list_widget)
+            history_widget = HistoryWidget(
+                verse=verse,
+                list_widget_item=list_widget_item,
+                on_click=self.on_history_click,
+            )
+            list_widget_item.setSizeHint(history_widget.sizeHint())
+            self.history_list_widget.addItem(list_widget_item)
+            self.history_list_widget.setItemWidget(
+                list_widget_item, history_widget)
+
     def search(self):
         search_text: str = self.search_line_edit.text()
         try:
             verse = self.__view_model.search(search_text)
+            self.update_history()
             self.update_chapter()
             self.select_current_verse_in_chapter()
             self.chapter_list_widget.scrollToItem(

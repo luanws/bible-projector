@@ -160,7 +160,7 @@
     <item>
      <layout class="QGridLayout" name="gridLayout" rowstretch="0,0,0,0" columnstretch="0,0,0,0">
       <item row="0" column="3">
-       <widget class="QLabel" name="historic_label">
+       <widget class="QLabel" name="history_label">
         <property name="styleSheet">
          <string notr="true"/>
         </property>
@@ -242,7 +242,7 @@
        </widget>
       </item>
       <item row="1" column="3" rowspan="3">
-       <widget class="QListWidget" name="historic_list_widget">
+       <widget class="QListWidget" name="history_list_widget">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
           <horstretch>0</horstretch>
@@ -256,7 +256,7 @@
          </size>
         </property>
         <property name="styleSheet">
-         <string notr="true">#historic_list_widget {
+         <string notr="true">#history_list_widget {
 	border-style: solid;
 	border-color: gray;
 	border-width: 1px;
