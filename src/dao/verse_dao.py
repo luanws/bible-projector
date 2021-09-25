@@ -54,7 +54,7 @@ class VerseDAO:
         return db.session.query(Verse)\
             .join(Version)\
             .join(Book)\
-            .filter(*verse_filter).one()
+            .filter(*verse_filter).first()
 
     def get_by_chapter_reference(self, chapter_reference: ChapterReference) -> List[Verse]:
         verse_filter = (
