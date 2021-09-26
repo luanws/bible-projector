@@ -139,7 +139,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.projector_window.close()
 
     def project(self):
-        screen = QApplication.screens()[1]
+        screen = QApplication.screens()[-1]
         self.projector_window.show()
         self.projector_window.windowHandle().setScreen(screen)
         self.projector_window.showFullScreen()
