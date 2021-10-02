@@ -3,6 +3,10 @@ from typing import Callable, Optional
 from PyQt5 import QtGui, QtWidgets
 from src.models.verse import Verse
 
+from .container import Container
+from .verse_number_label import VerseNumberLabel
+from .verse_text_label import VerseTextLabel
+
 
 class ChapterVerseWidget(QtWidgets.QWidget):
     verse: Verse
@@ -24,37 +28,21 @@ class ChapterVerseWidget(QtWidgets.QWidget):
         self.__on_click_callable = on_click
         self.__selected = False
 
-        self.container = QtWidgets.QHBoxLayout()
-        self.verse_label = QtWidgets.QLabel()
-        self.verse_number_label = QtWidgets.QLabel()
+        self.container = Container()
+        self.verse_text_label = VerseTextLabel()
+        self.verse_number_label = VerseNumberLabel()
 
-        self.verse_label.setText(verse.text)
+        self.verse_text_label.setText(verse.text)
         self.verse_number_label.setText(str(verse.verse_number))
 
         self.container.addWidget(self.verse_number_label)
-        self.container.addWidget(self.verse_label)
+        self.container.addWidget(self.verse_text_label)
         self.setLayout(self.container)
 
         self.configure_events()
-        self.configure_stylesheets()
 
     def configure_events(self):
         self.mouseReleaseEvent = self.__on_click
-
-    def configure_stylesheets(self):
-        self.container.setContentsMargins(8, 8, 8, 8)
-
-        self.verse_number_label.setFixedWidth(24)
-        self.verse_number_label.setStyleSheet('''
-            color: #000088;
-        ''')
-
-        self.verse_label.setWordWrap(True)
-        self.verse_label.setMaximumHeight(48)
-        self.verse_label.setMinimumHeight(48)
-        self.verse_label.setStyleSheet('''
-            font-size: 12px;
-        ''')
 
     def __on_click(self, event: QtGui.QMouseEvent):
         if self.__on_click_callable:
@@ -62,18 +50,10 @@ class ChapterVerseWidget(QtWidgets.QWidget):
 
     def select(self):
         if not self.__selected:
-            self.verse_label.setStyleSheet('''
-                color: #004;
-                font-size: 12px;
-                font-weight: bold;
-            ''')
+            self.verse_text_label.select()
             self.__selected = True
 
     def unselect(self):
         if self.__selected:
-            self.verse_label.setStyleSheet('''
-                color: black;
-                font-size: 12px;
-                font-weight: unset;
-            ''')
+            self.verse_text_label.unselect()
             self.__selected = False
