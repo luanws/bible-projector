@@ -1,5 +1,6 @@
 from typing import List, Optional
 
+import qtawesome as qta
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import (QApplication, QDesktopWidget, QMainWindow,
@@ -15,7 +16,6 @@ from src.ui.main.widgets.search_bar_widget import SearchBarWidget
 from src.ui.main.window import Ui_MainWindow
 from src.ui.projector import ProjectorWindow
 from src.ui.settings import SettingsWindow
-import qtawesome as qta
 
 
 class MainWindow(QMainWindow, Ui_MainWindow):
@@ -32,9 +32,15 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.settings_window = SettingsWindow()
         self.projector_window = ProjectorWindow()
         self.about_dialog = AboutDialog()
+        self.search_bar_widget = SearchBarWidget()
 
         screen = QDesktopWidget().screenGeometry(2)
         self.projector_window.move(screen.left(), screen.top())
+
+        self.header_container.addWidget(self.search_bar_widget)
+
+        self.versions_combo_box.addItems(self.__view_model.versions)
+        self.search_bar_widget.versions_combo_box.addItems(self.__view_model.versions)
 
         self.configure_styles()
         self.configure_events()
@@ -51,7 +57,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     def configure_events(self):
         self.__view_model.on_change_current_verse(self.on_change_current_verse)
-        self.versions_combo_box.addItems(self.__view_model.versions)
         self.search_button.clicked.connect(self.search)
         self.project_button.clicked.connect(self.project)
         self.update_button.clicked.connect(self.update_projector_text)
