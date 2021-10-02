@@ -1,8 +1,11 @@
 from typing import Callable, Optional
 
-import qtawesome as qta
-from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5 import QtWidgets
 from src.models.verse import Verse
+
+from .container import Container
+from .reference_button import ReferenceButton
+from .remove_button import RemoveButton
 
 
 class HistoryWidget(QtWidgets.QWidget):
@@ -25,9 +28,9 @@ class HistoryWidget(QtWidgets.QWidget):
         self.__on_reference_click_callable = on_reference_click
         self.__on_remove_click_callable = on_remove_click
 
-        self.container = QtWidgets.QHBoxLayout()
-        self.reference_button = QtWidgets.QPushButton()
-        self.remove_button = QtWidgets.QPushButton()
+        self.container = Container()
+        self.reference_button = ReferenceButton()
+        self.remove_button = RemoveButton()
 
         self.reference_button.setText(str(verse.reference))
 
@@ -36,7 +39,6 @@ class HistoryWidget(QtWidgets.QWidget):
         self.setLayout(self.container)
 
         self.configure_events()
-        self.configure_stylesheets()
 
     def configure_events(self):
         self.reference_button.clicked.connect(self.on_reference_button_click)
@@ -49,22 +51,3 @@ class HistoryWidget(QtWidgets.QWidget):
     def on_reference_button_click(self):
         if self.__on_reference_click_callable:
             self.__on_reference_click_callable(self.verse)
-
-    def configure_stylesheets(self):
-        self.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.container.setContentsMargins(0, 0, 0, 0)
-        self.reference_button.setStyleSheet('''
-            text-align: left;
-            font-size: 12px;
-            padding: 8px;
-            height: 14px;
-            background-color: transparent;
-        ''')
-
-        self.remove_button.setIcon(qta.icon('fa5s.times', color='#EC0059'))
-        self.remove_button.setIconSize(QtCore.QSize(20, 20))
-        self.remove_button.setMaximumSize(QtCore.QSize(32, 32))
-        self.remove_button.setStyleSheet('''
-            border: none;
-            background-color: transparent;
-        ''')
