@@ -53,13 +53,17 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.preview_text_edit.setText(f"{verse.text} ({verse.reference})")
         self.update_projector_text()
 
-    def on_history_click(self, verse: Verse):
+    def on_history_verse_click(self, verse: Verse):
         self.__view_model.current_verse = verse
         self.__view_model.update_current_chapter(verse)
         self.update_chapter()
         self.select_current_verse_in_chapter()
         self.chapter_list_widget.scrollToItem(
             self.current_chapter_verse_widget.list_widget_item)
+
+    def on_history_verse_remove(self, verse: Verse):
+        self.__view_model.remove_from_history(verse)
+        self.update_history()
 
     def on_chapter_verse_click(self, verse: Verse):
         self.__view_model.current_verse = verse
@@ -174,7 +178,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             history_widget = HistoryWidget(
                 verse=verse,
                 list_widget_item=list_widget_item,
-                on_click=self.on_history_click,
+                on_reference_click=self.on_history_verse_click,
+                on_remove_click=self.on_history_verse_remove,
             )
             list_widget_item.setSizeHint(history_widget.sizeHint())
             self.history_list_widget.addItem(list_widget_item)

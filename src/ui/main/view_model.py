@@ -50,6 +50,9 @@ class MainViewModel:
             self.history_list.remove(verse)
         self.history_list.append(verse)
 
+    def remove_from_history(self, verse: Verse):
+        self.history_list.remove(verse)
+
     def search(self, search_text: str) -> Verse:
         if search_text != '':
             while search_text.__contains__('  '):
