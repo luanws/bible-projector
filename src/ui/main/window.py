@@ -3,10 +3,23 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(709, 578)
+        MainWindow.setStyleSheet("QPushButton {\n"
+"    padding: 4px;\n"
+"    background-color: transparent;\n"
+"    border-radius: 8px;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"    background-color: #ccc;\n"
+"    color: white;\n"
+"}\n"
+"")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.centralwidget)
         self.verticalLayout.setObjectName("verticalLayout")
+        self.header_container = QtWidgets.QVBoxLayout()
+        self.header_container.setObjectName("header_container")
         self.horizontalLayout_3 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_3.setObjectName("horizontalLayout_3")
         self.versions_combo_box = QtWidgets.QComboBox(self.centralwidget)
@@ -36,59 +49,21 @@ class Ui_MainWindow(object):
         self.horizontalLayout_3.addWidget(self.search_line_edit)
         self.search_button = QtWidgets.QPushButton(self.centralwidget)
         self.search_button.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.search_button.setStyleSheet("* {\n"
-"    border-style: solid;\n"
-"    border-color: gray;\n"
-"    border-width: 1px;\n"
-"    border-radius: 3px;\n"
-"    padding: 4px;\n"
-"    background-color: rgb(220, 220, 220);\n"
-"    color: black;\n"
-"}\n"
-"\n"
-"*:hover {\n"
-"    background-color: gray;\n"
-"    color: white;\n"
-"}")
+        self.search_button.setText("")
         self.search_button.setObjectName("search_button")
         self.horizontalLayout_3.addWidget(self.search_button)
         self.project_button = QtWidgets.QPushButton(self.centralwidget)
         self.project_button.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.project_button.setStyleSheet("* {\n"
-"    border-style: solid;\n"
-"    border-color: gray;\n"
-"    border-width: 1px;\n"
-"    border-radius: 3px;\n"
-"    padding: 4px;\n"
-"    background-color: rgb(220, 220, 220);\n"
-"    color: black;\n"
-"}\n"
-"\n"
-"*:hover {\n"
-"    background-color: gray;\n"
-"    color: white;\n"
-"}")
+        self.project_button.setText("")
         self.project_button.setObjectName("project_button")
         self.horizontalLayout_3.addWidget(self.project_button)
         self.update_button = QtWidgets.QPushButton(self.centralwidget)
         self.update_button.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.update_button.setStyleSheet("* {\n"
-"    border-style: solid;\n"
-"    border-color: gray;\n"
-"    border-width: 1px;\n"
-"    border-radius: 3px;\n"
-"    padding: 4px;\n"
-"    background-color: rgb(220, 220, 220);\n"
-"    color: black;\n"
-"}\n"
-"\n"
-"*:hover {\n"
-"    background-color: gray;\n"
-"    color: white;\n"
-"}")
+        self.update_button.setText("")
         self.update_button.setObjectName("update_button")
         self.horizontalLayout_3.addWidget(self.update_button)
-        self.verticalLayout.addLayout(self.horizontalLayout_3)
+        self.header_container.addLayout(self.horizontalLayout_3)
+        self.verticalLayout.addLayout(self.header_container)
         self.gridLayout = QtWidgets.QGridLayout()
         self.gridLayout.setObjectName("gridLayout")
         self.history_label = QtWidgets.QLabel(self.centralwidget)
@@ -190,9 +165,6 @@ class Ui_MainWindow(object):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Projetor bíblico"))
         self.search_line_edit.setPlaceholderText(_translate("MainWindow", "Referência (F4)"))
-        self.search_button.setText(_translate("MainWindow", "Pesquisar"))
-        self.project_button.setText(_translate("MainWindow", "Projetar"))
-        self.update_button.setText(_translate("MainWindow", "Atualizar"))
         self.history_label.setText(_translate("MainWindow", "Histórico"))
         self.chapter_label.setText(_translate("MainWindow", "Capítulo"))
         self.preview_label.setText(_translate("MainWindow", "Pré-visualização"))
