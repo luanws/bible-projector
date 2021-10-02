@@ -2,7 +2,6 @@ import sys
 
 import sqlalchemy.ext.baked
 import sqlalchemy.sql.default_comparator
-from PyQt5 import QtGui
 from PyQt5.QtWidgets import QApplication
 
 from src.ui.main import MainWindow
