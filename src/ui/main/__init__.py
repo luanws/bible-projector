@@ -11,9 +11,11 @@ from src.ui.main.dialogs.about_dialog import AboutDialog
 from src.ui.main.view_model import MainViewModel
 from src.ui.main.widgets.chapter_widget import ChapterVerseWidget
 from src.ui.main.widgets.history_widget import HistoryWidget
+from src.ui.main.widgets.search_bar_widget import SearchBarWidget
 from src.ui.main.window import Ui_MainWindow
 from src.ui.projector import ProjectorWindow
 from src.ui.settings import SettingsWindow
+import qtawesome as qta
 
 
 class MainWindow(QMainWindow, Ui_MainWindow):
@@ -27,19 +29,25 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.setWindowIcon(QtGui.QIcon('icon.ico'))
 
         self.__view_model = MainViewModel()
-
         self.settings_window = SettingsWindow()
         self.projector_window = ProjectorWindow()
         self.about_dialog = AboutDialog()
+
         screen = QDesktopWidget().screenGeometry(2)
         self.projector_window.move(screen.left(), screen.top())
 
+        self.configure_styles()
         self.configure_events()
         self.configure_hot_keys()
 
     @property
     def current_chapter_verse_widget(self):
         return self.chapter_verse_widgets[self.__view_model.current_verse.verse_number - 1]
+
+    def configure_styles(self):
+        self.search_button.setIcon(qta.icon('fa.search'))
+        self.update_button.setIcon(qta.icon('fa.refresh'))
+        self.project_button.setIcon(qta.icon('fa.play'))
 
     def configure_events(self):
         self.__view_model.on_change_current_verse(self.on_change_current_verse)
