@@ -129,32 +129,6 @@
         </property>
        </widget>
       </item>
-      <item>
-       <widget class="QPushButton" name="settings_button">
-        <property name="cursor">
-         <cursorShape>PointingHandCursor</cursorShape>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">* {
-	border-style: solid;
-	border-color: gray;
-	border-width: 1px;
-	border-radius: 3px;
-	padding: 4px;
-	background-color: rgb(220, 220, 220);
-	color: black;
-}
-
-*:hover {
-	background-color: gray;
-	color: white;
-}</string>
-        </property>
-        <property name="text">
-         <string>Configurações</string>
-        </property>
-       </widget>
-      </item>
      </layout>
     </item>
     <item>
@@ -273,9 +247,56 @@
     </item>
    </layout>
   </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>709</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuArquivo">
+    <property name="title">
+     <string>Arquivo</string>
+    </property>
+    <addaction name="action_settings"/>
+    <addaction name="separator"/>
+    <addaction name="action_quit"/>
+   </widget>
+   <widget class="QMenu" name="menuAjuda">
+    <property name="title">
+     <string>Ajuda</string>
+    </property>
+    <addaction name="actionVerificar_se_h_atualiza_es"/>
+    <addaction name="action_about"/>
+   </widget>
+   <addaction name="menuArquivo"/>
+   <addaction name="menuAjuda"/>
+  </widget>
   <action name="actionSair">
    <property name="text">
     <string>Sair</string>
+   </property>
+  </action>
+  <action name="action_about">
+   <property name="text">
+    <string>Sobre</string>
+   </property>
+  </action>
+  <action name="actionVerificar_se_h_atualiza_es">
+   <property name="text">
+    <string>Verificar se há atualizações</string>
+   </property>
+  </action>
+  <action name="action_quit">
+   <property name="text">
+    <string>Sair</string>
+   </property>
+  </action>
+  <action name="action_settings">
+   <property name="text">
+    <string>Configurações</string>
    </property>
   </action>
  </widget>

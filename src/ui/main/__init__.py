@@ -24,26 +24,30 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         super().setupUi(self)
 
         self.__view_model = MainViewModel()
-        self.__view_model.on_change_current_verse(self.on_change_current_verse)
 
         self.settings_window = SettingsWindow()
         self.projector_window = ProjectorWindow()
         screen = QDesktopWidget().screenGeometry(2)
         self.projector_window.move(screen.left(), screen.top())
 
-        self.versions_combo_box.addItems(self.__view_model.versions)
-        self.search_button.clicked.connect(self.search)
-        self.project_button.clicked.connect(self.project)
-        self.update_button.clicked.connect(self.update_projector_text)
-        self.settings_button.clicked.connect(self.show_settings)
-        self.search_line_edit.returnPressed.connect(self.search)
-        self.versions_combo_box.currentTextChanged.connect(self.update_version)
-
+        self.configure_events()
         self.configure_hot_keys()
 
     @property
     def current_chapter_verse_widget(self):
         return self.chapter_verse_widgets[self.__view_model.current_verse.verse_number - 1]
+
+    def configure_events(self):
+        self.__view_model.on_change_current_verse(self.on_change_current_verse)
+        self.versions_combo_box.addItems(self.__view_model.versions)
+        self.search_button.clicked.connect(self.search)
+        self.project_button.clicked.connect(self.project)
+        self.update_button.clicked.connect(self.update_projector_text)
+        self.search_line_edit.returnPressed.connect(self.search)
+        self.versions_combo_box.currentTextChanged.connect(self.update_version)
+
+        self.action_settings.triggered.connect(self.show_settings)
+        self.action_quit.triggered.connect(self.close)
 
     def on_change_current_verse(self, verse: Verse):
         self.preview_text_edit.setText(f"{verse.text} ({verse.reference})")

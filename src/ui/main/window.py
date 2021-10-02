@@ -88,24 +88,6 @@ class Ui_MainWindow(object):
 "}")
         self.update_button.setObjectName("update_button")
         self.horizontalLayout_3.addWidget(self.update_button)
-        self.settings_button = QtWidgets.QPushButton(self.centralwidget)
-        self.settings_button.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.settings_button.setStyleSheet("* {\n"
-"    border-style: solid;\n"
-"    border-color: gray;\n"
-"    border-width: 1px;\n"
-"    border-radius: 3px;\n"
-"    padding: 4px;\n"
-"    background-color: rgb(220, 220, 220);\n"
-"    color: black;\n"
-"}\n"
-"\n"
-"*:hover {\n"
-"    background-color: gray;\n"
-"    color: white;\n"
-"}")
-        self.settings_button.setObjectName("settings_button")
-        self.horizontalLayout_3.addWidget(self.settings_button)
         self.verticalLayout.addLayout(self.horizontalLayout_3)
         self.gridLayout = QtWidgets.QGridLayout()
         self.gridLayout.setObjectName("gridLayout")
@@ -172,8 +154,31 @@ class Ui_MainWindow(object):
         self.gridLayout.addWidget(self.history_list_widget, 1, 3, 3, 1)
         self.verticalLayout.addLayout(self.gridLayout)
         MainWindow.setCentralWidget(self.centralwidget)
+        self.menubar = QtWidgets.QMenuBar(MainWindow)
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 709, 21))
+        self.menubar.setObjectName("menubar")
+        self.menuArquivo = QtWidgets.QMenu(self.menubar)
+        self.menuArquivo.setObjectName("menuArquivo")
+        self.menuAjuda = QtWidgets.QMenu(self.menubar)
+        self.menuAjuda.setObjectName("menuAjuda")
+        MainWindow.setMenuBar(self.menubar)
         self.actionSair = QtWidgets.QAction(MainWindow)
         self.actionSair.setObjectName("actionSair")
+        self.action_about = QtWidgets.QAction(MainWindow)
+        self.action_about.setObjectName("action_about")
+        self.actionVerificar_se_h_atualiza_es = QtWidgets.QAction(MainWindow)
+        self.actionVerificar_se_h_atualiza_es.setObjectName("actionVerificar_se_h_atualiza_es")
+        self.action_quit = QtWidgets.QAction(MainWindow)
+        self.action_quit.setObjectName("action_quit")
+        self.action_settings = QtWidgets.QAction(MainWindow)
+        self.action_settings.setObjectName("action_settings")
+        self.menuArquivo.addAction(self.action_settings)
+        self.menuArquivo.addSeparator()
+        self.menuArquivo.addAction(self.action_quit)
+        self.menuAjuda.addAction(self.actionVerificar_se_h_atualiza_es)
+        self.menuAjuda.addAction(self.action_about)
+        self.menubar.addAction(self.menuArquivo.menuAction())
+        self.menubar.addAction(self.menuAjuda.menuAction())
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
     def retranslateUi(self, MainWindow):
@@ -183,8 +188,13 @@ class Ui_MainWindow(object):
         self.search_button.setText(_translate("MainWindow", "Pesquisar"))
         self.project_button.setText(_translate("MainWindow", "Projetar"))
         self.update_button.setText(_translate("MainWindow", "Atualizar"))
-        self.settings_button.setText(_translate("MainWindow", "Configurações"))
         self.history_label.setText(_translate("MainWindow", "Histórico"))
         self.chapter_label.setText(_translate("MainWindow", "Capítulo"))
         self.preview_label.setText(_translate("MainWindow", "Pré-visualização"))
+        self.menuArquivo.setTitle(_translate("MainWindow", "Arquivo"))
+        self.menuAjuda.setTitle(_translate("MainWindow", "Ajuda"))
         self.actionSair.setText(_translate("MainWindow", "Sair"))
+        self.action_about.setText(_translate("MainWindow", "Sobre"))
+        self.actionVerificar_se_h_atualiza_es.setText(_translate("MainWindow", "Verificar se há atualizações"))
+        self.action_quit.setText(_translate("MainWindow", "Sair"))
+        self.action_settings.setText(_translate("MainWindow", "Configurações"))
