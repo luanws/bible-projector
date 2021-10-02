@@ -1,5 +1,7 @@
+from contextlib import suppress
 from typing import Callable, List, Optional
 
+from PyQt5 import QtWidgets
 from PyQt5.QtCore import QCoreApplication
 from src.dao.verse_dao import VerseDAO
 from src.dao.version_dao import VersionDAO
@@ -13,7 +15,7 @@ from src.models.version import Version
 class MainViewModel:
     version_dao: VersionDAO
     verse_dao: VerseDAO
-    history_list: List[Version]
+    history_list: List[Verse]
     current_version: Version
     __current_verse: Optional[Verse]
     current_chapter: Optional[List[Verse]]
@@ -44,6 +46,18 @@ class MainViewModel:
 
     def on_change_current_verse(self, callable: Callable[[Verse], None]):
         self.__on_change_current_verse_callable = callable
+
+    def export_history(self):
+        with suppress(FileNotFoundError):
+            filename, _ = QtWidgets.QFileDialog.getSaveFileName(
+                self.application.activeWindow(),
+                "Salvar como",
+                "Histórico",
+                "Documentos de texto (*.txt)"
+            )
+            with open(filename, 'w') as file:
+                for verse in self.history_list:
+                    file.write(str(verse.reference) + '\n')
 
     def __add_verse_in_history(self, verse: Verse):
         if self.history_list.__contains__(verse):

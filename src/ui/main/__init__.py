@@ -46,6 +46,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.search_line_edit.returnPressed.connect(self.search)
         self.versions_combo_box.currentTextChanged.connect(self.update_version)
 
+        self.action_export_history.triggered.connect(self.__view_model.export_history)
         self.action_settings.triggered.connect(self.show_settings)
         self.action_quit.triggered.connect(self.close)
 
