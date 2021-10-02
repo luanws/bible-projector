@@ -1,12 +1,13 @@
 from typing import List, Optional
 
-from PyQt5 import QtGui, QtWidgets
+from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import (QApplication, QDesktopWidget, QMainWindow,
                              QShortcut)
 from sqlalchemy.orm.exc import NoResultFound
 from src.error.invalid_reference import InvalidReferenceError
 from src.models.verse import Verse
+from src.ui.main.dialogs.about_dialog import AboutDialog
 from src.ui.main.view_model import MainViewModel
 from src.ui.main.widgets.chapter_widget import ChapterVerseWidget
 from src.ui.main.widgets.history_widget import HistoryWidget
@@ -23,10 +24,13 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         super().__init__(parent)
         super().setupUi(self)
 
+        self.setWindowIcon(QtGui.QIcon('icon.ico'))
+
         self.__view_model = MainViewModel()
 
         self.settings_window = SettingsWindow()
         self.projector_window = ProjectorWindow()
+        self.about_dialog = AboutDialog()
         screen = QDesktopWidget().screenGeometry(2)
         self.projector_window.move(screen.left(), screen.top())
 
@@ -46,8 +50,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.search_line_edit.returnPressed.connect(self.search)
         self.versions_combo_box.currentTextChanged.connect(self.update_version)
 
-        self.action_export_history.triggered.connect(self.__view_model.export_history)
+        self.action_export_history.triggered.connect(
+            self.__view_model.export_history)
         self.action_settings.triggered.connect(self.show_settings)
+        self.action_about.triggered.connect(self.show_about)
         self.action_quit.triggered.connect(self.close)
 
     def on_change_current_verse(self, verse: Verse):
@@ -76,6 +82,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 chapter_verse_widget.unselect()
             chapter_verse_widget = self.current_chapter_verse_widget
             chapter_verse_widget.select()
+
+    def show_about(self):
+        self.about_dialog.show()
 
     def show_settings(self):
         self.settings_window.show()
