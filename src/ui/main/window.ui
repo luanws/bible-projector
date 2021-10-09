@@ -29,76 +29,7 @@ QPushButton:hover {
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
-     <layout class="QVBoxLayout" name="header_container">
-      <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_3">
-        <item>
-         <widget class="QComboBox" name="versions_combo_box">
-          <property name="styleSheet">
-           <string notr="true">* {
-	border-style: solid;
-	border-color: gray;
-	border-width: 1px;
-	border-radius: 3px;
-	padding: 4px;
-	background-color: rgb(220, 220, 220);
-	color: black;
-	width: 30px
-}</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLineEdit" name="search_line_edit">
-          <property name="styleSheet">
-           <string notr="true">* {
-	border-style: solid;
-	border-color: gray;
-	border-width: 1px;
-	border-radius: 3px;
-	padding: 3px;
-	background-color: white;
-	color: black;
-}</string>
-          </property>
-          <property name="placeholderText">
-           <string>Referência (F4)</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="search_button">
-          <property name="cursor">
-           <cursorShape>PointingHandCursor</cursorShape>
-          </property>
-          <property name="text">
-           <string/>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="project_button">
-          <property name="cursor">
-           <cursorShape>PointingHandCursor</cursorShape>
-          </property>
-          <property name="text">
-           <string/>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="update_button">
-          <property name="cursor">
-           <cursorShape>PointingHandCursor</cursorShape>
-          </property>
-          <property name="text">
-           <string/>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </item>
-     </layout>
+     <layout class="QVBoxLayout" name="header_container"/>
     </item>
     <item>
      <layout class="QGridLayout" name="gridLayout" rowstretch="0,0,0,0" columnstretch="0,0,0,0">

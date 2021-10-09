@@ -20,49 +20,6 @@ class Ui_MainWindow(object):
         self.verticalLayout.setObjectName("verticalLayout")
         self.header_container = QtWidgets.QVBoxLayout()
         self.header_container.setObjectName("header_container")
-        self.horizontalLayout_3 = QtWidgets.QHBoxLayout()
-        self.horizontalLayout_3.setObjectName("horizontalLayout_3")
-        self.versions_combo_box = QtWidgets.QComboBox(self.centralwidget)
-        self.versions_combo_box.setStyleSheet("* {\n"
-"    border-style: solid;\n"
-"    border-color: gray;\n"
-"    border-width: 1px;\n"
-"    border-radius: 3px;\n"
-"    padding: 4px;\n"
-"    background-color: rgb(220, 220, 220);\n"
-"    color: black;\n"
-"    width: 30px\n"
-"}")
-        self.versions_combo_box.setObjectName("versions_combo_box")
-        self.horizontalLayout_3.addWidget(self.versions_combo_box)
-        self.search_line_edit = QtWidgets.QLineEdit(self.centralwidget)
-        self.search_line_edit.setStyleSheet("* {\n"
-"    border-style: solid;\n"
-"    border-color: gray;\n"
-"    border-width: 1px;\n"
-"    border-radius: 3px;\n"
-"    padding: 3px;\n"
-"    background-color: white;\n"
-"    color: black;\n"
-"}")
-        self.search_line_edit.setObjectName("search_line_edit")
-        self.horizontalLayout_3.addWidget(self.search_line_edit)
-        self.search_button = QtWidgets.QPushButton(self.centralwidget)
-        self.search_button.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.search_button.setText("")
-        self.search_button.setObjectName("search_button")
-        self.horizontalLayout_3.addWidget(self.search_button)
-        self.project_button = QtWidgets.QPushButton(self.centralwidget)
-        self.project_button.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.project_button.setText("")
-        self.project_button.setObjectName("project_button")
-        self.horizontalLayout_3.addWidget(self.project_button)
-        self.update_button = QtWidgets.QPushButton(self.centralwidget)
-        self.update_button.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.update_button.setText("")
-        self.update_button.setObjectName("update_button")
-        self.horizontalLayout_3.addWidget(self.update_button)
-        self.header_container.addLayout(self.horizontalLayout_3)
         self.verticalLayout.addLayout(self.header_container)
         self.gridLayout = QtWidgets.QGridLayout()
         self.gridLayout.setObjectName("gridLayout")
@@ -164,7 +121,6 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Projetor bíblico"))
-        self.search_line_edit.setPlaceholderText(_translate("MainWindow", "Referência (F4)"))
         self.history_label.setText(_translate("MainWindow", "Histórico"))
         self.chapter_label.setText(_translate("MainWindow", "Capítulo"))
         self.preview_label.setText(_translate("MainWindow", "Pré-visualização"))

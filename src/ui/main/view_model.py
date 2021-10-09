@@ -16,7 +16,7 @@ class MainViewModel:
     version_dao: VersionDAO
     verse_dao: VerseDAO
     history_list: List[Verse]
-    current_version: Version
+    current_version: str
     __current_verse: Optional[Verse]
     current_chapter: Optional[List[Verse]]
     __on_change_current_verse_callable: Optional[Callable[[

@@ -1,6 +1,5 @@
 from typing import List, Optional
 
-import qtawesome as qta
 from PyQt5 import QtGui, QtWidgets
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import (QApplication, QDesktopWidget, QMainWindow,
@@ -32,17 +31,19 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.settings_window = SettingsWindow()
         self.projector_window = ProjectorWindow()
         self.about_dialog = AboutDialog()
-        self.search_bar_widget = SearchBarWidget()
+        self.search_bar_widget = SearchBarWidget(
+            versions=self.__view_model.versions,
+            search_callable=self.search,
+            project_callable=self.project,
+            update_projector_text_callable=self.update_projector_text,
+            on_change_current_verse_callable=self.on_change_current_version,
+        )
 
         screen = QDesktopWidget().screenGeometry(2)
         self.projector_window.move(screen.left(), screen.top())
 
         self.header_container.addWidget(self.search_bar_widget)
 
-        self.versions_combo_box.addItems(self.__view_model.versions)
-        self.search_bar_widget.versions_combo_box.addItems(self.__view_model.versions)
-
-        self.configure_styles()
         self.configure_events()
         self.configure_hot_keys()
 
@@ -50,24 +51,17 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def current_chapter_verse_widget(self):
         return self.chapter_verse_widgets[self.__view_model.current_verse.verse_number - 1]
 
-    def configure_styles(self):
-        self.search_button.setIcon(qta.icon('fa.search'))
-        self.update_button.setIcon(qta.icon('fa.refresh'))
-        self.project_button.setIcon(qta.icon('fa.play'))
-
     def configure_events(self):
         self.__view_model.on_change_current_verse(self.on_change_current_verse)
-        self.search_button.clicked.connect(self.search)
-        self.project_button.clicked.connect(self.project)
-        self.update_button.clicked.connect(self.update_projector_text)
-        self.search_line_edit.returnPressed.connect(self.search)
-        self.versions_combo_box.currentTextChanged.connect(self.update_version)
 
         self.action_export_history.triggered.connect(
             self.__view_model.export_history)
         self.action_settings.triggered.connect(self.show_settings)
         self.action_about.triggered.connect(self.show_about)
         self.action_quit.triggered.connect(self.close)
+
+    def on_change_current_version(self, version: str):
+        self.__view_model.current_version = version
 
     def on_change_current_verse(self, verse: Verse):
         self.preview_text_edit.setText(f"{verse.text} ({verse.reference})")
@@ -102,9 +96,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def show_settings(self):
         self.settings_window.show()
 
-    def update_version(self):
-        self.__view_model.current_version = self.versions_combo_box.currentText()
-
     def configure_hot_keys(self):
         hot_keys = [
             (Qt.Key_PageUp, self.next_verse, self),
@@ -120,8 +111,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             QShortcut(hot_key, window).activated.connect(action)
 
     def search_input_request_focus(self):
-        self.search_line_edit.setFocus(True)
-        self.search_line_edit.selectAll()
+        self.search_bar_widget.search_input_request_focus()
 
     def closeEvent(self, a0: QtGui.QCloseEvent) -> None:
         self.__view_model.application.quit()
@@ -209,8 +199,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.history_list_widget.setItemWidget(
                 list_widget_item, history_widget)
 
-    def search(self):
-        search_text: str = self.search_line_edit.text()
+    def search(self, search_text: str):
         try:
             verse = self.__view_model.search(search_text)
             self.update_history()
@@ -218,7 +207,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.select_current_verse_in_chapter()
             self.chapter_list_widget.scrollToItem(
                 self.current_chapter_verse_widget.list_widget_item)
-            self.search_line_edit.setText(str(verse.reference))
+            self.search_bar_widget.set_text(str(verse.reference))
         except InvalidReferenceError:
             self.preview_text_edit.setText('Referência bíblica inválida')
         except NoResultFound:
