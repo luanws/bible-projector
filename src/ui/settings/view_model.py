@@ -12,3 +12,6 @@ class SettingsViewModel:
 
     def change_projector_font_size(self, new_size: int) -> None:
         self.projector_font_settings.font_size = new_size
+
+    def reset_projector_font_settings(self) -> None:
+        self.projector_font_settings = ProjectorFontSettings()

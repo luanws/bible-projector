@@ -1,4 +1,4 @@
-from PyQt5 import QtGui
+from PyQt5 import QtCore, QtGui
 from PyQt5.QtWidgets import QColorDialog, QMainWindow
 from src.ui.settings.view_model import SettingsViewModel
 from src.ui.settings.window import Ui_MainWindow
@@ -19,9 +19,13 @@ class SettingsWindow(QMainWindow, Ui_MainWindow):
 
         self.__view_model = SettingsViewModel()
 
-        self.configure_events()
-        self.configure_start_values()
         self.update_preview_label()
+        self.configure_events()
+
+    def showEvent(self, a0: QtGui.QShowEvent) -> None:
+        self.__view_model.reset_projector_font_settings()
+        self.configure_start_values()
+        return super().showEvent(a0)
 
     def configure_events(self):
         self.apply_button.clicked.connect(self.on_click_apply)
