@@ -7,6 +7,7 @@ from PyQt5.QtWidgets import (QApplication, QDesktopWidget, QMainWindow,
 from sqlalchemy.orm.exc import NoResultFound
 from src.error.invalid_reference import InvalidReferenceError
 from src.models.verse import Verse
+from src.ui.advanced_search import AdvancedSearchWindow
 from src.ui.main.dialogs.about_dialog import AboutDialog
 from src.ui.main.view_model import MainViewModel
 from src.ui.main.widgets.chapter_widget import ChapterVerseWidget
@@ -30,6 +31,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.__view_model = MainViewModel()
         self.settings_window = SettingsWindow()
         self.projector_window = ProjectorWindow()
+        self.advanced_search_window = AdvancedSearchWindow()
         self.about_dialog = AboutDialog()
         self.search_bar_widget = SearchBarWidget(
             versions=self.__view_model.versions,
@@ -58,6 +60,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.__view_model.export_history)
         self.action_settings.triggered.connect(self.show_settings)
         self.action_about.triggered.connect(self.show_about)
+        self.action_advanced_search.triggered.connect(
+            self.show_advanced_search)
         self.action_quit.triggered.connect(self.close)
 
     def on_change_current_version(self, version: str):
@@ -95,6 +99,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     def show_settings(self):
         self.settings_window.show()
+
+    def show_advanced_search(self):
+        self.advanced_search_window.show()
 
     def configure_hot_keys(self):
         hot_keys = [

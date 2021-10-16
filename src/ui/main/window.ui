@@ -160,6 +160,8 @@ QPushButton:hover {
     <property name="title">
      <string>Arquivo</string>
     </property>
+    <addaction name="action_export_history"/>
+    <addaction name="separator"/>
     <addaction name="action_settings"/>
     <addaction name="separator"/>
     <addaction name="action_quit"/>
@@ -168,7 +170,7 @@ QPushButton:hover {
     <property name="title">
      <string>Ferramentas</string>
     </property>
-    <addaction name="action_export_history"/>
+    <addaction name="action_advanced_search"/>
    </widget>
    <widget class="QMenu" name="menuAjuda">
     <property name="title">
@@ -208,6 +210,11 @@ QPushButton:hover {
   <action name="action_export_history">
    <property name="text">
     <string>Exportar histórico</string>
+   </property>
+  </action>
+  <action name="action_advanced_search">
+   <property name="text">
+    <string>Pesquisa avançada</string>
    </property>
   </action>
  </widget>
