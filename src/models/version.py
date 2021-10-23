@@ -9,6 +9,6 @@ class Version(db.Base):
     id = Column(Integer, primary_key=True)
     version = Column(String, nullable=False)
 
-    def __init__(self, id: int, version: str) -> None:
+    def __init__(self, *, id: int = None, version: str) -> None:
         self.id = id
         self.version = version

@@ -9,8 +9,7 @@ from src.error.invalid_reference import InvalidReferenceError
 from src.models.chapter_reference import ChapterReference
 from src.models.verse import Verse
 from src.models.verse_reference import VerseReference
-from src.models.version import Version
-from src.utils.modules.versions import install_version
+from src.utils.modules.versions import select_file_and_install_version
 
 
 class MainViewModel:
@@ -103,4 +102,4 @@ class MainViewModel:
         return min(next_verse_index, len(self.current_chapter))
 
     def install_version(self):
-        install_version()
+        select_file_and_install_version()

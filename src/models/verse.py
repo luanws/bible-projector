@@ -24,7 +24,7 @@ class Verse(db.Base):
 
     def __init__(
         self, *,
-        id: int,
+        id: int = None,
         text: str,
         chapter_number: int,
         verse_number: int,
