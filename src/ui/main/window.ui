@@ -160,6 +160,7 @@ QPushButton:hover {
     <property name="title">
      <string>Arquivo</string>
     </property>
+    <addaction name="action_install_version"/>
     <addaction name="action_export_history"/>
     <addaction name="separator"/>
     <addaction name="action_settings"/>
@@ -215,6 +216,11 @@ QPushButton:hover {
   <action name="action_advanced_search">
    <property name="text">
     <string>Pesquisa avançada</string>
+   </property>
+  </action>
+  <action name="action_install_version">
+   <property name="text">
+    <string>Instalar versão</string>
    </property>
   </action>
  </widget>

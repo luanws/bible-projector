@@ -63,6 +63,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.action_advanced_search.triggered.connect(
             self.show_advanced_search)
         self.action_quit.triggered.connect(self.close)
+        self.action_install_version.triggered.connect(self.install_version)
 
     def on_change_current_version(self, version: str):
         self.__view_model.current_version = version
@@ -93,6 +94,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 chapter_verse_widget.unselect()
             chapter_verse_widget = self.current_chapter_verse_widget
             chapter_verse_widget.select()
+
+    def install_version(self):
+        self.__view_model.install_version()
 
     def show_about(self):
         self.about_dialog.show()

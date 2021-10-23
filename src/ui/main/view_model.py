@@ -100,3 +100,6 @@ class MainViewModel:
         self.current_verse = self.verse_dao.get_by_verse_reference(reference)
         next_verse_index = self.current_verse.verse_number
         return min(next_verse_index, len(self.current_chapter))
+
+    def install_version(self):
+        pass
