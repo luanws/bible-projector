@@ -49,6 +49,11 @@ class SearchBarWidget(QtWidgets.QWidget):
         self.configure_events()
         self.setLayout(self.container)
 
+    def set_versions(self, versions: List[Version]) -> None:
+        self.versions = versions
+        self.versions_combo_box.clear()
+        self.versions_combo_box.addItems(versions)
+
     def configure_events(self):
         self.search_button.clicked.connect(self.search)
         self.project_button.clicked.connect(self.project_callable)

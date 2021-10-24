@@ -9,7 +9,8 @@ from src.error.invalid_reference import InvalidReferenceError
 from src.models.verse import Verse
 from src.ui.advanced_search import AdvancedSearchWindow
 from src.ui.main.dialogs.about_dialog import AboutDialog
-from src.ui.main.dialogs.installing_version_progress_dialog import InstallingVersionProgressDialog
+from src.ui.main.dialogs.installing_version_progress_dialog import \
+    InstallingVersionProgressDialog
 from src.ui.main.view_model import MainViewModel
 from src.ui.main.widgets.chapter_widget import ChapterVerseWidget
 from src.ui.main.widgets.history_widget import HistoryWidget
@@ -100,14 +101,16 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         progress_dialog = InstallingVersionProgressDialog(self)
 
         def on_update_progress(progress: int):
-            progress_dialog.setValue(progress*100)
             QCoreApplication.processEvents()
+            progress_dialog.setValue(progress*100)
             if progress == 0:
                 progress_dialog.show()
             elif progress == 1:
                 progress_dialog.destroy()
 
         self.__view_model.install_version(on_update_progress)
+        self.__view_model.update_versions()
+        self.search_bar_widget.set_versions(self.__view_model.versions)
 
     def show_about(self):
         self.about_dialog.show()
