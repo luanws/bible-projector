@@ -1,6 +1,7 @@
 import json
 import os
 import re
+from contextlib import suppress
 from typing import Callable, Dict, Optional
 
 from PyQt5 import QtWidgets
@@ -28,8 +29,11 @@ def get_version_file_path() -> Optional[str]:
 
 
 def install_version(file_path: str, on_update_progress: Optional[Callable] = None):
-    with open(file_path) as f:
-        content = f.read()
+    for encoding in ['utf8', None]:
+        with suppress(UnicodeDecodeError):
+            with open(file_path, encoding=encoding) as f:
+                content = f.read()
+                break
 
     filename = os.path.basename(file_path)
     extension = filename.split('.')[-1]
