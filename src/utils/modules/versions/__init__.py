@@ -1,21 +1,15 @@
-import json
 import os
 import re
 from contextlib import suppress
-from typing import Callable, Dict, Optional
+from typing import Callable, Optional
 
 from PyQt5 import QtWidgets
 from src.dao.verse_dao import VerseDAO
 from src.dao.version_dao import VersionDAO
 from src.models.version import Version
 
+from .bible_shape import bible_shape
 from .parsers import content_to_verses
-
-
-def get_bible_shape() -> Dict[str, Dict[str, int]]:
-    with open('data/bible_shape.json') as f:
-        bible_shape = json.load(f)
-    return bible_shape
 
 
 def get_version_file_path() -> Optional[str]:
@@ -45,7 +39,6 @@ def install_version(file_path: str, on_update_progress: Optional[Callable] = Non
     version_dao.add(version)
 
     try:
-        bible_shape = get_bible_shape()
         verses = content_to_verses(extension, content, bible_shape, version.id)
         verse_dao = VerseDAO()
         for i, verse in enumerate(verses):
