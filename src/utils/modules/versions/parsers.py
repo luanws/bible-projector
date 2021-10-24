@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import re
 from typing import Dict, List
 
 from src.models.verse import Verse
@@ -19,6 +20,7 @@ def content_to_verses(extension: str, content: str, bible_shape: Dict[str, Dict[
 
 
 def ont_to_verses(content: str, bible_shape: Dict[str, Dict[str, int]], version_id: int) -> List[Verse]:
+    content = re.sub(r'</?.+?>', '', content)
     verse_texts = content.split('\n')
     verses: List[Verse] = []
     for book_id in bible_shape.keys():
