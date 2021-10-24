@@ -35,6 +35,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.projector_window = ProjectorWindow()
         self.advanced_search_window = AdvancedSearchWindow()
         self.about_dialog = AboutDialog()
+        self.progress_dialog = InstallingVersionProgressDialog(self)
         self.search_bar_widget = SearchBarWidget(
             versions=self.__view_model.versions,
             search_callable=self.search,
@@ -98,15 +99,15 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             chapter_verse_widget.select()
 
     def install_version(self):
-        progress_dialog = InstallingVersionProgressDialog(self)
+        self.progress_dialog.setValue(0)
 
         def on_update_progress(progress: int):
             QCoreApplication.processEvents()
-            progress_dialog.setValue(progress*100)
+            self.progress_dialog.setValue(progress*100)
             if progress == 0:
-                progress_dialog.show()
+                self.progress_dialog.show()
             elif progress == 1:
-                progress_dialog.destroy()
+                self.progress_dialog.hide()
 
         self.__view_model.install_version(on_update_progress)
         self.__view_model.update_versions()
