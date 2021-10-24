@@ -101,5 +101,5 @@ class MainViewModel:
         next_verse_index = self.current_verse.verse_number
         return min(next_verse_index, len(self.current_chapter))
 
-    def install_version(self):
-        select_file_and_install_version()
+    def install_version(self, on_update_progress: Optional[Callable] = None):
+        select_file_and_install_version(on_update_progress)

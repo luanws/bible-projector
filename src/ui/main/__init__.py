@@ -1,7 +1,7 @@
 from typing import List, Optional
 
 from PyQt5 import QtGui, QtWidgets
-from PyQt5.QtCore import Qt
+from PyQt5.QtCore import QCoreApplication, Qt
 from PyQt5.QtWidgets import (QApplication, QDesktopWidget, QMainWindow,
                              QShortcut)
 from sqlalchemy.orm.exc import NoResultFound
@@ -9,6 +9,7 @@ from src.error.invalid_reference import InvalidReferenceError
 from src.models.verse import Verse
 from src.ui.advanced_search import AdvancedSearchWindow
 from src.ui.main.dialogs.about_dialog import AboutDialog
+from src.ui.main.dialogs.installing_version_progress_dialog import InstallingVersionProgressDialog
 from src.ui.main.view_model import MainViewModel
 from src.ui.main.widgets.chapter_widget import ChapterVerseWidget
 from src.ui.main.widgets.history_widget import HistoryWidget
@@ -96,7 +97,17 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             chapter_verse_widget.select()
 
     def install_version(self):
-        self.__view_model.install_version()
+        progress_dialog = InstallingVersionProgressDialog(self)
+
+        def on_update_progress(progress: int):
+            progress_dialog.setValue(progress*100)
+            QCoreApplication.processEvents()
+            if progress == 0:
+                progress_dialog.show()
+            elif progress == 1:
+                progress_dialog.destroy()
+
+        self.__view_model.install_version(on_update_progress)
 
     def show_about(self):
         self.about_dialog.show()
