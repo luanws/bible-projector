@@ -1,14 +1,14 @@
 import json
 import os
 import re
-from typing import Dict
+from typing import Dict, Optional
 
 from PyQt5 import QtWidgets
 from src.dao.verse_dao import VerseDAO
 from src.dao.version_dao import VersionDAO
 from src.models.version import Version
 
-from .parsers import ont_to_verses
+from .parsers import content_to_verses
 
 
 def get_bible_shape() -> Dict[str, Dict[str, int]]:
@@ -17,7 +17,7 @@ def get_bible_shape() -> Dict[str, Dict[str, int]]:
     return bible_shape
 
 
-def get_version_file_path() -> str:
+def get_version_file_path() -> Optional[str]:
     file_path, _ = QtWidgets.QFileDialog.getOpenFileName(
         None,
         "Instalar versão",
@@ -42,14 +42,15 @@ def install_version(file_path: str):
 
     try:
         bible_shape = get_bible_shape()
-
-        parsers_dict = {
-            'ont': ont_to_verses,
-        }
-        parser = parsers_dict[extension]
-        verses = parser(content, bible_shape, version.id)
+        verses = content_to_verses(extension, content, bible_shape, version.id)
         verse_dao = VerseDAO()
-        verse_dao.add_many(verses)
+        for i, verse in enumerate(verses):
+            is_last = i == len(verses) - 1
+            if is_last:
+                verse_dao.add(verse)
+            else:
+                verse_dao.add(verse, commit=False)
+
     except Exception as e:
         version_dao.delete(version.id)
         raise e
@@ -57,4 +58,6 @@ def install_version(file_path: str):
 
 def select_file_and_install_version():
     file_path = get_version_file_path()
+    if not file_path:
+        return
     install_version(file_path)

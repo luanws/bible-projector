@@ -1,6 +1,21 @@
+from __future__ import annotations
+
 from typing import Dict, List
 
 from src.models.verse import Verse
+
+
+def get_parsers_dict():
+    return {
+        'ont': ont_to_verses,
+    }
+
+
+def content_to_verses(extension: str, content: str, bible_shape: Dict[str, Dict[str, int]], version_id: int) -> List[Verse]:
+    parsers_dict = get_parsers_dict()
+    parser = parsers_dict[extension]
+    verses = parser(content, bible_shape, version_id)
+    return verses
 
 
 def ont_to_verses(content: str, bible_shape: Dict[str, Dict[str, int]], version_id: int) -> List[Verse]:

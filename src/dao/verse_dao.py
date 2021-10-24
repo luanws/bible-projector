@@ -79,6 +79,7 @@ class VerseDAO:
             .filter(*verse_filter)
         return query.all() if limit is None else query[:limit]
 
-    def add_many(self, verses: List[Verse]):
-        db.session.add_all(verses)
-        db.session.commit()
+    def add(self, verse: Verse, commit: bool = True):
+        db.session.add(verse)
+        if commit:
+            db.session.commit()
