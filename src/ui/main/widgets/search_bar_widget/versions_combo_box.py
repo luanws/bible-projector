@@ -18,11 +18,11 @@ class VersionsComboBox(QtWidgets.QComboBox):
         )
         self.setStyleSheet("""
             QComboBox {
+                padding: 4px;
                 border-style: solid;
                 border-color: gray;
                 border-width: 1px;
                 border-radius: 3px;
-                padding: 4px;
                 background-color: rgb(220, 220, 220);
                 color: black;
                 width: 30px;
