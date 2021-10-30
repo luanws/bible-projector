@@ -10,7 +10,6 @@ class VerseTextLabel(QtWidgets.QLabel):
         self.setMinimumHeight(48)
         self.setStyleSheet('''
             font-size: 12px;
-            background-color: transparent;
         ''')
 
     def select(self):
@@ -18,7 +17,6 @@ class VerseTextLabel(QtWidgets.QLabel):
             color: #004;
             font-size: 12px;
             font-weight: bold;
-            background-color: transparent;
         ''')
     
     def unselect(self):
@@ -26,5 +24,4 @@ class VerseTextLabel(QtWidgets.QLabel):
             color: black;
             font-size: 12px;
             font-weight: unset;
-            background-color: transparent;
         ''')

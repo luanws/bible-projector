@@ -13,15 +13,16 @@ class SearchLineEdit(QtWidgets.QLineEdit):
             QtWidgets.QSizePolicy.Expanding,
             QtWidgets.QSizePolicy.Preferred
         )
-        # self.setFixedHeight(28)
+        self.setFixedHeight(26)
         self.setPlaceholderText("Referência (F4)")
         self.setStyleSheet("""
-            padding: 8px;
-            border: none;
-            border-radius: 8px;
+            border-style: solid;
+            border-color: gray;
+            border-width: 1px;
+            border-radius: 4px;
+            padding: 4px;
             background-color: white;
             color: black;
-            font-size: 10pt;
         """)
 
         self.configure_events()
