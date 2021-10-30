@@ -48,7 +48,7 @@ QLineEdit {
 
 QScrollBar {
     background: transparent;
-    margin: 0px 0px 0px 0px;
+    margin: 0px;
 }
 
 QScrollBar::handle {         
