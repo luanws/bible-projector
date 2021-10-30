@@ -8,4 +8,5 @@ class VerseNumberLabel(QtWidgets.QLabel):
         self.setFixedWidth(24)
         self.setStyleSheet('''
             color: #000088;
+            background-color: transparent;
         ''')

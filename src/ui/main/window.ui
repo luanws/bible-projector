@@ -27,12 +27,45 @@ QPushButton:hover {
 </string>
   </property>
   <widget class="QWidget" name="centralwidget">
+   <property name="styleSheet">
+    <string notr="true">background-color: #E9ECF1;</string>
+   </property>
    <layout class="QVBoxLayout" name="verticalLayout">
+    <property name="leftMargin">
+     <number>16</number>
+    </property>
+    <property name="topMargin">
+     <number>8</number>
+    </property>
+    <property name="rightMargin">
+     <number>16</number>
+    </property>
+    <property name="bottomMargin">
+     <number>16</number>
+    </property>
     <item>
      <layout class="QVBoxLayout" name="header_container"/>
     </item>
     <item>
      <layout class="QGridLayout" name="gridLayout" rowstretch="0,0,0,0" columnstretch="0,0,0,0">
+      <property name="leftMargin">
+       <number>0</number>
+      </property>
+      <property name="topMargin">
+       <number>0</number>
+      </property>
+      <property name="rightMargin">
+       <number>0</number>
+      </property>
+      <property name="bottomMargin">
+       <number>0</number>
+      </property>
+      <property name="horizontalSpacing">
+       <number>16</number>
+      </property>
+      <property name="verticalSpacing">
+       <number>8</number>
+      </property>
       <item row="0" column="3">
        <widget class="QLabel" name="history_label">
         <property name="styleSheet">
@@ -65,15 +98,12 @@ QPushButton:hover {
          </size>
         </property>
         <property name="styleSheet">
-         <string notr="true">* {
-	border-style: solid;
-	border-color: gray;
-	border-width: 1px;
-	border-radius: 3px;
-	background-color: white;
-	color: black;
-	font-size: 10pt;
-}</string>
+         <string notr="true">padding: 8px;
+border: none;
+border-radius: 8px;
+background-color: white;
+color: black;
+font-size: 10pt;</string>
         </property>
        </widget>
       </item>
@@ -103,11 +133,10 @@ QPushButton:hover {
       <item row="3" column="0">
        <widget class="QListWidget" name="chapter_list_widget">
         <property name="styleSheet">
-         <string notr="true">#chapter_list_widget {
-	border-style: solid;
-	border-color: gray;
-	border-width: 1px;
-	border-radius: 3px;
+         <string notr="true">QListWidget {
+	padding: 8px;
+	border: none;
+	border-radius: 8px;
 	background-color: white;
 	color: black;
 	font-size: 10pt;
@@ -130,16 +159,12 @@ QPushButton:hover {
          </size>
         </property>
         <property name="styleSheet">
-         <string notr="true">#history_list_widget {
-	border-style: solid;
-	border-color: gray;
-	border-width: 1px;
-	border-radius: 3px;
-	background-color: white;
-	color: black;
-	font-size: 10pt;
-	padding: 8px;
-}</string>
+         <string notr="true">padding: 8px;
+border: none;
+border-radius: 8px;
+background-color: white;
+color: black;
+font-size: 10pt;</string>
         </property>
        </widget>
       </item>
