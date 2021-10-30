@@ -99,7 +99,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             chapter_verse_widget.select()
 
     def install_version(self):
-
         def on_update_progress(progress: int):
             if self.progress_dialog is None:
                 self.progress_dialog = InstallingVersionProgressDialog(self)
