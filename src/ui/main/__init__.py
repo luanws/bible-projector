@@ -12,17 +12,18 @@ from src.ui.main.dialogs.about_dialog import AboutDialog
 from src.ui.main.dialogs.installing_version_progress_dialog import \
     InstallingVersionProgressDialog
 from src.ui.main.view_model import MainViewModel
-from src.ui.main.widgets.chapter_widget import ChapterVerseWidget
 from src.ui.main.widgets.history_widget import HistoryWidget
 from src.ui.main.widgets.search_bar_widget import SearchBarWidget
 from src.ui.main.window import Ui_MainWindow
 from src.ui.projector import ProjectorWindow
 from src.ui.settings import SettingsWindow
+from src.widgets.chapter_widget import ChapterWidget
+from src.widgets.chapter_widget.chapter_verse_widget import ChapterVerseWidget
 
 
 class MainWindow(QMainWindow, Ui_MainWindow):
     __view_model: MainViewModel
-    chapter_verse_widgets: Optional[List[ChapterVerseWidget]]
+    chapter_widget: ChapterWidget
     progress_dialog: Optional[InstallingVersionProgressDialog] = None
 
     def __init__(self, parent=None):
@@ -43,6 +44,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             update_projector_text_callable=self.update_projector_text,
             on_change_current_verse_callable=self.on_change_current_version,
         )
+        self.chapter_widget = ChapterWidget(
+            list_widget=self.chapter_list_widget,
+            on_click=self.on_chapter_verse_click,
+        )
 
         screen = QDesktopWidget().screenGeometry(2)
         self.projector_window.move(screen.left(), screen.top())
@@ -54,7 +59,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     @property
     def current_chapter_verse_widget(self):
-        return self.chapter_verse_widgets[self.__view_model.current_verse.verse_number - 1]
+        return self.chapter_widget.chapter_verse_widgets[self.__view_model.current_verse.verse_number - 1]
 
     def configure_events(self):
         self.__view_model.on_change_current_verse(self.on_change_current_verse)
@@ -92,8 +97,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.select_current_verse_in_chapter()
 
     def select_current_verse_in_chapter(self):
-        if self.chapter_verse_widgets is not None:
-            for chapter_verse_widget in self.chapter_verse_widgets:
+        if self.chapter_widget.chapter_verse_widgets is not None:
+            for chapter_verse_widget in self.chapter_widget.chapter_verse_widgets:
                 chapter_verse_widget.unselect()
             chapter_verse_widget = self.current_chapter_verse_widget
             chapter_verse_widget.select()
@@ -144,8 +149,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.__view_model.application.quit()
 
     def scroll_to_chapter_verse_widget_by_index(self, index: int):
-        if self.chapter_verse_widgets is not None:
-            chapter_verse_widget = self.chapter_verse_widgets[index]
+        if self.chapter_widget.chapter_verse_widgets is not None:
+            chapter_verse_widget = self.chapter_widget.chapter_verse_widgets[index]
             if chapter_verse_widget.visibleRegion().isEmpty():
                 self.chapter_list_widget.scrollToItem(
                     self.current_chapter_verse_widget.list_widget_item)
@@ -193,22 +198,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.projector_window.showFullScreen()
 
     def update_chapter(self):
-        self.chapter_list_widget.clear()
-        chapter_verse_widgets = []
-        for verse in self.__view_model.current_chapter:
-            list_widget_item = QtWidgets.QListWidgetItem(
-                self.chapter_list_widget)
-            chapter_verse_widget = ChapterVerseWidget(
-                verse=verse,
-                list_widget_item=list_widget_item,
-                on_click=self.on_chapter_verse_click,
-            )
-            list_widget_item.setSizeHint(chapter_verse_widget.sizeHint())
-            self.chapter_list_widget.addItem(list_widget_item)
-            self.chapter_list_widget.setItemWidget(
-                list_widget_item, chapter_verse_widget)
-            chapter_verse_widgets.append(chapter_verse_widget)
-        self.chapter_verse_widgets = chapter_verse_widgets
+        self.chapter_widget.chapter = self.__view_model.current_chapter
 
     def update_history(self):
         self.history_list_widget.clear()
