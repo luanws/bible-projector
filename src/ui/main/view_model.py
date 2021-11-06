@@ -78,17 +78,21 @@ class MainViewModel:
         return self.current_chapter
 
     def previous_verse(self) -> Verse:
-        if self.current_verse is None:
+        if self.current_verse is None or self.current_chapter is None:
             raise InvalidReferenceError('Nenhum verso selecionado')
-        reference = self.current_verse.reference.previous()
-        self.current_verse = self.verse_dao.get_by_verse_reference(reference)
+        index = self.current_verse.verse_number - 2
+        if index < 0:
+            raise InvalidReferenceError('Não há versículo anterior')
+        self.current_verse = self.current_chapter[index]
         return self.current_verse
 
     def next_verse(self) -> Verse:
         if self.current_verse is None or self.current_chapter is None:
             raise InvalidReferenceError('Nenhum verso selecionado')
-        reference = self.current_verse.reference.next()
-        self.current_verse = self.verse_dao.get_by_verse_reference(reference)
+        index = self.current_verse.verse_number
+        if index >= len(self.current_chapter):
+            raise InvalidReferenceError('Não há versículo posterior')
+        self.current_verse = self.current_chapter[index]
         return self.current_verse
 
     def install_version(self, on_update_progress: Optional[Callable] = None):
