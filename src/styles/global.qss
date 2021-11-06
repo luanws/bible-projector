@@ -1,0 +1,109 @@
+QLabel {
+    font-size: 12px;
+}
+
+QMainWindow {
+    background-color: #e9ecf1;
+}
+
+QListWidget {
+    border: none;
+    border-radius: 8px;
+    background-color: white;
+    color: black;
+    font-size: 10pt;
+    padding: 8px;
+}
+
+QTextEdit {
+    padding: 8px;
+    border: none;
+    border-radius: 8px;
+    background-color: white;
+    color: black;
+    font-size: 10pt;
+}
+
+QComboBox {
+    padding: 8px;
+    border: none;
+    border-radius: 8px;
+    background-color: white;
+    color: black;
+    font-size: 10pt;
+}
+
+QComboBox::drop-down {
+    border: 0px;
+    width: 24px;
+}
+
+QComboBox::down-arrow {
+    image: url(data/img/arrow-down.png);
+    width: 8px;
+    height: 8px;
+}
+
+QLineEdit {
+    padding: 8px;
+    border: none;
+    border-radius: 8px;
+    background-color: white;
+    color: black;
+    font-size: 10pt;
+}
+
+QScrollBar {
+    background: transparent;
+    margin: 0px;
+}
+
+QScrollBar::handle {         
+    border: 0px solid red;
+    border-radius: 4px;
+    background-color: #b6b8bb;
+}
+
+QScrollBar::add-line {
+    subcontrol-origin: margin;
+}
+
+QScrollBar::sub-line {
+    subcontrol-origin: margin;
+}
+
+QScrollBar:vertical {
+    width: 10px;
+}
+
+QScrollBar::handle:vertical {         
+    min-height: 32px;
+}
+
+QScrollBar::add-line:vertical {
+    height: 0px;
+    subcontrol-position: bottom;
+}
+
+QScrollBar::sub-line:vertical {
+    height: 0px;
+    subcontrol-position: top;
+}
+
+QScrollBar:horizontal {
+    height: 10px;
+}
+
+QScrollBar::handle:horizontal {         
+    min-width: 32px;
+}
+
+QScrollBar::add-line:horizontal {
+    width: 0px;
+    subcontrol-position: left;
+}
+
+QScrollBar::sub-line:horizontal {
+    width: 0px;
+    subcontrol-position: right;
+}

@@ -17,11 +17,15 @@ class Ui_MainWindow(object):
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.centralwidget)
+        self.verticalLayout.setContentsMargins(16, 8, 16, 16)
         self.verticalLayout.setObjectName("verticalLayout")
         self.header_container = QtWidgets.QVBoxLayout()
+        self.header_container.setContentsMargins(-1, -1, -1, 8)
         self.header_container.setObjectName("header_container")
         self.verticalLayout.addLayout(self.header_container)
         self.gridLayout = QtWidgets.QGridLayout()
+        self.gridLayout.setHorizontalSpacing(16)
+        self.gridLayout.setVerticalSpacing(8)
         self.gridLayout.setObjectName("gridLayout")
         self.history_label = QtWidgets.QLabel(self.centralwidget)
         self.history_label.setStyleSheet("")
@@ -37,15 +41,7 @@ class Ui_MainWindow(object):
         sizePolicy.setHeightForWidth(self.preview_text_edit.sizePolicy().hasHeightForWidth())
         self.preview_text_edit.setSizePolicy(sizePolicy)
         self.preview_text_edit.setMaximumSize(QtCore.QSize(16777215, 160))
-        self.preview_text_edit.setStyleSheet("* {\n"
-"    border-style: solid;\n"
-"    border-color: gray;\n"
-"    border-width: 1px;\n"
-"    border-radius: 3px;\n"
-"    background-color: white;\n"
-"    color: black;\n"
-"    font-size: 10pt;\n"
-"}")
+        self.preview_text_edit.setStyleSheet("")
         self.preview_text_edit.setObjectName("preview_text_edit")
         self.gridLayout.addWidget(self.preview_text_edit, 1, 0, 1, 1)
         self.preview_label = QtWidgets.QLabel(self.centralwidget)
@@ -54,15 +50,7 @@ class Ui_MainWindow(object):
         spacerItem = QtWidgets.QSpacerItem(5, 0, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Minimum)
         self.gridLayout.addItem(spacerItem, 2, 1, 1, 1)
         self.chapter_list_widget = QtWidgets.QListWidget(self.centralwidget)
-        self.chapter_list_widget.setStyleSheet("#chapter_list_widget {\n"
-"    border-style: solid;\n"
-"    border-color: gray;\n"
-"    border-width: 1px;\n"
-"    border-radius: 3px;\n"
-"    background-color: white;\n"
-"    color: black;\n"
-"    font-size: 10pt;\n"
-"}")
+        self.chapter_list_widget.setStyleSheet("")
         self.chapter_list_widget.setObjectName("chapter_list_widget")
         self.gridLayout.addWidget(self.chapter_list_widget, 3, 0, 1, 1)
         self.history_list_widget = QtWidgets.QListWidget(self.centralwidget)
@@ -72,16 +60,7 @@ class Ui_MainWindow(object):
         sizePolicy.setHeightForWidth(self.history_list_widget.sizePolicy().hasHeightForWidth())
         self.history_list_widget.setSizePolicy(sizePolicy)
         self.history_list_widget.setMaximumSize(QtCore.QSize(240, 16777215))
-        self.history_list_widget.setStyleSheet("#history_list_widget {\n"
-"    border-style: solid;\n"
-"    border-color: gray;\n"
-"    border-width: 1px;\n"
-"    border-radius: 3px;\n"
-"    background-color: white;\n"
-"    color: black;\n"
-"    font-size: 10pt;\n"
-"    padding: 8px;\n"
-"}")
+        self.history_list_widget.setStyleSheet("")
         self.history_list_widget.setObjectName("history_list_widget")
         self.gridLayout.addWidget(self.history_list_widget, 1, 3, 3, 1)
         self.verticalLayout.addLayout(self.gridLayout)
