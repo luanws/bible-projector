@@ -2,6 +2,8 @@ import os
 import re
 from typing import List, Tuple
 
+from termcolor import cprint
+
 from scripts import Script
 
 
@@ -37,4 +39,4 @@ class UpdateWindowsScript(Script):
             os.system(f"pyuic5 {ui_file_path} -o {py_file_path}")
             remove_comments_from_python_file(py_file_path)
 
-        print('Janelas atualizadas com sucesso')
+        cprint('Janelas atualizadas com sucesso', 'green')
