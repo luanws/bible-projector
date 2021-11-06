@@ -6,7 +6,7 @@ from src.models import Version
 
 class VersionDAO:
     def get_all(self) -> List[Version]:
-        return db.session.query(Version).all()
+        return db.session.query(Version).order_by(Version.version).all()
 
     def add(self, version: Version):
         db.session.add(version)
