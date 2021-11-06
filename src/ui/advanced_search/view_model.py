@@ -25,5 +25,5 @@ class AdvancedSearchViewModel:
             version = None
         return self.verse_dao.filter(
             {'q': search_text, 'version': version},
-            limit=200
+            limit=50
         )
