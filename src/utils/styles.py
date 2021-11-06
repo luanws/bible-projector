@@ -21,4 +21,6 @@ def check_paths_is_equal(path1: str, path2: str) -> bool:
 
 
 def get_qss_stylesheet(qss_file_path) -> str:
+    if len(qss_dict) == 0:
+        update_qss_dict()
     return qss_dict[qss_file_path]
