@@ -1,6 +1,7 @@
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QDialog, QLabel, QVBoxLayout
+from src import version
 
 
 class AboutDialog(QDialog):
@@ -31,7 +32,7 @@ class AboutDialog(QDialog):
         self.title_label.setFixedSize(400, 50)
         self.layout.addWidget(self.title_label)
 
-        self.version_label = QLabel("Versão: 1.0.0")
+        self.version_label = QLabel(f"Versão: {version}")
         self.version_label.setAlignment(Qt.AlignCenter)
         self.version_label.setStyleSheet("font-size: 12px;")
         self.version_label.setFixedSize(400, 50)
