@@ -70,14 +70,20 @@ class VerseDAO:
             .join(Book)\
             .filter(*verse_filter).all()
 
-    def filter(self, filter_dict: Dict[str, Any], limit: int = None) -> List[Verse]:
+    def filter(self, filter_dict: Dict[str, Any], limit: int = None, page: int = None) -> List[Verse]:
         verse_filter = query_filter_to_sql_filter_list(
             query_filter, filter_dict)
         query = db.session.query(Verse)\
             .join(Version)\
             .join(Book)\
             .filter(*verse_filter)
-        return query.all() if limit is None else query[:limit]
+
+        if limit is None:
+            return query.all()
+        if page is None:
+            return query.all() if limit is None else query[:limit]
+        offset = page * limit
+        return query[offset:offset + limit]
 
     def add(self, verse: Verse, commit: bool = True):
         db.session.add(verse)
