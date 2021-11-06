@@ -44,7 +44,6 @@ class MainViewModel:
 
     def update_versions(self):
         self.versions = [v.version for v in self.version_dao.get_all()]
-        self.versions.sort()
 
     def on_change_current_verse(self, callable: Callable[[Verse], None]):
         self.__on_change_current_verse_callable = callable
