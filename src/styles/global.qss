@@ -67,6 +67,10 @@ QComboBox::up-arrow, QSpinBox::up-arrow, QTimeEdit::up-arrow, QDateEdit::up-arro
     height: 8px;
 }
 
+QComboBox QListView {
+    background-color: white;
+}
+
 QListWidget {
     border: none;
     border-radius: 8px;
