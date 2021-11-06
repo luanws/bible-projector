@@ -2,7 +2,8 @@ import json
 import os
 from typing import Dict, List
 
-from termcolor import cprint
+from src.utils import styles
+from termcolor import colored, cprint
 
 from scripts import Script
 
@@ -44,12 +45,31 @@ def save_qss_dict_as_styles_file(qss_dict: Dict[str, str]):
         json.dump(qss_dict, styles_file)
 
 
+def check_is_new_qss_file(existing_qss_files: List[str], qss_file_path: str) -> bool:
+    qss_file_path_key = format_qss_file_path(qss_file_path)
+    return qss_file_path_key not in existing_qss_files
+
+
+def show_created_and_deleted_qss_files(qss_dict: Dict[str, str]):
+    qss_file_paths_old = list(styles.get_qss_dict().keys())
+    for i, qss_file_path in enumerate(qss_dict.keys()):
+        print(f'{i+1}- ', end='')
+        if qss_file_path in qss_file_paths_old:
+            print(qss_file_path)
+        else:
+            print(qss_file_path, colored('NEW', 'green'))
+
+    for i, qss_file_path in enumerate(qss_file_paths_old):
+        if qss_file_path not in qss_dict.keys():
+            print(f'{i+1}- ', end='')
+            print(qss_file_path, colored('DELETED', 'red'))
+
+
 def generate_styles_file():
     qss_file_paths = get_all_file_paths_with_extension('.qss')
     qss_dict = qss_file_paths_to_dict(qss_file_paths)
     print(f'Found {len(qss_file_paths)} qss files:')
-    for qss_file_path in qss_dict.keys():
-        cprint(qss_file_path, 'blue')
+    show_created_and_deleted_qss_files(qss_dict)
     save_qss_dict_as_styles_file(qss_dict)
     cprint('Arquivos de estilos gerado com sucesso', 'green')
 
