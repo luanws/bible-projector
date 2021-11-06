@@ -1,56 +1,62 @@
-from typing import Callable, Optional
+from typing import Callable, List, Optional
 
 from PyQt5 import QtWidgets
 from src.models.verse import Verse
-from src.utils import styles
 
-from .container import Container
-from .reference_button import ReferenceButton
-from .remove_button import RemoveButton
+from .history_item_widget import HistoryItemWidget
 
 
 class HistoryWidget(QtWidgets.QWidget):
-    verse: Verse
+    __history: List[Verse]
+    list_widget: QtWidgets.QListWidget
     list_widget_item: QtWidgets.QListWidgetItem
     __on_reference_click_callable: Optional[Callable[[Verse], None]]
     __on_remove_click_callable: Optional[Callable[[Verse], None]]
 
     def __init__(
         self, parent=None, *,
-        verse: Verse,
-        list_widget_item: QtWidgets.QListWidgetItem,
+        list_widget: QtWidgets.QListWidget,
         on_reference_click: Optional[Callable[[Verse], None]] = None,
         on_remove_click: Optional[Callable[[Verse], None]] = None
     ):
         super(HistoryWidget, self).__init__(parent)
 
-        self.verse = verse
-        self.list_widget_item = list_widget_item
+        self.__history = []
+        self.list_widget = list_widget
         self.__on_reference_click_callable = on_reference_click
         self.__on_remove_click_callable = on_remove_click
 
-        self.container = Container()
-        self.reference_button = ReferenceButton()
-        self.remove_button = RemoveButton()
+    @property
+    def history(self) -> List[Verse]:
+        return self.__history
 
-        self.reference_button.setText(str(verse.reference))
-
-        self.container.addWidget(self.reference_button)
-        self.container.addWidget(self.remove_button)
-        self.setLayout(self.container)
-
-        self.setStyleSheet(styles.get_qss_stylesheet(
-            'src/ui/main/widgets/history_widget/styles.qss'))
-        self.configure_events()
-
-    def configure_events(self):
-        self.reference_button.clicked.connect(self.on_reference_button_click)
-        self.remove_button.clicked.connect(self.on_remove_button_click)
-
-    def on_remove_button_click(self):
+    def on_remove(self, verse: Verse):
+        self.remove_verse(verse)
         if self.__on_remove_click_callable:
-            self.__on_remove_click_callable(self.verse)
+            self.__on_remove_click_callable(verse)
 
-    def on_reference_button_click(self):
-        if self.__on_reference_click_callable:
-            self.__on_reference_click_callable(self.verse)
+    def add_verse(self, verse: Verse):
+        if verse in self.history:
+            self.__history.remove(verse)
+        self.__history.append(verse)
+        self.render()
+
+    def remove_verse(self, verse: Verse):
+        self.__history.remove(verse)
+        self.render()
+
+    def render(self):
+        self.list_widget.clear()
+        for verse in self.history:
+            list_widget_item = QtWidgets.QListWidgetItem(
+                self.list_widget)
+            history_widget = HistoryItemWidget(
+                verse=verse,
+                list_widget_item=list_widget_item,
+                on_reference_click=self.__on_reference_click_callable,
+                on_remove_click=self.on_remove,
+            )
+            list_widget_item.setSizeHint(history_widget.sizeHint())
+            self.list_widget.addItem(list_widget_item)
+            self.list_widget.setItemWidget(
+                list_widget_item, history_widget)

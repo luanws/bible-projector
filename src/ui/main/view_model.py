@@ -15,7 +15,6 @@ from src.utils.modules.versions import select_file_and_install_version
 class MainViewModel:
     version_dao: VersionDAO
     verse_dao: VerseDAO
-    history_list: List[Verse]
     current_version: str
     __current_verse: Optional[Verse]
     current_chapter: Optional[List[Verse]]
@@ -38,7 +37,6 @@ class MainViewModel:
 
         self.application: QCoreApplication = QCoreApplication.instance()
 
-        self.history_list = []
         self.update_versions()
         self.current_version = self.versions[0]
         self.__current_verse: Optional[Verse] = None
@@ -51,7 +49,7 @@ class MainViewModel:
     def on_change_current_verse(self, callable: Callable[[Verse], None]):
         self.__on_change_current_verse_callable = callable
 
-    def export_history(self):
+    def export_history(self, history: List[Verse]):
         with suppress(FileNotFoundError):
             filename, _ = QtWidgets.QFileDialog.getSaveFileName(
                 self.application.activeWindow(),
@@ -60,16 +58,8 @@ class MainViewModel:
                 "Documentos de texto (*.txt)"
             )
             with open(filename, 'w') as file:
-                for verse in self.history_list:
+                for verse in history:
                     file.write(str(verse.reference) + '\n')
-
-    def __add_verse_in_history(self, verse: Verse):
-        if self.history_list.__contains__(verse):
-            self.history_list.remove(verse)
-        self.history_list.append(verse)
-
-    def remove_from_history(self, verse: Verse):
-        self.history_list.remove(verse)
 
     def search(self, search_text: str) -> Verse:
         if search_text != '':
@@ -78,7 +68,6 @@ class MainViewModel:
             version = self.current_version
             verse_reference = VerseReference.from_str(search_text, version)
             verse = self.verse_dao.get_by_verse_reference(verse_reference)
-            self.__add_verse_in_history(verse)
             self.current_verse = verse
             self.update_current_chapter(verse)
             return verse

@@ -16,7 +16,7 @@ class SearchBarWidget(QtWidgets.QWidget):
         search_callable: Callable[[str], None],
         project_callable: Callable[[], None],
         update_projector_text_callable: Callable[[], None],
-        on_change_current_verse_callable: Callable[[str], None],
+        on_change_current_version_callable: Callable[[str], None],
     ) -> None:
         super(SearchBarWidget, self).__init__(parent)
 
@@ -24,11 +24,11 @@ class SearchBarWidget(QtWidgets.QWidget):
         self.search_callable = search_callable
         self.project_callable = project_callable
         self.update_projector_text_callable = update_projector_text_callable
-        self.on_change_current_verse_callable = on_change_current_verse_callable
+        self.on_change_current_version_callable = on_change_current_version_callable
 
         self.container = Container()
         self.versions_combo_box = VersionsComboBox(
-            on_change_current_version_callable=self.on_change_current_verse_callable,
+            on_change_current_version_callable=self.on_change_current_version_callable,
         )
         self.search_line_edit = SearchLineEdit(search_callable=self.search)
         self.search_button = widgets.IconButton(

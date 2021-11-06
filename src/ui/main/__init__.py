@@ -1,6 +1,6 @@
 from typing import List, Optional
 
-from PyQt5 import QtGui, QtWidgets
+from PyQt5 import QtGui
 from PyQt5.QtCore import QCoreApplication, Qt
 from PyQt5.QtWidgets import (QApplication, QDesktopWidget, QMainWindow,
                              QShortcut)
@@ -23,6 +23,7 @@ from src.widgets.chapter_widget import ChapterWidget
 class MainWindow(QMainWindow, Ui_MainWindow):
     __view_model: MainViewModel
     chapter_widget: ChapterWidget
+    history_widget: HistoryWidget
     progress_dialog: Optional[InstallingVersionProgressDialog] = None
 
     def __init__(self, parent=None):
@@ -41,11 +42,15 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             search_callable=self.search,
             project_callable=self.project,
             update_projector_text_callable=self.update_projector_text,
-            on_change_current_verse_callable=self.on_change_current_version,
+            on_change_current_version_callable=self.on_change_current_version,
         )
         self.chapter_widget = ChapterWidget(
             list_widget=self.chapter_list_widget,
             on_click=self.on_chapter_verse_click,
+        )
+        self.history_widget = HistoryWidget(
+            list_widget=self.history_list_widget,
+            on_reference_click=self.on_history_verse_click,
         )
 
         screen = QDesktopWidget().screenGeometry(2)
@@ -81,10 +86,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.update_chapter()
         self.select_current_verse_in_chapter()
         self.chapter_widget.scroll_to_verse(verse)
-
-    def on_history_verse_remove(self, verse: Verse):
-        self.__view_model.remove_from_history(verse)
-        self.update_history()
 
     def on_chapter_verse_click(self, verse: Verse):
         self.__view_model.current_verse = verse
@@ -180,26 +181,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def update_chapter(self):
         self.chapter_widget.chapter = self.__view_model.current_chapter
 
-    def update_history(self):
-        self.history_list_widget.clear()
-        for verse in self.__view_model.history_list:
-            list_widget_item = QtWidgets.QListWidgetItem(
-                self.history_list_widget)
-            history_widget = HistoryWidget(
-                verse=verse,
-                list_widget_item=list_widget_item,
-                on_reference_click=self.on_history_verse_click,
-                on_remove_click=self.on_history_verse_remove,
-            )
-            list_widget_item.setSizeHint(history_widget.sizeHint())
-            self.history_list_widget.addItem(list_widget_item)
-            self.history_list_widget.setItemWidget(
-                list_widget_item, history_widget)
-
     def search(self, search_text: str):
         try:
             verse = self.__view_model.search(search_text)
-            self.update_history()
+            self.history_widget.add_verse(verse)
             self.update_chapter()
             self.select_current_verse_in_chapter()
             self.chapter_widget.scroll_to_verse(verse)
