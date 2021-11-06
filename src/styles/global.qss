@@ -72,6 +72,25 @@ QComboBox QListView {
     background-color: white;
 }
 
+QSpinBox {
+    padding: 8px;
+    border: none;
+    border-radius: 8px;
+    background-color: white;
+    color: black;
+    font-size: 10pt; 
+}
+
+QSpinBox::up-button {
+    border: none;
+    padding-top: 2px;
+}
+
+QSpinBox::down-button {
+    border: none;
+    padding-bottom: 2px;
+}
+
 QListWidget {
     border: none;
     border-radius: 8px;

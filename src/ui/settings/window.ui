@@ -64,26 +64,18 @@
               </property>
               <property name="minimumSize">
                <size>
-                <width>50</width>
+                <width>60</width>
                 <height>0</height>
                </size>
               </property>
               <property name="maximumSize">
                <size>
-                <width>50</width>
+                <width>60</width>
                 <height>16777215</height>
                </size>
               </property>
               <property name="styleSheet">
-               <string notr="true">* {
-	border-style: solid;
-	border-color: gray;
-	border-width: 1px;
-	border-radius: 3px;
-	padding: 3px;
-	background-color: white;
-	color: black;
-}</string>
+               <string notr="true">padding: 8px;</string>
               </property>
               <property name="maximum">
                <number>1638</number>
@@ -145,20 +137,18 @@
               </property>
               <property name="minimumSize">
                <size>
-                <width>50</width>
+                <width>60</width>
                 <height>0</height>
                </size>
               </property>
+              <property name="maximumSize">
+               <size>
+                <width>60</width>
+                <height>16777215</height>
+               </size>
+              </property>
               <property name="styleSheet">
-               <string notr="true">* {
-	border-style: solid;
-	border-color: gray;
-	border-width: 1px;
-	border-radius: 3px;
-	padding: 3px;
-	background-color: white;
-	color: black;
-}</string>
+               <string notr="true">padding: 8px;</string>
               </property>
               <property name="maximum">
                <number>1000000</number>

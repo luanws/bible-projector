@@ -36,17 +36,9 @@ class Ui_MainWindow(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.font_size_spin_box.sizePolicy().hasHeightForWidth())
         self.font_size_spin_box.setSizePolicy(sizePolicy)
-        self.font_size_spin_box.setMinimumSize(QtCore.QSize(50, 0))
-        self.font_size_spin_box.setMaximumSize(QtCore.QSize(50, 16777215))
-        self.font_size_spin_box.setStyleSheet("* {\n"
-"    border-style: solid;\n"
-"    border-color: gray;\n"
-"    border-width: 1px;\n"
-"    border-radius: 3px;\n"
-"    padding: 3px;\n"
-"    background-color: white;\n"
-"    color: black;\n"
-"}")
+        self.font_size_spin_box.setMinimumSize(QtCore.QSize(60, 0))
+        self.font_size_spin_box.setMaximumSize(QtCore.QSize(60, 16777215))
+        self.font_size_spin_box.setStyleSheet("padding: 8px;")
         self.font_size_spin_box.setMaximum(1638)
         self.font_size_spin_box.setObjectName("font_size_spin_box")
         self.gridLayout.addWidget(self.font_size_spin_box, 3, 1, 1, 1)
@@ -79,16 +71,9 @@ class Ui_MainWindow(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.margin_spin_box.sizePolicy().hasHeightForWidth())
         self.margin_spin_box.setSizePolicy(sizePolicy)
-        self.margin_spin_box.setMinimumSize(QtCore.QSize(50, 0))
-        self.margin_spin_box.setStyleSheet("* {\n"
-"    border-style: solid;\n"
-"    border-color: gray;\n"
-"    border-width: 1px;\n"
-"    border-radius: 3px;\n"
-"    padding: 3px;\n"
-"    background-color: white;\n"
-"    color: black;\n"
-"}")
+        self.margin_spin_box.setMinimumSize(QtCore.QSize(60, 0))
+        self.margin_spin_box.setMaximumSize(QtCore.QSize(60, 16777215))
+        self.margin_spin_box.setStyleSheet("padding: 8px;")
         self.margin_spin_box.setMaximum(1000000)
         self.margin_spin_box.setObjectName("margin_spin_box")
         self.gridLayout.addWidget(self.margin_spin_box, 3, 3, 1, 1)
