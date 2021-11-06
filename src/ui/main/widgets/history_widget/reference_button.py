@@ -6,10 +6,3 @@ class ReferenceButton(QtWidgets.QPushButton):
         super().__init__(parent)
 
         self.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.setStyleSheet('''
-            text-align: left;
-            font-size: 12px;
-            padding: 8px;
-            height: 14px;
-            background-color: transparent;
-        ''')

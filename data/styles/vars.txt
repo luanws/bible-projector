@@ -1,2 +1,3 @@
 @backgroundColor = #e9ecf1
 @backgroundColorPushButton = #1d2249
+@textColor = black

@@ -2,6 +2,7 @@ from typing import Callable, Optional
 
 from PyQt5 import QtWidgets
 from src.models.verse import Verse
+from src.utils import styles
 
 from .container import Container
 from .reference_button import ReferenceButton
@@ -38,6 +39,8 @@ class HistoryWidget(QtWidgets.QWidget):
         self.container.addWidget(self.remove_button)
         self.setLayout(self.container)
 
+        self.setStyleSheet(styles.get_qss_stylesheet(
+            'src/ui/main/widgets/history_widget/styles.qss'))
         self.configure_events()
 
     def configure_events(self):
