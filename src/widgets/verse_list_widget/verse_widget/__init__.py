@@ -31,7 +31,8 @@ class VerseWidget(QtWidgets.QWidget):
         self.verse_reference_label = VerseReferenceLabel()
 
         self.verse_text_label.setText(verse.text)
-        self.verse_reference_label.setText(str(verse.reference))
+        reference = str(verse.reference) + ' ' + verse.version.version
+        self.verse_reference_label.setText(reference)
 
         self.container.addWidget(self.verse_reference_label)
         self.container.addWidget(self.verse_text_label)

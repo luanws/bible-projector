@@ -20,13 +20,21 @@ class AdvancedSearchWindow(QMainWindow, Ui_MainWindow):
         self.chapter_widget = VerseListWidget(
             list_widget=self.chapter_list_widget,
         )
+        self.versions_combo_box.addItems(
+            self.__view_model.get_version_options())
 
         self.configure_events()
 
     def configure_events(self):
         self.search_line_edit.returnPressed.connect(self.search)
+        self.versions_combo_box.currentTextChanged.connect(
+            self.on_change_version)
+
+    def on_change_version(self, version: str):
+        self.search()
 
     def search(self):
         search_text: str = self.search_line_edit.text()
-        verses = self.__view_model.search(search_text)
+        version = self.versions_combo_box.currentText()
+        verses = self.__view_model.search(search_text, version)
         self.chapter_widget.verses = verses
