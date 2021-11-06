@@ -12,7 +12,6 @@ class Ui_MainWindow(object):
         self.verticalLayout = QtWidgets.QVBoxLayout(self.centralwidget)
         self.verticalLayout.setObjectName("verticalLayout")
         self.scrollArea = QtWidgets.QScrollArea(self.centralwidget)
-        self.scrollArea.setStyleSheet("")
         self.scrollArea.setWidgetResizable(True)
         self.scrollArea.setAlignment(QtCore.Qt.AlignHCenter|QtCore.Qt.AlignTop)
         self.scrollArea.setObjectName("scrollArea")
@@ -60,33 +59,9 @@ class Ui_MainWindow(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.font_family_combo_box.sizePolicy().hasHeightForWidth())
         self.font_family_combo_box.setSizePolicy(sizePolicy)
-        self.font_family_combo_box.setStyleSheet("* {\n"
-"    border-style: solid;\n"
-"    border-color: gray;\n"
-"    border-width: 1px;\n"
-"    border-radius: 3px;\n"
-"    padding: 3px;\n"
-"    background-color: white;\n"
-"    color: black;\n"
-"}")
+        self.font_family_combo_box.setStyleSheet("padding: 8px;")
         self.font_family_combo_box.setObjectName("font_family_combo_box")
         self.gridLayout.addWidget(self.font_family_combo_box, 3, 0, 1, 1)
-        self.preview_text_line_edit = QtWidgets.QLineEdit(self.scrollAreaWidgetContents)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Fixed)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.preview_text_line_edit.sizePolicy().hasHeightForWidth())
-        self.preview_text_line_edit.setSizePolicy(sizePolicy)
-        self.preview_text_line_edit.setStyleSheet("border-style: solid;\n"
-"border-color: gray;\n"
-"border-width: 1px;\n"
-"border-radius: 3px;\n"
-"padding: 3px;\n"
-"background-color: white;\n"
-"color: black;")
-        self.preview_text_line_edit.setPlaceholderText("")
-        self.preview_text_line_edit.setObjectName("preview_text_line_edit")
-        self.gridLayout.addWidget(self.preview_text_line_edit, 1, 0, 1, 3)
         self.apply_button = QtWidgets.QPushButton(self.scrollAreaWidgetContents)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
@@ -95,20 +70,7 @@ class Ui_MainWindow(object):
         self.apply_button.setSizePolicy(sizePolicy)
         self.apply_button.setMinimumSize(QtCore.QSize(71, 0))
         self.apply_button.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.apply_button.setStyleSheet("* {\n"
-"    border-style: solid;\n"
-"    border-color: gray;\n"
-"    border-width: 1px;\n"
-"    border-radius: 3px;\n"
-"    padding: 4px;\n"
-"    background-color: rgb(220, 220, 220);\n"
-"    color: black;\n"
-"}\n"
-"\n"
-"*:hover {\n"
-"    background-color: gray;\n"
-"    color: white;\n"
-"}")
+        self.apply_button.setStyleSheet("padding: 8px;")
         self.apply_button.setObjectName("apply_button")
         self.gridLayout.addWidget(self.apply_button, 1, 3, 1, 1)
         self.margin_spin_box = QtWidgets.QSpinBox(self.scrollAreaWidgetContents)
@@ -130,6 +92,16 @@ class Ui_MainWindow(object):
         self.margin_spin_box.setMaximum(1000000)
         self.margin_spin_box.setObjectName("margin_spin_box")
         self.gridLayout.addWidget(self.margin_spin_box, 3, 3, 1, 1)
+        self.preview_text_line_edit = QtWidgets.QLineEdit(self.scrollAreaWidgetContents)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.preview_text_line_edit.sizePolicy().hasHeightForWidth())
+        self.preview_text_line_edit.setSizePolicy(sizePolicy)
+        self.preview_text_line_edit.setStyleSheet("padding: 8px;")
+        self.preview_text_line_edit.setPlaceholderText("")
+        self.preview_text_line_edit.setObjectName("preview_text_line_edit")
+        self.gridLayout.addWidget(self.preview_text_line_edit, 1, 0, 1, 3)
         self.label = QtWidgets.QLabel(self.scrollAreaWidgetContents)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
@@ -186,7 +158,7 @@ class Ui_MainWindow(object):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Configurações"))
         self.label_2.setText(_translate("MainWindow", "Margem"))
-        self.preview_text_line_edit.setText(_translate("MainWindow", "Texto de teste"))
         self.apply_button.setText(_translate("MainWindow", "Aplicar"))
+        self.preview_text_line_edit.setText(_translate("MainWindow", "Texto de teste"))
         self.label.setText(_translate("MainWindow", "Fonte:"))
         self.preview_label.setText(_translate("MainWindow", "Texto de teste"))
