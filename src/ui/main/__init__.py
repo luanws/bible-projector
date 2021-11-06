@@ -18,7 +18,6 @@ from src.ui.main.window import Ui_MainWindow
 from src.ui.projector import ProjectorWindow
 from src.ui.settings import SettingsWindow
 from src.widgets.chapter_widget import ChapterWidget
-from src.widgets.chapter_widget.chapter_verse_widget import ChapterVerseWidget
 
 
 class MainWindow(QMainWindow, Ui_MainWindow):
@@ -57,10 +56,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.configure_events()
         self.configure_hot_keys()
 
-    @property
-    def current_chapter_verse_widget(self):
-        return self.chapter_widget.chapter_verse_widgets[self.__view_model.current_verse.verse_number - 1]
-
     def configure_events(self):
         self.__view_model.on_change_current_verse(self.on_change_current_verse)
 
@@ -85,8 +80,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.__view_model.update_current_chapter(verse)
         self.update_chapter()
         self.select_current_verse_in_chapter()
-        self.chapter_list_widget.scrollToItem(
-            self.current_chapter_verse_widget.list_widget_item)
+        self.chapter_widget.scroll_to_verse(verse)
 
     def on_history_verse_remove(self, verse: Verse):
         self.__view_model.remove_from_history(verse)
@@ -97,11 +91,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.select_current_verse_in_chapter()
 
     def select_current_verse_in_chapter(self):
-        if self.chapter_widget.chapter_verse_widgets is not None:
-            for chapter_verse_widget in self.chapter_widget.chapter_verse_widgets:
-                chapter_verse_widget.unselect()
-            chapter_verse_widget = self.current_chapter_verse_widget
-            chapter_verse_widget.select()
+        self.chapter_widget.select_verse(self.__view_model.current_verse)
 
     def install_version(self):
         def on_update_progress(progress: int):
@@ -148,29 +138,19 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def closeEvent(self, a0: QtGui.QCloseEvent) -> None:
         self.__view_model.application.quit()
 
-    def scroll_to_chapter_verse_widget_by_index(self, index: int):
-        if self.chapter_widget.chapter_verse_widgets is not None:
-            chapter_verse_widget = self.chapter_widget.chapter_verse_widgets[index]
-            if chapter_verse_widget.visibleRegion().isEmpty():
-                self.chapter_list_widget.scrollToItem(
-                    self.current_chapter_verse_widget.list_widget_item)
-            else:
-                self.chapter_list_widget.scrollToItem(
-                    chapter_verse_widget.list_widget_item)
-
     def previous_verse(self):
         try:
-            index = self.__view_model.previous_verse()
+            verse = self.__view_model.previous_verse()
             self.select_current_verse_in_chapter()
-            self.scroll_to_chapter_verse_widget_by_index(index)
+            self.chapter_widget.scroll_to_verse(verse)
         except Exception:
             self.preview_text_edit.setText('Verso não encontrado')
 
     def next_verse(self):
         try:
-            index = self.__view_model.next_verse()
+            verse = self.__view_model.next_verse()
             self.select_current_verse_in_chapter()
-            self.scroll_to_chapter_verse_widget_by_index(index)
+            self.chapter_widget.scroll_to_verse(verse)
         except Exception:
             self.preview_text_edit.setText('Verso não encontrado')
 
@@ -222,8 +202,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.update_history()
             self.update_chapter()
             self.select_current_verse_in_chapter()
-            self.chapter_list_widget.scrollToItem(
-                self.current_chapter_verse_widget.list_widget_item)
+            self.chapter_widget.scroll_to_verse(verse)
             self.search_bar_widget.set_text(str(verse.reference))
         except InvalidReferenceError:
             self.preview_text_edit.setText('Referência bíblica inválida')

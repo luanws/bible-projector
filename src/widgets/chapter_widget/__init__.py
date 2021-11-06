@@ -48,3 +48,19 @@ class ChapterWidget(QtWidgets.QWidget):
                 list_widget_item, chapter_verse_widget)
             chapter_verse_widgets.append(chapter_verse_widget)
         self.chapter_verse_widgets = chapter_verse_widgets
+
+    def select_verse(self, verse: Verse):
+        if self.chapter_verse_widgets is not None:
+            for chapter_verse_widget in self.chapter_verse_widgets:
+                chapter_verse_widget.unselect()
+                if chapter_verse_widget.verse == verse:
+                    chapter_verse_widget.select()
+
+    def scroll_to_verse(self, verse: Verse):
+        if self.chapter_verse_widgets is not None:
+            for chapter_verse_widget in self.chapter_verse_widgets:
+                if chapter_verse_widget.verse == verse:
+                    self.list_widget.scrollToItem(
+                        chapter_verse_widget.list_widget_item,
+                        QtWidgets.QAbstractItemView.PositionAtCenter
+                    )
