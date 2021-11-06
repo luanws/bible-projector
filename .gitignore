@@ -1,5 +1,5 @@
 config.ini
-data/styles.json
+data/styles/stylesheets.json
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

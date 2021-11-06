@@ -1,9 +1,9 @@
 QMainWindow {
-    background-color: #e9ecf1;
+    background-color: @backgroundColor;
 }
 
 QAbstractScrollArea #scrollAreaWidgetContents {
-    background-color: #e9ecf1;
+    background-color: @backgroundColor;
 }
 
 QLabel {
@@ -38,7 +38,7 @@ QPushButton {
 }
 
 QPushButton::hover {
-    background-color: #1d2249;
+    background-color: @backgroundColorPushButton;
 }
 
 QComboBox {
