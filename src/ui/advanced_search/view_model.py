@@ -11,4 +11,4 @@ class AdvancedSearchViewModel:
         self.verse_dao = VerseDAO()
 
     def search(self, search_text: str) -> List[Verse]:
-        return self.verse_dao.filter({'q': search_text})
+        return self.verse_dao.filter({'q': search_text}, limit=100)

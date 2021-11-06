@@ -1,13 +1,13 @@
 from PyQt5 import QtGui
 from PyQt5.QtWidgets import QMainWindow
 from src.ui.advanced_search.view_model import AdvancedSearchViewModel
-from src.widgets.chapter_widget import ChapterWidget
+from src.widgets.verse_list_widget import VerseListWidget
 
 from .window import Ui_MainWindow
 
 
 class AdvancedSearchWindow(QMainWindow, Ui_MainWindow):
-    chapter_widget: ChapterWidget
+    chapter_widget: VerseListWidget
     __view_model: AdvancedSearchViewModel
 
     def __init__(self):
@@ -17,7 +17,7 @@ class AdvancedSearchWindow(QMainWindow, Ui_MainWindow):
         self.setWindowIcon(QtGui.QIcon('icon.ico'))
 
         self.__view_model = AdvancedSearchViewModel()
-        self.chapter_widget = ChapterWidget(
+        self.chapter_widget = VerseListWidget(
             list_widget=self.chapter_list_widget,
         )
 
@@ -29,4 +29,4 @@ class AdvancedSearchWindow(QMainWindow, Ui_MainWindow):
     def search(self):
         search_text: str = self.search_line_edit.text()
         verses = self.__view_model.search(search_text)
-        self.chapter_widget.chapter = verses
+        self.chapter_widget.verses = verses
