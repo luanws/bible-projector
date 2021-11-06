@@ -1,18 +1,22 @@
-QLabel {
-    font-size: 12px;
-}
-
 QMainWindow {
     background-color: #e9ecf1;
 }
 
-QListWidget {
+QAbstractScrollArea #scrollAreaWidgetContents {
+    background-color: #e9ecf1;
+}
+
+QLabel {
+    font-size: 12px;
+}
+
+QLineEdit {
+    padding: 8px;
     border: none;
     border-radius: 8px;
     background-color: white;
     color: black;
     font-size: 10pt;
-    padding: 8px;
 }
 
 QTextEdit {
@@ -22,6 +26,19 @@ QTextEdit {
     background-color: white;
     color: black;
     font-size: 10pt;
+}
+
+QPushButton {
+    background-color: #323A7C;
+    border: none;
+    color: white;
+    font-size: 10pt;
+    border-radius: 8px;
+    padding: 8px;
+}
+
+QPushButton::hover {
+    background-color: #1d2249;
 }
 
 QComboBox {
@@ -50,13 +67,13 @@ QComboBox::up-arrow, QSpinBox::up-arrow, QTimeEdit::up-arrow, QDateEdit::up-arro
     height: 8px;
 }
 
-QLineEdit {
-    padding: 8px;
+QListWidget {
     border: none;
     border-radius: 8px;
     background-color: white;
     color: black;
     font-size: 10pt;
+    padding: 8px;
 }
 
 QScrollBar {
