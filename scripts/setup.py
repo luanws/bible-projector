@@ -9,8 +9,17 @@ from scripts import Script
 
 application_name = 'Projetor bíblico'
 
-assets_folder_path = os.path.join('data')
-dist_folder_path = os.path.join('dist')
+assets_path = os.path.join('data')
+dist_path = os.path.join('dist')
+
+copy_files = [
+    ('icon.ico', dist_path),
+    ('styles.json', dist_path),
+]
+
+copy_folders = [
+    ('data', os.path.join(dist_path, 'data')),
+]
 
 
 def setup():
@@ -30,6 +39,14 @@ def setup():
 
         with suppress(FileNotFoundError):
             os.remove(f'{application_name}.spec')
+
+        for source, destination in copy_files:
+            with suppress(FileNotFoundError):
+                shutil.copy(source, destination)
+
+        for source, destination in copy_folders:
+            with suppress(FileNotFoundError):
+                shutil.copytree(source, destination)
 
 
 class SetupScript(Script):
