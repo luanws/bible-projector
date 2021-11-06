@@ -58,9 +58,8 @@ class ChapterWidget(QtWidgets.QWidget):
 
     def scroll_to_verse(self, verse: Verse):
         if self.chapter_verse_widgets is not None:
-            for chapter_verse_widget in self.chapter_verse_widgets:
-                if chapter_verse_widget.verse == verse:
-                    self.list_widget.scrollToItem(
-                        chapter_verse_widget.list_widget_item,
-                        QtWidgets.QAbstractItemView.PositionAtCenter
-                    )
+            chapter_verse_widget = self.chapter_verse_widgets[verse.verse_number - 1]
+            self.list_widget.scrollToItem(
+                chapter_verse_widget.list_widget_item,
+                QtWidgets.QAbstractItemView.PositionAtCenter
+            )
