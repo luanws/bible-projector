@@ -6,7 +6,8 @@ qss_dict: Dict[str, str] = {}
 
 
 def get_qss_dict() -> Dict[str, str]:
-    with open('styles.json') as f:
+    file_path = os.path.join('data', 'styles.json')
+    with open(file_path) as f:
         return json.load(f)
 
 

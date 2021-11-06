@@ -34,7 +34,14 @@ QComboBox {
 }
 
 QComboBox::drop-down {
-    width: 0px;
+    border: 0px;
+    width: 24px;
+}
+
+QComboBox::down-arrow {
+    image: url(data/img/arrow-down.png);
+    width: 8px;
+    height: 8px;
 }
 
 QLineEdit {

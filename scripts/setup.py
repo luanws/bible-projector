@@ -14,7 +14,6 @@ dist_path = os.path.join('dist')
 
 copy_files = [
     ('icon.ico', dist_path),
-    ('styles.json', dist_path),
 ]
 
 copy_folders = [
