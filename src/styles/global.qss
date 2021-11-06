@@ -38,8 +38,14 @@ QComboBox::drop-down {
     width: 24px;
 }
 
-QComboBox::down-arrow {
+QComboBox::down-arrow, QSpinBox::down-arrow, QTimeEdit::down-arrow, QDateEdit::down-arrow {
     image: url(data/img/arrow-down.png);
+    width: 8px;
+    height: 8px;
+}
+
+QComboBox::up-arrow, QSpinBox::up-arrow, QTimeEdit::up-arrow, QDateEdit::up-arrow {
+    image: url(data/img/arrow-up.png);
     width: 8px;
     height: 8px;
 }
