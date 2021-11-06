@@ -12,7 +12,6 @@ def main():
     app = QApplication(sys.argv)
     main_window = MainWindow()
     main_window.showMaximized()
-    styles.update_qss_dict()
     app.setStyleSheet(styles.get_qss_stylesheet('src/styles/global.qss'))
     app.exec()
 
