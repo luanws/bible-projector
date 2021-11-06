@@ -31,6 +31,14 @@ def setup():
             '--onefile',
             '--windowed',
         ])
+
+        for source, destination in copy_files:
+            shutil.copy(source, destination)
+
+        for source, destination in copy_folders:
+            with suppress(FileNotFoundError):
+                shutil.rmtree(destination)
+            shutil.copytree(source, destination)
     except:
         traceback.print_exc()
     finally:
@@ -39,14 +47,6 @@ def setup():
 
         with suppress(FileNotFoundError):
             os.remove(f'{application_name}.spec')
-
-        for source, destination in copy_files:
-            with suppress(FileNotFoundError):
-                shutil.copy(source, destination)
-
-        for source, destination in copy_folders:
-            with suppress(FileNotFoundError):
-                shutil.copytree(source, destination)
 
 
 class SetupScript(Script):
