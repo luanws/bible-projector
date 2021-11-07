@@ -33,7 +33,7 @@
      <number>0</number>
     </property>
     <item row="0" column="0">
-     <widget class="QLabel" name="textLabel">
+     <widget class="QLabel" name="text_label">
       <property name="styleSheet">
        <string notr="true">* {
 	font: 8pt &quot;Berlin Sans FB&quot;;

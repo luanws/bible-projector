@@ -17,7 +17,7 @@ class ProjectorWindow(QMainWindow, Ui_MainWindow):
         self.__view_model.font_settings.on_change_settings(
             self.configure_text_label_styles)
 
-        self.textLabel.setText('')
+        self.text_label.setText('')
         self.configure_text_label_styles()
 
     @property
@@ -34,12 +34,12 @@ class ProjectorWindow(QMainWindow, Ui_MainWindow):
             self.close()
 
     def on_change_text(self, text: str):
-        self.textLabel.setText(text)
+        self.text_label.setText(text)
 
     def configure_text_label_styles(self):
         font_settings = self.__view_model.font_settings
-        self.textLabel.setAlignment(QtCore.Qt.AlignVCenter)
-        self.textLabel.setStyleSheet(f"""
+        self.text_label.setAlignment(QtCore.Qt.AlignVCenter)
+        self.text_label.setStyleSheet(f"""
             color: {font_settings.color};
             font-size: {font_settings.font_size}pt;
             font-family: '{font_settings.font_family}';
