@@ -3,6 +3,7 @@ from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QColorDialog, QMainWindow
 from src.ui.settings.view_model import SettingsViewModel
 from src.ui.settings.window import Ui_MainWindow
+from src.widgets.outlined_label import OutlinedLabel
 
 
 def q_color_to_hex(color: QtGui.QColor) -> str:
@@ -19,6 +20,13 @@ class SettingsWindow(QMainWindow, Ui_MainWindow):
         self.setWindowIcon(QtGui.QIcon('icon.ico'))
 
         self.__view_model = SettingsViewModel()
+        self.preview_label = OutlinedLabel(1/16)
+        self.preview_label.setWordWrap(True)
+        self.preview_label.setSizePolicy(
+            QtWidgets.QSizePolicy.Expanding,
+            QtWidgets.QSizePolicy.Expanding
+        )
+        self.vertical_layout.addWidget(self.preview_label)
 
         self.update_preview_label()
         self.configure_events()

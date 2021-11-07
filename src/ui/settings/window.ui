@@ -89,6 +89,25 @@
               </property>
              </widget>
             </item>
+            <item row="1" column="0" colspan="3">
+             <widget class="QLineEdit" name="preview_text_line_edit">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">padding: 8px;</string>
+              </property>
+              <property name="text">
+               <string>Texto de teste</string>
+              </property>
+              <property name="placeholderText">
+               <string/>
+              </property>
+             </widget>
+            </item>
             <item row="3" column="0">
              <widget class="QFontComboBox" name="font_family_combo_box">
               <property name="sizePolicy">
@@ -99,31 +118,6 @@
               </property>
               <property name="styleSheet">
                <string notr="true">padding: 8px;</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="3">
-             <widget class="QPushButton" name="apply_button">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="minimumSize">
-               <size>
-                <width>71</width>
-                <height>0</height>
-               </size>
-              </property>
-              <property name="cursor">
-               <cursorShape>PointingHandCursor</cursorShape>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">padding: 8px;</string>
-              </property>
-              <property name="text">
-               <string>Aplicar</string>
               </property>
              </widget>
             </item>
@@ -155,35 +149,28 @@
               </property>
              </widget>
             </item>
-            <item row="1" column="0" colspan="3">
-             <widget class="QLineEdit" name="preview_text_line_edit">
+            <item row="1" column="3">
+             <widget class="QPushButton" name="apply_button">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>71</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="cursor">
+               <cursorShape>PointingHandCursor</cursorShape>
               </property>
               <property name="styleSheet">
                <string notr="true">padding: 8px;</string>
               </property>
               <property name="text">
-               <string>Texto de teste</string>
-              </property>
-              <property name="placeholderText">
-               <string/>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="0" colspan="3">
-             <widget class="QLabel" name="label">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="text">
-               <string>Fonte:</string>
+               <string>Aplicar</string>
               </property>
              </widget>
             </item>
@@ -223,49 +210,23 @@ border-width: 1px;
               </property>
              </widget>
             </item>
+            <item row="2" column="0" colspan="3">
+             <widget class="QLabel" name="label">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="text">
+               <string>Fonte:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="0" colspan="4">
+             <layout class="QVBoxLayout" name="vertical_layout"/>
+            </item>
            </layout>
-          </item>
-          <item>
-           <widget class="QLabel" name="preview_label">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>200</height>
-             </size>
-            </property>
-            <property name="font">
-             <font>
-              <family>Arial</family>
-              <pointsize>20</pointsize>
-             </font>
-            </property>
-            <property name="cursor">
-             <cursorShape>PointingHandCursor</cursorShape>
-            </property>
-            <property name="layoutDirection">
-             <enum>Qt::LeftToRight</enum>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">background-color: black;
-color: white;
-padding: 16px;</string>
-            </property>
-            <property name="text">
-             <string>Texto de teste</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-            </property>
-            <property name="wordWrap">
-             <bool>true</bool>
-            </property>
-           </widget>
           </item>
          </layout>
         </item>

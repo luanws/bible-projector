@@ -18,7 +18,7 @@
 	background-color: black;
 }</string>
   </property>
-  <widget class="QWidget" name="centralwidget">
+  <widget class="QWidget" name="central_widget">
    <layout class="QGridLayout" name="gridLayout">
     <property name="leftMargin">
      <number>0</number>
@@ -33,31 +33,7 @@
      <number>0</number>
     </property>
     <item row="0" column="0">
-     <widget class="QLabel" name="text_label">
-      <property name="styleSheet">
-       <string notr="true">* {
-	font: 8pt &quot;Berlin Sans FB&quot;;
-	color: white;
-	font-size: 30px;
-	margin: 50%;
-}</string>
-      </property>
-      <property name="text">
-       <string>Texto bíblico</string>
-      </property>
-      <property name="textFormat">
-       <enum>Qt::AutoText</enum>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
-      </property>
-      <property name="wordWrap">
-       <bool>true</bool>
-      </property>
-      <property name="textInteractionFlags">
-       <set>Qt::NoTextInteraction</set>
-      </property>
-     </widget>
+     <layout class="QVBoxLayout" name="vertical_layout"/>
     </item>
    </layout>
   </widget>
