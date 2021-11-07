@@ -125,6 +125,7 @@ class Ui_MainWindow(object):
         font.setFamily("Arial")
         font.setPointSize(20)
         self.preview_label.setFont(font)
+        self.preview_label.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.preview_label.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.preview_label.setStyleSheet("background-color: black;\n"
 "color: white;\n"

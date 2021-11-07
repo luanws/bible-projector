@@ -6,3 +6,4 @@ class ProjectorFontSettings(Settings):
     font_family: str = 'Arial'
     margin: int = 64
     color: str = '#ffffff'
+    background_image_path: str = ''

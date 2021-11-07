@@ -43,5 +43,6 @@ class ProjectorWindow(QMainWindow, Ui_MainWindow):
             color: {font_settings.color};
             font-size: {font_settings.font_size}pt;
             font-family: '{font_settings.font_family}';
-            margin: {font_settings.margin}px;
+            padding: {font_settings.margin}px;
+            border-image: url({font_settings.background_image_path}) 0 0 0 0 stretch stretch;
         """)

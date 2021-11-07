@@ -1,4 +1,5 @@
 from PyQt5 import QtCore, QtGui
+from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QColorDialog, QMainWindow
 from src.ui.settings.view_model import SettingsViewModel
 from src.ui.settings.window import Ui_MainWindow
@@ -37,6 +38,7 @@ class SettingsWindow(QMainWindow, Ui_MainWindow):
             self.on_change_preview_text)
         self.change_color_button.clicked.connect(
             self.on_click_change_color_button)
+        self.preview_label.mousePressEvent = self.on_click_preview_label
 
     def configure_start_values(self):
         font_size = self.__view_model.projector_font_settings.font_size
@@ -64,7 +66,18 @@ class SettingsWindow(QMainWindow, Ui_MainWindow):
             font-size: {font_settings.font_size}pt;
             font-family: '{font_settings.font_family}';
             padding: {font_settings.margin}px;
+            border-image: url({font_settings.background_image_path}) 0 0 0 0 stretch stretch;
         """)
+
+    def on_click_preview_label(self, event: QtGui.QMouseEvent):
+        file_path, _ = QtWidgets.QFileDialog.getOpenFileName(
+            None,
+            "Imagem de fundo",
+            "",
+            "Imagens (*.png *.jpg *.jpeg *.bmp *.gif)"
+        )
+        self.__view_model.projector_font_settings.background_image_path = file_path
+        self.update_preview_label()
 
     def on_click_change_color_button(self):
         q_color = QColorDialog.getColor()
