@@ -21,7 +21,14 @@
        <widget class="QComboBox" name="versions_combo_box"/>
       </item>
       <item>
-       <widget class="QLineEdit" name="search_line_edit"/>
+       <widget class="QComboBox" name="books_combo_box"/>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="search_line_edit">
+        <property name="placeholderText">
+         <string>Pesquisar...</string>
+        </property>
+       </widget>
       </item>
      </layout>
     </item>

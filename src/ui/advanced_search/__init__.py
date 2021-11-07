@@ -28,7 +28,9 @@ class AdvancedSearchWindow(QMainWindow, Ui_MainWindow):
             on_click=self.on_verse_clicked
         )
         self.versions_combo_box.addItems(
-            self.__view_model.get_version_options())
+            self.__view_model.get_all_version_options())
+        self.books_combo_box.addItems(
+            self.__view_model.get_all_book_options())
 
         self.configure_events()
 
@@ -36,8 +38,13 @@ class AdvancedSearchWindow(QMainWindow, Ui_MainWindow):
         self.search_line_edit.returnPressed.connect(self.search)
         self.versions_combo_box.currentTextChanged.connect(
             self.on_change_version)
+        self.books_combo_box.currentTextChanged.connect(
+            self.on_change_book)
 
     def on_change_version(self, version: str):
+        self.search()
+
+    def on_change_book(self, book: str):
         self.search()
 
     def on_verse_clicked(self, verse: Verse):
@@ -47,5 +54,6 @@ class AdvancedSearchWindow(QMainWindow, Ui_MainWindow):
     def search(self):
         search_text: str = self.search_line_edit.text()
         version = self.versions_combo_box.currentText()
-        verses = self.__view_model.search(search_text, version)
+        book = self.books_combo_box.currentText()
+        verses = self.__view_model.search(search_text, book, version)
         self.chapter_widget.verses = verses

@@ -16,7 +16,7 @@ query_filter: QueryFilter = {
         func.lower(Book.name) == func.lower(q),
         func.lower(Book._name) == func.lower(q),
         func.lower(Book._initials) == func.lower(q),
-    ),
+    ) if q else True,
     'book_part': lambda q: func.lower(Book._name).like(f'%{q.lower()}%'),
     'chapter': lambda q: Verse.chapter_number == q,
     'verse': lambda q: Verse.verse_number == q,

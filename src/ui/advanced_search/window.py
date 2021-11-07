@@ -12,6 +12,9 @@ class Ui_MainWindow(object):
         self.versions_combo_box = QtWidgets.QComboBox(self.centralwidget)
         self.versions_combo_box.setObjectName("versions_combo_box")
         self.horizontalLayout.addWidget(self.versions_combo_box)
+        self.books_combo_box = QtWidgets.QComboBox(self.centralwidget)
+        self.books_combo_box.setObjectName("books_combo_box")
+        self.horizontalLayout.addWidget(self.books_combo_box)
         self.search_line_edit = QtWidgets.QLineEdit(self.centralwidget)
         self.search_line_edit.setObjectName("search_line_edit")
         self.horizontalLayout.addWidget(self.search_line_edit)
@@ -25,3 +28,4 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Pesquisa avançada"))
+        self.search_line_edit.setPlaceholderText(_translate("MainWindow", "Pesquisar..."))
