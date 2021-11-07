@@ -35,7 +35,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.__view_model = MainViewModel()
         self.settings_window = SettingsWindow()
         self.projector_window = ProjectorWindow()
-        self.advanced_search_window = AdvancedSearchWindow()
+        self.advanced_search_window = AdvancedSearchWindow(
+            self.on_verse_clicked_advanced_search)
         self.about_dialog = AboutDialog()
         self.search_bar_widget = SearchBarWidget(
             versions=self.__view_model.versions,
@@ -72,6 +73,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.show_advanced_search)
         self.action_quit.triggered.connect(self.close)
         self.action_install_version.triggered.connect(self.install_version)
+
+    def on_verse_clicked_advanced_search(self, verse: Verse):
+        self.__view_model.current_verse = verse
 
     def on_change_current_version(self, version: str):
         self.__view_model.current_version = version
