@@ -20,6 +20,7 @@ def content_to_verses(extension: str, content: str, bible_shape: Dict[str, Dict[
 
 
 def ont_to_verses(content: str, bible_shape: Dict[str, Dict[str, int]], version_id: int) -> List[Verse]:
+    content = re.sub(r'<TS>.+<Ts>', '', content)
     content = re.sub(r'</?.+?>', '', content)
     verse_texts = content.split('\n')
     verses: List[Verse] = []
