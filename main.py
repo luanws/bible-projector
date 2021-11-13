@@ -12,7 +12,7 @@ from src.utils import styles
 def main():
     app = QApplication(sys.argv)
 
-    splash_screen = QSplashScreen(QPixmap('data/img/splash.png'))
+    splash_screen = QSplashScreen(QPixmap('res/img/splash.png'))
     splash_screen.show()
 
     main_window = MainWindow()
