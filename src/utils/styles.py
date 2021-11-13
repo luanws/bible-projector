@@ -2,13 +2,14 @@ import json
 import os
 import re
 from typing import Dict
+from contextlib import suppress
 
 qss_dict: Dict[str, str] = {}
 qss_vars: Dict[str, str] = {}
 
 
 def get_stylesheet_vars() -> Dict[str, str]:
-    file_path = os.path.join('data', 'styles', 'vars.txt')
+    file_path = os.path.join('res', 'styles', 'vars.txt')
     with open(file_path) as f:
         content = f.read()
     groups = re.findall(r'(@[^\s]+)\s*=\s*([^\s]+)', content, re.MULTILINE)
@@ -23,9 +24,11 @@ def apply_qss_vars(qss_vars: Dict[str, str], qss_stylesheet: str) -> str:
 
 
 def get_qss_dict() -> Dict[str, str]:
-    file_path = os.path.join('data', 'styles', 'stylesheets.json')
-    with open(file_path) as f:
-        return json.load(f)
+    file_path = os.path.join('res', 'styles', 'stylesheets.json')
+    with suppress(FileNotFoundError):
+        with open(file_path) as f:
+            return json.load(f)
+    return {}
 
 
 def update_qss_dict():

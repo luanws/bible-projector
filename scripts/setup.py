@@ -18,6 +18,7 @@ copy_files = [
 
 copy_folders = [
     ('data', os.path.join(dist_path, 'data')),
+    ('res', os.path.join(dist_path, 'res')),
 ]
 
 

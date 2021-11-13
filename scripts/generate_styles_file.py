@@ -40,7 +40,7 @@ def qss_file_paths_to_dict(qss_file_paths: List[str]) -> Dict[str, str]:
 
 
 def save_qss_dict_as_styles_file(qss_dict: Dict[str, str]):
-    file_path = os.path.join('data', 'styles', 'stylesheets.json')
+    file_path = os.path.join('res', 'styles', 'stylesheets.json')
     with open(file_path, 'w') as styles_file:
         json.dump(qss_dict, styles_file)
 
