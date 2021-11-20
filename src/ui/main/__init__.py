@@ -8,6 +8,7 @@ from sqlalchemy.orm.exc import NoResultFound
 from src.error.invalid_reference import InvalidReferenceError
 from src.models.verse import Verse
 from src.ui.advanced_search import AdvancedSearchWindow
+from src.ui.main.control import MainWindowControl
 from src.ui.main.dialogs.about_dialog import AboutDialog
 from src.ui.main.dialogs.installing_version_progress_dialog import \
     InstallingVersionProgressDialog
@@ -26,6 +27,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     chapter_widget: ChapterWidget
     history_widget: HistoryWidget
     progress_dialog: Optional[InstallingVersionProgressDialog] = None
+    main_window_control: MainWindowControl
 
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -34,11 +36,14 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.setWindowIcon(QtGui.QIcon('icon.ico'))
 
         self.__view_model = MainViewModel()
+        self.main_window_control = MainWindowControl(self)
+
         self.settings_window = SettingsWindow()
         self.projector_window = ProjectorWindow()
         self.advanced_search_window = AdvancedSearchWindow(
             self.on_verse_clicked_advanced_search)
-        self.remote_control_window = RemoteControlWindow()
+        self.remote_control_window = RemoteControlWindow(
+            main_window_control=self.main_window_control)
         self.about_dialog = AboutDialog()
 
         self.search_bar_widget = SearchBarWidget(

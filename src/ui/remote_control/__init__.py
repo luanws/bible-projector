@@ -1,5 +1,6 @@
 from PyQt5 import QtGui
 from PyQt5.QtWidgets import QMainWindow
+from src.ui.main.control import MainWindowControl
 from src.utils import qrcode
 
 from .view_model import RemoteControlViewModel
@@ -8,13 +9,14 @@ from .window import Ui_RemoteControlWindow
 
 class RemoteControlWindow(QMainWindow, Ui_RemoteControlWindow):
     __view_model: RemoteControlViewModel
+    main_window_control: MainWindowControl
 
-    def __init__(self, parent=None):
+    def __init__(self, parent=None, *, main_window_control: MainWindowControl):
         super().__init__(parent)
         self.setupUi(self)
         self.setWindowIcon(QtGui.QIcon('icon.ico'))
 
-        self.__view_model = RemoteControlViewModel()
+        self.__view_model = RemoteControlViewModel(main_window_control)
 
     def generate_qr_code(self, text: str):
         pixmap = qrcode.make_pixmap(text)
