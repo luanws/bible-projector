@@ -1,4 +1,4 @@
-from typing import Any, Dict, List, Optional
+from typing import List, Optional
 
 from PyQt5 import QtGui
 from PyQt5.QtCore import QCoreApplication, Qt
@@ -17,8 +17,6 @@ from src.ui.main.widgets.search_bar_widget import SearchBarWidget
 from src.ui.main.window import Ui_MainWindow
 from src.ui.projector import ProjectorWindow
 from src.ui.settings import SettingsWindow
-from src.utils.remote import Command
-from src.utils.remote.remote_api import RemoteAPI
 from src.widgets.chapter_widget import ChapterWidget
 
 
@@ -74,16 +72,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.show_advanced_search)
         self.action_quit.triggered.connect(self.close)
         self.action_install_version.triggered.connect(self.install_version)
-        self.action_remote.triggered.connect(self.start_remote_api)
-
-    def start_remote_api(self):
-        remote_api = RemoteAPI()
-
-        remote_api.add_command_listener(
-            Command.SEARCH_BY_REFERENCE,
-            lambda data: self.search(data['reference'])
-        )
-        remote_api.start()
+        self.action_remote.triggered.connect(self.show_remote_control)
 
     def on_verse_clicked_advanced_search(self, verse: Verse):
         self.__view_model.current_verse = verse
@@ -136,6 +125,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     def show_advanced_search(self):
         self.advanced_search_window.show()
+
+    def show_remote_control(self):
+        pass
 
     def configure_hot_keys(self):
         hot_keys = [
