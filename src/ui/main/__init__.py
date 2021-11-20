@@ -1,4 +1,4 @@
-from typing import List, Optional
+from typing import Any, Dict, List, Optional
 
 from PyQt5 import QtGui
 from PyQt5.QtCore import QCoreApplication, Qt
@@ -78,9 +78,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     def start_remote_api(self):
         remote_api = RemoteAPI()
-        def on_search_by_reference(data):
-            print(data)
-            self.preview_text_edit.setText('teste123')
+        def on_search_by_reference(data: Dict[str, Any]):
+            self.preview_text_edit.setText(str(data))
         remote_api.add_command_listener(Command.SEARCH_BY_REFERENCE, on_search_by_reference)
         remote_api.run()
 

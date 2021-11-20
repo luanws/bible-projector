@@ -1,4 +1,4 @@
-from flask import Flask, send_from_directory
+from flask import Flask, request, send_from_directory
 
 from . import Remote
 
@@ -28,5 +28,6 @@ class RemoteAPI(Remote):
 
         @app.route('/<command>')
         def command(command: str):
-            self.execute(command)
+            data = request.get_json()
+            self.execute(command, data)
             return command

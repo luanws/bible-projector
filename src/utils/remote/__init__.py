@@ -12,7 +12,7 @@ class Command(enum.Enum):
 
 class Remote(QtCore.QObject):
     commands: Dict[Command, Callable[[Any], None]] = {}
-    __command_received = QtCore.pyqtSignal(Command, str)
+    __command_received = QtCore.pyqtSignal(Command, dict)
 
     def __init__(self, parent: Optional[QtCore.QObject] = None) -> None:
         super().__init__(parent=parent)
@@ -25,14 +25,14 @@ class Remote(QtCore.QObject):
     def _run(self) -> None:
         pass
 
-    def __on_command_received(self, command: Command, data: str) -> None:
+    def __on_command_received(self, command: Command, data: Dict[str, Any]) -> None:
         if command in self.commands:
             self.commands[command](data)
 
     def add_command_listener(self, command: Command, callable: Callable[[Any], None]) -> None:
         self.commands[command] = callable
 
-    def execute(self, command: Union[Command, str], data: str = None) -> None:
+    def execute(self, command: Union[Command, str], data: Dict[str, Any] = None) -> None:
         command = Command(command)
         if command in self.commands:
             self.__command_received.emit(command, data)
