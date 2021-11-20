@@ -16,6 +16,7 @@ from src.ui.main.widgets.history_widget import HistoryWidget
 from src.ui.main.widgets.search_bar_widget import SearchBarWidget
 from src.ui.main.window import Ui_MainWindow
 from src.ui.projector import ProjectorWindow
+from src.ui.remote_control import RemoteControlWindow
 from src.ui.settings import SettingsWindow
 from src.widgets.chapter_widget import ChapterWidget
 
@@ -37,7 +38,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.projector_window = ProjectorWindow()
         self.advanced_search_window = AdvancedSearchWindow(
             self.on_verse_clicked_advanced_search)
+        self.remote_control_window = RemoteControlWindow()
         self.about_dialog = AboutDialog()
+
         self.search_bar_widget = SearchBarWidget(
             versions=self.__view_model.versions,
             search_callable=self.search,
@@ -127,7 +130,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.advanced_search_window.show()
 
     def show_remote_control(self):
-        pass
+        self.remote_control_window.show()
 
     def configure_hot_keys(self):
         hot_keys = [
