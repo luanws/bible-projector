@@ -1,3 +1,5 @@
+from typing import Optional
+
 from flask import Flask
 from src.utils.remote import Remote
 
@@ -10,6 +12,11 @@ class RemoteAPI(Remote):
     __app: Flask
     __server: Server
     __server_address: ServerAddress
+    prefix_length: int
+
+    def __init__(self, parent=None, prefix_length: int = 0) -> None:
+        super().__init__(parent=parent)
+        self.prefix_length = prefix_length
 
     @property
     def address(self) -> str:
@@ -18,7 +25,7 @@ class RemoteAPI(Remote):
     def start(self) -> None:
         self.__app = Flask(__name__)
         self.__server_address = ServerAddress(port=5000)
-        self.__server_address.generate_prefix(40)
+        self.__server_address.generate_prefix(self.prefix_length)
         print(f'Server prefix: {self.__server_address.prefix}')
         return super().start()
 

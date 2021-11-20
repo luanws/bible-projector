@@ -2,6 +2,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_RemoteControlWindow(object):
     def setupUi(self, RemoteControlWindow):
         RemoteControlWindow.setObjectName("RemoteControlWindow")
+        RemoteControlWindow.resize(557, 370)
         self.centralwidget = QtWidgets.QWidget(RemoteControlWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.gridLayout = QtWidgets.QGridLayout(self.centralwidget)

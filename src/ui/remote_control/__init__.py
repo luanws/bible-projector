@@ -13,13 +13,13 @@ class RemoteControlWindow(QMainWindow, Ui_RemoteControlWindow):
         super().__init__(parent)
         self.setupUi(self)
         self.setWindowIcon(QtGui.QIcon('icon.ico'))
-        self.setFixedSize(self.minimumSize())
 
         self.__view_model = RemoteControlViewModel()
 
     def generate_qr_code(self, text: str):
         pixmap = qrcode.make_pixmap(text)
         self.qr_code_label.setPixmap(pixmap)
+        self.setFixedSize(pixmap.size())
 
     def showEvent(self, a0: QtGui.QShowEvent) -> None:
         address = self.__view_model.start_api()

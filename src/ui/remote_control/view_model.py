@@ -8,7 +8,7 @@ class RemoteControlViewModel:
     remote_api: RemoteAPI
 
     def __init__(self) -> None:
-        self.remote_api = RemoteAPI()
+        self.remote_api = RemoteAPI(prefix_length=40)
 
         self.remote_api.add_command_listener(
             Command.SEARCH_BY_REFERENCE,
