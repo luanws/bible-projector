@@ -23,7 +23,6 @@ class RemoteAPI(Remote):
         def favicon():
             return send_from_directory(
                 app.root_path, 'icon.ico',
-                mimetype='image/vnd.microsoft.icon'
             )
 
         @app.route('/<command>')
