@@ -67,8 +67,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def configure_events(self):
         self.__view_model.on_change_current_verse(self.on_change_current_verse)
 
-        self.action_export_history.triggered.connect(
-            self.__view_model.export_history)
+        self.action_export_history.triggered.connect(self.export_history)
         self.action_settings.triggered.connect(self.show_settings)
         self.action_about.triggered.connect(self.show_about)
         self.action_advanced_search.triggered.connect(
@@ -124,6 +123,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.__view_model.install_version(on_update_progress)
         self.__view_model.update_versions()
         self.search_bar_widget.set_versions(self.__view_model.versions)
+
+    def export_history(self):
+        self.__view_model.export_history(self.history_widget.history)
 
     def show_about(self):
         self.about_dialog.show()
