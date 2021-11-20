@@ -35,4 +35,4 @@ class Remote(QtCore.QObject):
     def execute(self, command: Union[Command, str], data: Dict[str, Any] = None) -> None:
         command = Command(command)
         if command in self.commands:
-            self.__command_received.emit(command, data)
+            self.__command_received.emit(command, data or {})
