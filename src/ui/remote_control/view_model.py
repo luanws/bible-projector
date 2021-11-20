@@ -1,4 +1,5 @@
 from typing import Any, Dict
+
 from src.utils.remote import Command
 from src.utils.remote.remote_api import RemoteAPI
 
@@ -13,7 +14,10 @@ class RemoteControlViewModel:
             Command.SEARCH_BY_REFERENCE,
             self.search_by_reference
         )
-        self.remote_api.start()
 
     def search_by_reference(self, data: Dict[str, Any]) -> None:
         print(data)
+    
+    def start_api(self) -> str:
+        self.remote_api.start()
+        return self.remote_api.address

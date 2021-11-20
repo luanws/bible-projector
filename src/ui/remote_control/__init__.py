@@ -17,11 +17,13 @@ class RemoteControlWindow(QMainWindow, Ui_RemoteControlWindow):
 
         self.__view_model = RemoteControlViewModel()
 
-        self.generate_qr_code('Hello World')
-
     def generate_qr_code(self, text: str):
         pixmap = qrcode.make_pixmap(text)
         self.qr_code_label.setPixmap(pixmap)
+
+    def showEvent(self, a0: QtGui.QShowEvent) -> None:
+        address = self.__view_model.start_api()
+        self.generate_qr_code(address)
 
     def closeEvent(self, a0: QtGui.QCloseEvent) -> None:
         self.__view_model.remote_api.stop()
