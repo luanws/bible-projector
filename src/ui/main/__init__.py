@@ -150,6 +150,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.search_bar_widget.search_input_request_focus()
 
     def closeEvent(self, a0: QtGui.QCloseEvent) -> None:
+        self.remote_control_window.close()
         self.__view_model.application.quit()
 
     def previous_verse(self):
