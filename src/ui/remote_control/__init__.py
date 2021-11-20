@@ -22,3 +22,6 @@ class RemoteControlWindow(QMainWindow, Ui_RemoteControlWindow):
     def generate_qr_code(self, text: str):
         pixmap = qrcode.make_pixmap(text)
         self.qr_code_label.setPixmap(pixmap)
+
+    def closeEvent(self, a0: QtGui.QCloseEvent) -> None:
+        self.__view_model.remote_api.stop()
