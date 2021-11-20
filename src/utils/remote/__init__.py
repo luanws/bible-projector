@@ -13,6 +13,7 @@ class Remote(QRunnable):
     commands: Dict[Command, Callable[[Any], None]]
 
     def __init__(self) -> None:
+        super().__init__()
         self.commands = {}
 
     def start(self) -> None:
