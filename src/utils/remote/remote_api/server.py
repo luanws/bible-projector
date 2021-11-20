@@ -1,3 +1,5 @@
+import threading
+
 from flask import Flask
 from werkzeug.serving import make_server
 
@@ -11,5 +13,5 @@ class Server:
     def run(self):
         self.server.serve_forever()
 
-    def shutdown(self):
-        self.server.shutdown()
+    def stop(self):
+        threading.Thread(target=self.server.shutdown).start()
