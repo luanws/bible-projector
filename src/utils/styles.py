@@ -19,7 +19,7 @@ def get_stylesheet_vars() -> Dict[str, str]:
 def apply_qss_vars(qss_vars: Dict[str, str], qss_stylesheet: str) -> str:
     stylesheet = qss_stylesheet
     for key, value in qss_vars.items():
-        stylesheet = re.sub(fr'{key}\s*;', value, stylesheet)
+        stylesheet = re.sub(fr'{key}\s*;', f'{value};', stylesheet)
     return stylesheet
 
 
