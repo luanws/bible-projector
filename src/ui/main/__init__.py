@@ -82,7 +82,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             print(data)
             self.preview_text_edit.setText('teste123')
         remote_api.add_command_listener(Command.SEARCH_BY_REFERENCE, on_search_by_reference)
-        remote_api.start()
+        remote_api.run()
 
     def on_verse_clicked_advanced_search(self, verse: Verse):
         self.__view_model.current_verse = verse

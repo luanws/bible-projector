@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, send_from_directory
 
 from . import Remote
 
@@ -9,7 +9,7 @@ class RemoteAPI(Remote):
         self.app = Flask(__name__)
         self.configure_routes()
 
-    def run(self) -> None:
+    def _run(self) -> None:
         self.app.run(host='0.0.0.0', port=5000)
 
     def configure_routes(self) -> None:
@@ -18,6 +18,13 @@ class RemoteAPI(Remote):
         @app.route('/')
         def index():
             return 'Remote API'
+
+        @app.route('/favicon.ico')
+        def favicon():
+            return send_from_directory(
+                app.root_path, 'icon.ico',
+                mimetype='image/vnd.microsoft.icon'
+            )
 
         @app.route('/<command>')
         def command(command: str):

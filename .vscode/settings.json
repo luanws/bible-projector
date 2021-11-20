@@ -10,6 +10,7 @@
         "**/.qt_for_python": true,
     },
     "cSpell.words": [
+        "favicon",
         "isnumeric",
         "pymenu",
         "pyqt",
