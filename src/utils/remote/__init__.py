@@ -8,6 +8,8 @@ from PyQt5 import QtCore
 
 class Command(enum.Enum):
     SEARCH_BY_REFERENCE = 'search_by_reference'
+    PREVIOUS_VERSE = 'previous_verse'
+    NEXT_VERSE = 'next_verse'
 
 
 class Remote(QtCore.QObject):

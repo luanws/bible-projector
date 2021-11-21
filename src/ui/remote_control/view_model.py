@@ -14,15 +14,23 @@ class RemoteControlViewModel:
 
         self.remote_api = RemoteAPI(prefix_length=40)
 
-        self.remote_api.add_command_listener(
-            Command.SEARCH_BY_REFERENCE,
-            self.search_by_reference
-        )
+        commands = [
+            (Command.SEARCH_BY_REFERENCE, self.search_by_reference),
+            (Command.PREVIOUS_VERSE, self.previous_verse),
+            (Command.NEXT_VERSE, self.next_verse),
+        ]
+        for command, callback in commands:
+            self.remote_api.add_command_listener(command, callback)
 
     def search_by_reference(self, data: Dict[str, Any]) -> None:
         reference = data['reference']
-        print(reference)
         self.main_window_control.search(reference)
+
+    def previous_verse(self, data: Dict[str, Any]) -> None:
+        self.main_window_control.previous_verse()
+
+    def next_verse(self, data: Dict[str, Any]) -> None:
+        self.main_window_control.next_verse()
 
     def start_api(self) -> str:
         self.remote_api.start()
