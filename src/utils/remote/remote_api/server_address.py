@@ -1,7 +1,6 @@
 import random
 import socket
 import string
-from typing import Optional
 
 
 def generate_random_string_with_letters_and_digits(length: int) -> str:
@@ -12,7 +11,11 @@ def generate_random_string_with_letters_and_digits(length: int) -> str:
 
 
 def get_host() -> str:
-    return socket.gethostbyname(socket.gethostname())
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    s.connect(('8.8.8.8', 53))
+    host = s.getsockname()[0]
+    s.close()
+    return host
 
 
 class ServerAddress:
