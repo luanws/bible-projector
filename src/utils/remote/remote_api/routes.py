@@ -21,7 +21,7 @@ def favicon():
     )
 
 
-@api_routes_blueprint.route('/<command>')
+@api_routes_blueprint.route('/<command>', methods=['POST'])
 def command(command: str):
     global execute
     data = request.get_json()
