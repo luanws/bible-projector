@@ -11,7 +11,7 @@ execute: Callable[[Union[Command, str], Optional[Dict[str, Any]]], None]
 
 @api_routes_blueprint.route('/')
 def index():
-    return 'Remote API'
+    return 'Bible projector remote API'
 
 
 @api_routes_blueprint.route('/favicon.ico')
