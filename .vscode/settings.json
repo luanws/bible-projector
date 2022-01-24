@@ -17,6 +17,7 @@
         "pyqt",
         "qrcode",
         "qtawesome",
+        "sqlalchemy",
         "werkzeug"
     ]
 }
