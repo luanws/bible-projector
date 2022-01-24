@@ -10,7 +10,7 @@ from .server_address import ServerAddress
 
 class RemoteAPI(Remote):
     __app: Flask
-    __server: Server
+    __server: Server = None
     __server_address: ServerAddress
     prefix_length: int
 
@@ -40,8 +40,9 @@ class RemoteAPI(Remote):
         self.__server.run()
 
     def stop(self) -> None:
-        self.__server.stop()
-        print('Server stopped')
+        if self.__server is not None:
+            self.__server.stop()
+            print('Server stopped')
 
     def configure_routes(self) -> None:
         routes.execute = self.execute
