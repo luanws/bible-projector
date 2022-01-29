@@ -4,5 +4,5 @@ QPushButton {
     padding: 8px;
     height: 14px;
     background-color: transparent;
-    color: black;
+    color: @textColor;
 }

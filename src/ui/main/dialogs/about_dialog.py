@@ -16,13 +16,6 @@ class AboutDialog(QDialog):
         self.layout.setAlignment(Qt.AlignCenter)
         self.setLayout(self.layout)
 
-        self.setStyleSheet("""
-            QLabel {
-                color: #444;
-                padding: 0px 24px;
-            }
-        """)
-
         self.title_label = QLabel("Projetor bíblico")
         self.title_label.setAlignment(Qt.AlignCenter)
         self.title_label.setStyleSheet("""

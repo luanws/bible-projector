@@ -86,9 +86,6 @@ QPushButton:hover {
           <height>160</height>
          </size>
         </property>
-        <property name="styleSheet">
-         <string notr="true"/>
-        </property>
        </widget>
       </item>
       <item row="0" column="0">
@@ -115,11 +112,7 @@ QPushButton:hover {
        </spacer>
       </item>
       <item row="3" column="0">
-       <widget class="QListWidget" name="chapter_list_widget">
-        <property name="styleSheet">
-         <string notr="true"/>
-        </property>
-       </widget>
+       <widget class="QListWidget" name="chapter_list_widget"/>
       </item>
       <item row="1" column="3" rowspan="3">
        <widget class="QListWidget" name="history_list_widget">
@@ -134,9 +127,6 @@ QPushButton:hover {
           <width>240</width>
           <height>16777215</height>
          </size>
-        </property>
-        <property name="styleSheet">
-         <string notr="true"/>
         </property>
        </widget>
       </item>

@@ -1,4 +1,5 @@
 from PyQt5 import QtCore, QtWidgets
+from src.utils import styles
 
 
 class VerseReferenceLabel(QtWidgets.QLabel):
@@ -6,6 +7,7 @@ class VerseReferenceLabel(QtWidgets.QLabel):
         super().__init__(parent)
 
         self.setAlignment(QtCore.Qt.AlignBottom)
-        self.setStyleSheet('''
-            color: #000088;
-        ''')
+        self.setStyleSheet(f"""
+            font-weight: bold;
+            color: {styles.qss_vars['@verseReferenceTextColor']};
+        """)

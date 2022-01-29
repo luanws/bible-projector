@@ -1,4 +1,5 @@
 from PyQt5 import QtWidgets
+from src.utils import styles
 
 
 class VerseTextLabel(QtWidgets.QLabel):
@@ -8,20 +9,18 @@ class VerseTextLabel(QtWidgets.QLabel):
         self.setWordWrap(True)
         self.setMaximumHeight(48)
         self.setMinimumHeight(48)
-        self.setStyleSheet('''
-            font-size: 12px;
-        ''')
+        self.unselect()
 
     def select(self):
-        self.setStyleSheet('''
-            color: #004;
+        self.setStyleSheet(f"""
+            color: {styles.qss_vars['@selectedVerseTextColor']};
             font-size: 12px;
             font-weight: bold;
-        ''')
-    
+        """)
+
     def unselect(self):
-        self.setStyleSheet('''
-            color: black;
+        self.setStyleSheet(f"""
+            color: {styles.qss_vars['@textColor']};
             font-size: 12px;
             font-weight: unset;
-        ''')
+        """)

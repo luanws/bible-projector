@@ -2,6 +2,42 @@ QMainWindow {
     background-color: @backgroundColor;
 }
 
+QDialog {
+    background-color: @backgroundColor;
+}
+
+QMenuBar { 
+    background-color: @menuBarBackgroundColor; 
+    color: @menuBarTextColor;
+}
+
+QMenuBar::item {
+    spacing: 4px;           
+    padding: 2px 8px;
+}
+
+QMenuBar::item:selected {    
+    background-color: @menuBarItemSelectedBackgroundColor;
+}
+
+QMenuBar::item:pressed {
+    background-color: @menuBarItemSelectedBackgroundColor;
+}
+
+QMenu {
+    background-color: @menuBackgroundColor;   
+    margin: 4px;
+}
+
+QMenu::item {
+    background-color: @menuItemBackgroundColor;
+    color: @menuItemTextColor;
+}
+
+QMenu::item:selected { 
+    background-color: @menuItemSelectedBackgroundColor;
+}
+
 QAbstractScrollArea #scrollAreaWidgetContents {
     background-color: @backgroundColor;
 }
@@ -15,8 +51,8 @@ QLineEdit {
     padding: 8px;
     border: none;
     border-radius: 8px;
-    background-color: white;
-    color: black;
+    background-color: @backgroundColorContainer;
+    color: @textColor;
     font-size: 10pt;
 }
 
@@ -24,9 +60,13 @@ QTextEdit {
     padding: 8px;
     border: none;
     border-radius: 8px;
-    background-color: white;
-    color: black;
+    background-color: @backgroundColorContainer;
+    color: @textColor;
     font-size: 10pt;
+}
+
+QListWidget {
+    background-color: @backgroundColorContainer;
 }
 
 QPushButton {
@@ -46,8 +86,8 @@ QComboBox {
     padding: 8px;
     border: none;
     border-radius: 8px;
-    background-color: white;
-    color: black;
+    background-color: @backgroundColorContainer;
+    color: @textColor;
     font-size: 10pt;
 }
 
@@ -69,15 +109,16 @@ QComboBox::up-arrow, QSpinBox::up-arrow, QTimeEdit::up-arrow, QDateEdit::up-arro
 }
 
 QComboBox QListView {
-    background-color: white;
+    background-color: @backgroundColorContainer;
+    color: @textColor;
 }
 
 QSpinBox {
     padding: 8px;
     border: none;
     border-radius: 8px;
-    background-color: white;
-    color: black;
+    background-color: @backgroundColorContainer;
+    color: @textColor;
     font-size: 10pt; 
 }
 
@@ -94,21 +135,22 @@ QSpinBox::down-button {
 QListWidget {
     border: none;
     border-radius: 8px;
-    background-color: white;
-    color: black;
+    background-color: @backgroundColorContainer;
+    color: @textColor;
     font-size: 10pt;
     padding: 8px;
 }
 
 QScrollBar {
-    background: transparent;
+    background: @backgroundColorScrollBar;
+    border-radius: 4px;
     margin: 0px;
 }
 
 QScrollBar::handle {         
     border: 0px solid red;
     border-radius: 4px;
-    background-color: #b6b8bb;
+    background-color: @backgroundColorScrollBarHandle;
 }
 
 QScrollBar::add-line {
@@ -153,4 +195,8 @@ QScrollBar::add-line:horizontal {
 QScrollBar::sub-line:horizontal {
     width: 0px;
     subcontrol-position: right;
+}
+
+QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
+    background: none;
 }

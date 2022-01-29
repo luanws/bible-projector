@@ -1,8 +1,8 @@
 import json
 import os
 import re
-from typing import Dict
 from contextlib import suppress
+from typing import Dict
 
 qss_dict: Dict[str, str] = {}
 qss_vars: Dict[str, str] = {}
@@ -31,7 +31,7 @@ def get_qss_dict() -> Dict[str, str]:
     return {}
 
 
-def update_qss_dict():
+def update_qss_dict_and_qss_vars():
     global qss_dict
     global qss_vars
     qss_vars = get_stylesheet_vars()
@@ -43,7 +43,5 @@ def check_paths_is_equal(path1: str, path2: str) -> bool:
 
 
 def get_qss_stylesheet(qss_file_path) -> str:
-    if len(qss_dict) == 0:
-        update_qss_dict()
     stylesheet = qss_dict[qss_file_path]
     return apply_qss_vars(qss_vars, stylesheet)

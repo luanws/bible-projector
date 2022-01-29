@@ -15,6 +15,8 @@ def main():
     splash_screen = QSplashScreen(QPixmap('res/img/splash.png'))
     splash_screen.show()
 
+    styles.update_qss_dict_and_qss_vars()
+
     main_window = MainWindow()
     main_window.showMaximized()
 

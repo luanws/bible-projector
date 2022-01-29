@@ -3,6 +3,7 @@ from typing import Callable, List
 from PyQt5 import QtWidgets
 from src import widgets
 from src.models.version import Version
+from src.utils import styles
 
 from .container import Container
 from .search_line_edit import SearchLineEdit
@@ -31,12 +32,14 @@ class SearchBarWidget(QtWidgets.QWidget):
             on_change_current_version_callable=self.on_change_current_version_callable,
         )
         self.search_line_edit = SearchLineEdit(search_callable=self.search)
+        color = styles.qss_vars['@colorIcon']
+        active_color = styles.qss_vars['@colorActiveIcon']
         self.search_button = widgets.IconButton(
-            'fa.search', color='#444', active_color='#3B6DBE')
+            'fa.search', color=color, active_color=active_color)
         self.project_button = widgets.IconButton(
-            'fa.play', color='#444', active_color='#3B6DBE')
+            'fa.play', color=color, active_color=active_color)
         self.update_button = widgets.IconButton(
-            'fa.refresh', color='#444', active_color='#3B6DBE')
+            'fa.refresh', color=color, active_color=active_color)
 
         self.versions_combo_box.addItems(versions)
 
@@ -48,6 +51,8 @@ class SearchBarWidget(QtWidgets.QWidget):
 
         self.configure_events()
         self.setLayout(self.container)
+
+        self.setStyleSheet(styles.get_qss_stylesheet('src/ui/main/widgets/search_bar_widget/styles.qss'))
 
     def set_versions(self, versions: List[Version]) -> None:
         self.versions = versions

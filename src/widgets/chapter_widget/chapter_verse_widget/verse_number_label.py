@@ -1,4 +1,5 @@
 from PyQt5 import QtWidgets
+from src.utils import styles
 
 
 class VerseNumberLabel(QtWidgets.QLabel):
@@ -6,6 +7,6 @@ class VerseNumberLabel(QtWidgets.QLabel):
         super().__init__(parent)
 
         self.setFixedWidth(24)
-        self.setStyleSheet('''
-            color: #000088;
-        ''')
+        self.setStyleSheet(f"""
+            color: {styles.qss_vars['@verseNumberTextColor']};
+        """)
