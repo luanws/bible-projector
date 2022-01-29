@@ -8,7 +8,7 @@ from .chapter_verse_widget import ChapterVerseWidget
 
 class ChapterWidget(QtWidgets.QWidget):
     __chapter: Optional[List[Verse]] = None
-    chapter_verse_widgets: List[ChapterVerseWidget]
+    chapter_verse_widgets: List[ChapterVerseWidget] = []
     list_widget: QtWidgets.QListWidget
     on_click_verse_callable: Optional[Callable[[Verse], None]] = None
 
@@ -31,23 +31,27 @@ class ChapterWidget(QtWidgets.QWidget):
         self.__chapter = chapter
         self.render()
 
+    def get_chapter_verse_widget(self, verse: Verse) -> ChapterVerseWidget:
+        list_widget_item = QtWidgets.QListWidgetItem(self.list_widget)
+        return ChapterVerseWidget(
+            verse=verse,
+            list_widget_item=list_widget_item,
+            on_click=self.on_click_verse_callable,
+        )
+
     def render(self):
         self.list_widget.clear()
-        chapter_verse_widgets = []
+        self.chapter_verse_widgets = []
+        
         for verse in self.__chapter:
-            list_widget_item = QtWidgets.QListWidgetItem(
-                self.list_widget)
-            chapter_verse_widget = ChapterVerseWidget(
-                verse=verse,
-                list_widget_item=list_widget_item,
-                on_click=self.on_click_verse_callable,
-            )
-            list_widget_item.setSizeHint(chapter_verse_widget.sizeHint())
+            chapter_verse_widget = self.get_chapter_verse_widget(verse)
+            self.chapter_verse_widgets.append(chapter_verse_widget)
+
+        for chapter_verse_widget in self.chapter_verse_widgets:
+            list_widget_item = chapter_verse_widget.list_widget_item
             self.list_widget.addItem(list_widget_item)
             self.list_widget.setItemWidget(
                 list_widget_item, chapter_verse_widget)
-            chapter_verse_widgets.append(chapter_verse_widget)
-        self.chapter_verse_widgets = chapter_verse_widgets
 
     def select_verse(self, verse: Verse):
         if self.chapter_verse_widgets is not None:
@@ -57,7 +61,7 @@ class ChapterWidget(QtWidgets.QWidget):
                     chapter_verse_widget.select()
 
     def scroll_to_verse(self, verse: Verse):
-        if self.chapter_verse_widgets is not None:
+        if len(self.chapter_verse_widgets) > 0:
             chapter_verse_widget = self.chapter_verse_widgets[verse.verse_number - 1]
             self.list_widget.scrollToItem(
                 chapter_verse_widget.list_widget_item,

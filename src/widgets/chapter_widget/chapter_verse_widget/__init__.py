@@ -39,6 +39,8 @@ class ChapterVerseWidget(QtWidgets.QWidget):
         self.container.addWidget(self.verse_text_label)
         self.setLayout(self.container)
 
+        list_widget_item.setSizeHint(self.sizeHint())
+        
         self.configure_events()
 
     def configure_events(self):
