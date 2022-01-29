@@ -1,7 +1,9 @@
 @menuBarBackgroundColor = #1E1E1E
 @menuBarTextColor = white
 @menuBarItemSelectedBackgroundColor = #525253
+
 @menuBackgroundColor = #272727
+@menuBorderColor = #444
 
 @menuItemBackgroundColor = #272727
 @menuItemSelectedBackgroundColor = #525253
@@ -20,3 +22,6 @@
 @selectedVerseTextColor = #7AB021
 @verseNumberTextColor = #6E8585
 @verseReferenceTextColor = #DAEC22
+
+@arrowDownImageUrl = url(res/img/arrow-down-white.png)
+@arrowUpImageUrl = url(res/img/arrow-up-white.png)

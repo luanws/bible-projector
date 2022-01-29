@@ -1,9 +1,13 @@
 from __future__ import annotations
 
 from abc import ABC
+from collections import defaultdict
 from configparser import ConfigParser
 from contextlib import suppress
-from typing import Any, Callable, Dict, List, Optional, Tuple
+from typing import Any, Callable, Dict, Optional
+
+
+def nested_dict(): return defaultdict(nested_dict)
 
 
 def filter_dict_not_starts_with_underscore(d: Dict[str, Any]) -> Dict[str, Any]:
@@ -13,14 +17,15 @@ def filter_dict_not_starts_with_underscore(d: Dict[str, Any]) -> Dict[str, Any]:
 class Settings(ABC):
     CONFIG_FILE_NAME = 'config.ini'
     config: ConfigParser = ConfigParser()
-    settings_instances: Dict[
-        str, List[Tuple[Settings, Optional[Callable]]]] = {}
+    settings_instances: Dict[str, Dict[Settings,
+                                       Optional[Callable]]] = nested_dict()
 
     def __init__(self) -> None:
         super().__init__()
         self.__load_config()
         self.__load_config_by_defaults()
         self.__init_subclass()
+        self.__register_instance()
 
     def __load_config(self):
         if not Settings.config.sections():
@@ -38,6 +43,10 @@ class Settings(ABC):
             config_dict: Dict[str, Any] = dict(section)
             self.from_dict(config_dict)
 
+    def __register_instance(self):
+        class_name = self.__class__.__name__
+        Settings.settings_instances[class_name][self] = None
+
     def save(self):
         Settings.config[self.__class__.__name__] = self.to_dict()
         self.update_settings_instances()
@@ -54,17 +63,16 @@ class Settings(ABC):
         self.__dict__ = config_dict
 
     def update_settings_instances(self):
-        for setting_instance, _ in Settings.settings_instances[self.__class__.__name__]:
+        class_name = self.__class__.__name__
+        for setting_instance in Settings.settings_instances[class_name]:
             if setting_instance is not self:
                 setting_instance.from_dict(self.to_dict().copy())
 
     def notify_settings_instances(self):
-        for _, on_change_settings in Settings.settings_instances[self.__class__.__name__]:
+        for on_change_settings in Settings.settings_instances[self.__class__.__name__].values():
             if on_change_settings is not None:
                 on_change_settings()
 
     def on_change_settings(self, callable: Callable):
         class_name = self.__class__.__name__
-        if not Settings.settings_instances.__contains__(class_name):
-            Settings.settings_instances[class_name] = []
-        Settings.settings_instances[class_name].append((self, callable))
+        Settings.settings_instances[class_name][self] = callable

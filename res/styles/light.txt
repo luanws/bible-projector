@@ -1,0 +1,27 @@
+@menuBarBackgroundColor = #FFFFFF
+@menuBarTextColor = black
+@menuBarItemSelectedBackgroundColor = #E5F3FF
+
+@menuBackgroundColor = #F0F0F0
+@menuBorderColor = #CCCCCC
+
+@menuItemBackgroundColor = #F0F0F0
+@menuItemSelectedBackgroundColor = #90C8F6
+@menuItemTextColor = black
+
+@backgroundColor = #E9ECF1
+@backgroundColorContainer = #FFFFFF
+@backgroundColorPushButton = #1d2249
+@textColor = black
+@placeholderTextColor = #6A6BA5
+@colorIcon = #444
+@colorActiveIcon = #7AB021
+@backgroundColorScrollBar = #E9ECF1
+@backgroundColorScrollBarHandle = #4F4F4F
+
+@selectedVerseTextColor = #7AB021
+@verseNumberTextColor = #6E8585
+@verseReferenceTextColor = #DAEC22
+
+@arrowDownImageUrl = url(res/img/arrow-down-black.png)
+@arrowUpImageUrl = url(res/img/arrow-up-black.png)

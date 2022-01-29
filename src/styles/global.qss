@@ -26,7 +26,8 @@ QMenuBar::item:pressed {
 
 QMenu {
     background-color: @menuBackgroundColor;   
-    margin: 4px;
+    padding: 2px;
+    border: 1px solid @menuBorderColor;
 }
 
 QMenu::item {
@@ -97,13 +98,13 @@ QComboBox::drop-down {
 }
 
 QComboBox::down-arrow, QSpinBox::down-arrow, QTimeEdit::down-arrow, QDateEdit::down-arrow {
-    image: url(res/img/arrow-down.png);
+    image: @arrowDownImageUrl;
     width: 8px;
     height: 8px;
 }
 
 QComboBox::up-arrow, QSpinBox::up-arrow, QTimeEdit::up-arrow, QDateEdit::up-arrow {
-    image: url(res/img/arrow-up.png);
+    image: @arrowUpImageUrl;
     width: 8px;
     height: 8px;
 }
@@ -197,6 +198,7 @@ QScrollBar::sub-line:horizontal {
     subcontrol-position: right;
 }
 
-QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
+QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical,
+QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {
     background: none;
 }

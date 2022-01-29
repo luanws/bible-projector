@@ -1,0 +1,27 @@
+@menuBarBackgroundColor = #1A1921
+@menuBarTextColor = white
+@menuBarItemSelectedBackgroundColor = #848a96
+
+@menuBackgroundColor = #363546
+@menuBorderColor = #444
+
+@menuItemBackgroundColor = #363546
+@menuItemSelectedBackgroundColor = #848a96
+@menuItemTextColor = white
+
+@backgroundColor = #1A1921
+@backgroundColorContainer = #292836
+@backgroundColorPushButton = #1d2249
+@textColor = #e6e6e6
+@placeholderTextColor = #6A6BA5
+@colorIcon = #FAFAFA
+@colorActiveIcon = #53ED78
+@backgroundColorScrollBar = #1A1921
+@backgroundColorScrollBarHandle = #525256
+
+@selectedVerseTextColor = #58FF76
+@verseNumberTextColor = #84EAF0
+@verseReferenceTextColor = #F59C47
+
+@arrowDownImageUrl = url(res/img/arrow-down-white.png)
+@arrowUpImageUrl = url(res/img/arrow-up-white.png)

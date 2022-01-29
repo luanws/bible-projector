@@ -4,12 +4,17 @@ import re
 from contextlib import suppress
 from typing import Dict
 
+from src.utils.settings.theme_settings import ThemeSettings
+
 qss_dict: Dict[str, str] = {}
 qss_vars: Dict[str, str] = {}
 
 
 def get_stylesheet_vars() -> Dict[str, str]:
-    file_path = os.path.join('res', 'styles', 'vars.txt')
+    theme_settings = ThemeSettings()
+    theme: str = theme_settings.theme
+    filename = f'{theme}.txt'
+    file_path = os.path.join('res', 'styles', filename)
     with open(file_path) as f:
         content = f.read()
     groups = re.findall(r'(@[^\s]+)\s*=\s*([^\s]+)', content, re.MULTILINE)
