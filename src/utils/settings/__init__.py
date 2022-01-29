@@ -47,6 +47,9 @@ class Settings(ABC):
         class_name = self.__class__.__name__
         Settings.settings_instances[class_name][self] = None
 
+    def before_notify_settings_instances(self):
+        pass
+
     def save(self):
         Settings.config[self.__class__.__name__] = self.to_dict()
         self.update_settings_instances()
@@ -69,7 +72,8 @@ class Settings(ABC):
                 setting_instance.from_dict(self.to_dict().copy())
 
     def notify_settings_instances(self):
-        for on_change_settings in Settings.settings_instances[self.__class__.__name__].values():
+        self.before_notify_settings_instances()
+        for on_change_settings in dict(Settings.settings_instances[self.__class__.__name__]).values():
             if on_change_settings is not None:
                 on_change_settings()
 

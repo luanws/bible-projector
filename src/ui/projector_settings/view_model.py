@@ -1,7 +1,7 @@
 from src.utils.settings.projector_font_settings import ProjectorFontSettings
 
 
-class SettingsViewModel:
+class ProjectorSettingsViewModel:
     projector_font_settings: ProjectorFontSettings
 
     def __init__(self) -> None:

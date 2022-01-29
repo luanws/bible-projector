@@ -17,8 +17,9 @@ from src.ui.main.widgets.history_widget import HistoryWidget
 from src.ui.main.widgets.search_bar_widget import SearchBarWidget
 from src.ui.main.window import Ui_MainWindow
 from src.ui.projector import ProjectorWindow
+from src.ui.projector_settings import ProjectorSettingsWindow
 from src.ui.remote_control import RemoteControlWindow
-from src.ui.settings import SettingsWindow
+from src.ui.theme_settings import ThemeSettingsWindow
 from src.widgets.chapter_widget import ChapterWidget
 
 
@@ -38,7 +39,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.__view_model = MainViewModel()
         self.main_window_control = MainWindowControl(self)
 
-        self.settings_window = SettingsWindow()
+        self.projector_settings_window = ProjectorSettingsWindow()
+        self.theme_settings_window = ThemeSettingsWindow()
         self.projector_window = ProjectorWindow()
         self.advanced_search_window = AdvancedSearchWindow(
             self.on_verse_clicked_advanced_search)
@@ -74,7 +76,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.__view_model.on_change_current_verse(self.on_change_current_verse)
 
         self.action_export_history.triggered.connect(self.export_history)
-        self.action_settings.triggered.connect(self.show_settings)
+        self.action_projector_settings.triggered.connect(
+            self.show_projector_settings)
+        self.action_theme_settings.triggered.connect(self.show_themes)
         self.action_about.triggered.connect(self.show_about)
         self.action_advanced_search.triggered.connect(
             self.show_advanced_search)
@@ -128,8 +132,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def show_about(self):
         self.about_dialog.show()
 
-    def show_settings(self):
-        self.settings_window.show()
+    def show_projector_settings(self):
+        self.projector_settings_window.show()
+
+    def show_themes(self):
+        self.theme_settings_window.show()
 
     def show_advanced_search(self):
         self.advanced_search_window.show()

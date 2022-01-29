@@ -142,7 +142,7 @@ class Ui_MainWindow(object):
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "Configurações"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "Configurações de projeção"))
         self.label_2.setText(_translate("MainWindow", "Margem"))
         self.apply_button.setText(_translate("MainWindow", "Aplicar"))
         self.preview_text_line_edit.setText(_translate("MainWindow", "Texto de teste"))

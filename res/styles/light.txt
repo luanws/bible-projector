@@ -19,9 +19,9 @@
 @backgroundColorScrollBar = #E9ECF1
 @backgroundColorScrollBarHandle = #4F4F4F
 
-@selectedVerseTextColor = #7AB021
-@verseNumberTextColor = #6E8585
-@verseReferenceTextColor = #DAEC22
+@selectedVerseTextColor = #000044
+@verseNumberTextColor = #000044
+@verseReferenceTextColor = green
 
 @arrowDownImageUrl = url(res/img/arrow-down-black.png)
 @arrowUpImageUrl = url(res/img/arrow-up-black.png)

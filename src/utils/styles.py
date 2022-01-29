@@ -2,12 +2,16 @@ import json
 import os
 import re
 from contextlib import suppress
-from typing import Dict
+from typing import Dict, List
 
 from src.utils.settings.theme_settings import ThemeSettings
 
 qss_dict: Dict[str, str] = {}
 qss_vars: Dict[str, str] = {}
+
+
+def get_themes() -> List[str]:
+    return [os.path.splitext(file)[0] for file in os.listdir('res/styles') if file.endswith('.txt')]
 
 
 def get_stylesheet_vars() -> Dict[str, str]:

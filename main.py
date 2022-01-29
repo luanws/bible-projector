@@ -7,6 +7,13 @@ from PyQt5.QtWidgets import QApplication, QSplashScreen
 
 from src.ui.main import MainWindow
 from src.utils import styles
+from src.utils.settings.theme_settings import ThemeSettings
+
+theme_settings = ThemeSettings()
+
+
+def configure_app_theme(app: QApplication):
+    app.setStyleSheet(styles.get_qss_stylesheet('src/styles/global.qss'))
 
 
 def main():
@@ -16,13 +23,14 @@ def main():
     splash_screen.show()
 
     styles.update_qss_dict_and_qss_vars()
+    configure_app_theme(app)
+    theme_settings.on_change_settings(lambda: configure_app_theme(app))
 
     main_window = MainWindow()
     main_window.showMaximized()
 
     splash_screen.close()
 
-    app.setStyleSheet(styles.get_qss_stylesheet('src/styles/global.qss'))
     app.exec()
 
 

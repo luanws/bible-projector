@@ -147,10 +147,17 @@ QPushButton:hover {
     <property name="title">
      <string>Arquivo</string>
     </property>
+    <widget class="QMenu" name="menuConfigura_es">
+     <property name="title">
+      <string>Configurações</string>
+     </property>
+     <addaction name="action_projector_settings"/>
+     <addaction name="action_theme_settings"/>
+    </widget>
     <addaction name="action_install_version"/>
     <addaction name="action_export_history"/>
     <addaction name="separator"/>
-    <addaction name="action_settings"/>
+    <addaction name="menuConfigura_es"/>
     <addaction name="separator"/>
     <addaction name="action_quit"/>
    </widget>
@@ -191,11 +198,6 @@ QPushButton:hover {
     <string>Sair</string>
    </property>
   </action>
-  <action name="action_settings">
-   <property name="text">
-    <string>Configurações</string>
-   </property>
-  </action>
   <action name="action_export_history">
    <property name="text">
     <string>Exportar histórico</string>
@@ -214,6 +216,16 @@ QPushButton:hover {
   <action name="action_remote">
    <property name="text">
     <string>Controle remoto</string>
+   </property>
+  </action>
+  <action name="action_projector_settings">
+   <property name="text">
+    <string>Projeção</string>
+   </property>
+  </action>
+  <action name="action_theme_settings">
+   <property name="text">
+    <string>Temas</string>
    </property>
   </action>
  </widget>
