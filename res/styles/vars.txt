@@ -1,22 +1,22 @@
-@menuBarBackgroundColor = #1A1921
+@menuBarBackgroundColor = #1E1E1E
 @menuBarTextColor = white
-@menuBarItemSelectedBackgroundColor = #848a96
-@menuBackgroundColor = #363546
+@menuBarItemSelectedBackgroundColor = #525253
+@menuBackgroundColor = #272727
 
-@menuItemBackgroundColor = #363546
-@menuItemSelectedBackgroundColor = #848a96
+@menuItemBackgroundColor = #272727
+@menuItemSelectedBackgroundColor = #525253
 @menuItemTextColor = white
 
-@backgroundColor = #1A1921
-@backgroundColorContainer = #292836
+@backgroundColor = #1E1E1E
+@backgroundColorContainer = #272727
 @backgroundColorPushButton = #1d2249
 @textColor = #e6e6e6
 @placeholderTextColor = #6A6BA5
 @colorIcon = #FAFAFA
-@colorActiveIcon = #53ED78
-@backgroundColorScrollBar = #1A1921
-@backgroundColorScrollBarHandle = #525256
+@colorActiveIcon = #7AB021
+@backgroundColorScrollBar = #1E1E1E
+@backgroundColorScrollBarHandle = #4F4F4F
 
-@selectedVerseTextColor = #58FF76
-@verseNumberTextColor = #84EAF0
-@verseReferenceTextColor = #F59C47
+@selectedVerseTextColor = #7AB021
+@verseNumberTextColor = #6E8585
+@verseReferenceTextColor = #DAEC22
