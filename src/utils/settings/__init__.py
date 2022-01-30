@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import inspect
 from abc import ABC
 from collections import defaultdict
 from configparser import ConfigParser
@@ -12,6 +13,10 @@ def nested_dict(): return defaultdict(nested_dict)
 
 def filter_dict_not_starts_with_underscore(d: Dict[str, Any]) -> Dict[str, Any]:
     return {k: v for k, v in d.items() if not k.startswith('_')}
+
+
+def get_class_attributes(cls: type) -> Dict[str, Any]:
+    return dict(inspect.getmembers(cls, lambda m: not inspect.isroutine(m)))
 
 
 class Settings(ABC):
@@ -34,7 +39,11 @@ class Settings(ABC):
     def __load_config_by_defaults(self):
         if not Settings.config.sections().__contains__(self.__class__.__name__):
             cls = self.__class__
-            config_dict = filter_dict_not_starts_with_underscore(cls.__dict__)
+            settings_attributes = get_class_attributes(Settings)
+            config_dict = get_class_attributes(cls)
+            config_dict = filter_dict_not_starts_with_underscore(config_dict)
+            config_dict = {k: v for k, v in config_dict.items()
+                           if k not in settings_attributes}
             Settings.config[cls.__name__] = config_dict
 
     def __init_subclass(self):

@@ -13,6 +13,7 @@
         "favicon",
         "gethostbyname",
         "isnumeric",
+        "isroutine",
         "pymenu",
         "pyqt",
         "qrcode",
