@@ -10,7 +10,7 @@ from .window import Ui_MainWindow
 
 
 class AdvancedSearchWindow(QMainWindow, Ui_MainWindow):
-    chapter_widget: VerseListWidget
+    verse_list_widget: VerseListWidget
     __view_model: AdvancedSearchViewModel
     on_verse_clicked_callable: Optional[Callable[[Verse], None]]
 
@@ -23,7 +23,7 @@ class AdvancedSearchWindow(QMainWindow, Ui_MainWindow):
         self.on_verse_clicked_callable = on_verse_clicked
 
         self.__view_model = AdvancedSearchViewModel()
-        self.chapter_widget = VerseListWidget(
+        self.verse_list_widget = VerseListWidget(
             list_widget=self.chapter_list_widget,
             on_click=self.on_verse_clicked
         )
@@ -61,4 +61,4 @@ class AdvancedSearchWindow(QMainWindow, Ui_MainWindow):
         version = self.versions_combo_box.currentText()
         book = self.books_combo_box.currentText()
         verses = self.__view_model.search(search_text, book, version)
-        self.chapter_widget.verses = verses
+        self.verse_list_widget.verses = verses
