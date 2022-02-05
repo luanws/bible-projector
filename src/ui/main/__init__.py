@@ -1,3 +1,4 @@
+import math
 from typing import List, Optional
 
 from PyQt5 import QtGui
@@ -116,7 +117,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 self.progress_dialog = InstallingVersionProgressDialog(self)
                 self.progress_dialog.setValue(0)
                 self.progress_dialog.show()
-            self.progress_dialog.setValue(progress*100)
+            self.progress_dialog.setValue(math.ceil(progress*100))
             QCoreApplication.processEvents()
             if progress == 1:
                 self.progress_dialog.hide()
