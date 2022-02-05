@@ -56,9 +56,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             on_change_current_version_callable=self.on_change_current_version,
         )
         self.chapter_widget = ChapterWidget(
-            list_widget=self.chapter_list_widget,
-            on_click=self.on_chapter_verse_click,
-        )
+            list_widget=self.chapter_list_widget)
         self.history_widget = HistoryWidget(
             list_widget=self.history_list_widget,
             on_reference_click=self.on_history_verse_click,
@@ -88,6 +86,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         self.advanced_search_window.verse_clicked.connect(
             self.on_verse_clicked_advanced_search)
+        self.chapter_widget.verse_clicked.connect(self.on_chapter_verse_click)
 
     def on_verse_clicked_advanced_search(self, verse: Verse):
         self.__view_model.current_verse = verse
