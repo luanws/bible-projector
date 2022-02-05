@@ -1,6 +1,7 @@
-from typing import Callable, List, Optional
+from typing import List
 
 from PyQt5 import QtWidgets
+from PyQt5.QtCore import pyqtSignal
 from src.models.verse import Verse
 
 from .history_item_widget import HistoryItemWidget
@@ -10,22 +11,15 @@ class HistoryWidget(QtWidgets.QWidget):
     __history: List[Verse]
     list_widget: QtWidgets.QListWidget
     history_item_widgets: List[HistoryItemWidget]
-    __on_reference_click_callable: Optional[Callable[[Verse], None]]
-    __on_remove_click_callable: Optional[Callable[[Verse], None]]
+    reference_clicked = pyqtSignal(Verse)
+    remove_clicked = pyqtSignal(Verse)
 
-    def __init__(
-        self, parent=None, *,
-        list_widget: QtWidgets.QListWidget,
-        on_reference_click: Optional[Callable[[Verse], None]] = None,
-        on_remove_click: Optional[Callable[[Verse], None]] = None
-    ):
+    def __init__(self, parent=None, *, list_widget: QtWidgets.QListWidget):
         super(HistoryWidget, self).__init__(parent)
 
         self.__history = []
         self.history_item_widgets = []
         self.list_widget = list_widget
-        self.__on_reference_click_callable = on_reference_click
-        self.__on_remove_click_callable = on_remove_click
 
     @property
     def history(self) -> List[Verse]:
@@ -33,8 +27,7 @@ class HistoryWidget(QtWidgets.QWidget):
 
     def on_remove(self, verse: Verse):
         self.remove_verse(verse)
-        if self.__on_remove_click_callable:
-            self.__on_remove_click_callable(verse)
+        self.remove_clicked.emit(verse)
 
     def add_verse(self, verse: Verse):
         if verse in self.history:
@@ -57,9 +50,10 @@ class HistoryWidget(QtWidgets.QWidget):
             history_item_widget = HistoryItemWidget(
                 verse=verse,
                 list_widget_item=list_widget_item,
-                on_reference_click=self.__on_reference_click_callable,
-                on_remove_click=self.on_remove,
             )
+            history_item_widget.reference_clicked.connect(
+                self.reference_clicked.emit)
+            history_item_widget.remove_clicked.connect(self.on_remove)
             self.history_item_widgets.append(history_item_widget)
             list_widget_item.setSizeHint(history_item_widget.sizeHint())
             self.list_widget.addItem(list_widget_item)

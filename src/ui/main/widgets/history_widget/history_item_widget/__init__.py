@@ -1,6 +1,7 @@
 from typing import Callable, Optional
 
 from PyQt5 import QtWidgets
+from PyQt5.QtCore import pyqtSignal
 from src.models.verse import Verse
 from src.utils import styles
 from src.utils.settings.theme_settings import ThemeSettings
@@ -13,23 +14,19 @@ from .remove_button import RemoveButton
 class HistoryItemWidget(QtWidgets.QWidget):
     verse: Verse
     list_widget_item: QtWidgets.QListWidgetItem
-    __on_reference_click_callable: Optional[Callable[[Verse], None]]
-    __on_remove_click_callable: Optional[Callable[[Verse], None]]
+    reference_clicked = pyqtSignal(Verse)
+    remove_clicked = pyqtSignal(Verse)
     theme_settings: ThemeSettings
 
     def __init__(
         self, parent=None, *,
         verse: Verse,
         list_widget_item: QtWidgets.QListWidgetItem,
-        on_reference_click: Optional[Callable[[Verse], None]] = None,
-        on_remove_click: Optional[Callable[[Verse], None]] = None
     ):
         super(HistoryItemWidget, self).__init__(parent)
 
         self.verse = verse
         self.list_widget_item = list_widget_item
-        self.__on_reference_click_callable = on_reference_click
-        self.__on_remove_click_callable = on_remove_click
 
         self.theme_settings = ThemeSettings()
 
@@ -60,9 +57,7 @@ class HistoryItemWidget(QtWidgets.QWidget):
         self.remove_button.clicked.connect(self.on_remove_button_click)
 
     def on_remove_button_click(self):
-        if self.__on_remove_click_callable:
-            self.__on_remove_click_callable(self.verse)
+        self.remove_clicked.emit(self.verse)
 
     def on_reference_button_click(self):
-        if self.__on_reference_click_callable:
-            self.__on_reference_click_callable(self.verse)
+        self.reference_clicked.emit(self.verse)
