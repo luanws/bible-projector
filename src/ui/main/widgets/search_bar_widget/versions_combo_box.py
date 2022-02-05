@@ -1,16 +1,12 @@
-from typing import Callable
-
 from PyQt5 import QtWidgets
+from PyQt5.QtCore import pyqtSignal
 
 
 class VersionsComboBox(QtWidgets.QComboBox):
-    def __init__(
-        self, parent=None, *,
-        on_change_current_version_callable: Callable[[str], None]
-    ):
-        super().__init__(parent)
+    change_version = pyqtSignal(str)
 
-        self.on_change_current_version_callable = on_change_current_version_callable
+    def __init__(self, parent=None):
+        super().__init__(parent)
 
         self.setSizePolicy(
             QtWidgets.QSizePolicy.Fixed,
@@ -21,4 +17,4 @@ class VersionsComboBox(QtWidgets.QComboBox):
 
     def on_change_current_version(self):
         version = self.currentText()
-        self.on_change_current_version_callable(version)
+        self.change_version.emit(version)

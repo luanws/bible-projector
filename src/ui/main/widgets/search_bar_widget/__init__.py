@@ -2,6 +2,7 @@ from contextlib import suppress
 from typing import Callable, List
 
 from PyQt5 import QtWidgets
+from PyQt5.QtCore import pyqtSignal
 from src import widgets
 from src.models.version import Version
 from src.utils import styles
@@ -15,22 +16,20 @@ from .versions_combo_box import VersionsComboBox
 class SearchBarWidget(QtWidgets.QWidget):
     theme_settings: ThemeSettings
     versions: List[Version]
+    update_clicked = pyqtSignal()
+    change_version = pyqtSignal()
 
     def __init__(
         self, parent=None, *,
         versions: List[Version],
         search_callable: Callable[[str], None],
         project_callable: Callable[[], None],
-        update_projector_text_callable: Callable[[], None],
-        on_change_current_version_callable: Callable[[str], None],
     ) -> None:
         super(SearchBarWidget, self).__init__(parent)
 
         self.versions = versions
         self.search_callable = search_callable
         self.project_callable = project_callable
-        self.update_projector_text_callable = update_projector_text_callable
-        self.on_change_current_version_callable = on_change_current_version_callable
 
         self.theme_settings = ThemeSettings()
         self.container = Container()
@@ -48,9 +47,7 @@ class SearchBarWidget(QtWidgets.QWidget):
             self.container.removeWidget(self.project_button)
             self.container.removeWidget(self.update_button)
 
-        self.versions_combo_box = VersionsComboBox(
-            on_change_current_version_callable=self.on_change_current_version_callable,
-        )
+        self.versions_combo_box = VersionsComboBox()
         self.search_line_edit = SearchLineEdit(search_callable=self.search)
 
         color = styles.qss_vars['@colorIcon']
@@ -84,7 +81,9 @@ class SearchBarWidget(QtWidgets.QWidget):
     def configure_events(self):
         self.search_button.clicked.connect(self.search)
         self.project_button.clicked.connect(self.project_callable)
-        self.update_button.clicked.connect(self.update_projector_text_callable)
+        self.update_button.clicked.connect(self.update_clicked.emit)
+        self.versions_combo_box.change_version.connect(
+            self.change_version.emit)
 
     def search(self):
         self.search_callable(self.search_line_edit.text())
