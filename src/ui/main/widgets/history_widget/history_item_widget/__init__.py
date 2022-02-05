@@ -44,13 +44,16 @@ class HistoryItemWidget(QtWidgets.QWidget):
         self.setLayout(self.container)
 
         self.apply_styles()
-        self.theme_settings.on_change_settings(self.apply_styles)
+        self.theme_settings.add_settings_listener(self.apply_styles)
 
         self.configure_events()
 
     def apply_styles(self):
-        self.setStyleSheet(styles.get_qss_stylesheet(
-            'src/ui/main/widgets/history_widget/history_item_widget/styles.qss'))
+        try:
+            self.setStyleSheet(styles.get_qss_stylesheet(
+                'src/ui/main/widgets/history_widget/history_item_widget/styles.qss'))
+        except RuntimeError:
+            self.theme_settings.remove_settings_listener()
 
     def configure_events(self):
         self.reference_button.clicked.connect(self.on_reference_button_click)

@@ -17,13 +17,16 @@ class VerseTextLabel(QtWidgets.QLabel):
         self.setMaximumHeight(48)
         self.setMinimumHeight(48)
         self.unselect()
-        self.theme_settings.on_change_settings(self.apply_styles)
+        self.theme_settings.add_settings_listener(self.apply_styles)
 
     def apply_styles(self):
-        if self.__is_selected:
-            self.select()
-        else:
-            self.unselect()
+        try:
+            if self.__is_selected:
+                self.select()
+            else:
+                self.unselect()
+        except RuntimeError:
+            self.theme_settings.remove_settings_listener()
 
     def select(self):
         self.__is_selected = True

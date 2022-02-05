@@ -13,7 +13,7 @@ class VerseReferenceLabel(QtWidgets.QLabel):
 
         self.setAlignment(QtCore.Qt.AlignBottom)
         self.apply_styles()
-        self.theme_settings.on_change_settings(self.apply_styles)
+        self.theme_settings.add_settings_listener(self.apply_styles)
 
     def apply_styles(self):
         self.setStyleSheet(f"""

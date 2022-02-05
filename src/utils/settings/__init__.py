@@ -86,6 +86,10 @@ class Settings(ABC):
             if on_change_settings is not None:
                 on_change_settings()
 
-    def on_change_settings(self, callable: Callable):
+    def add_settings_listener(self, callable: Callable):
         class_name = self.__class__.__name__
         Settings.settings_instances[class_name][self] = callable
+
+    def remove_settings_listener(self):
+        class_name = self.__class__.__name__
+        del Settings.settings_instances[class_name][self]

@@ -34,7 +34,7 @@ class SearchBarWidget(QtWidgets.QWidget):
         self.container = Container()
 
         self.render()
-        self.theme_settings.on_change_settings(self.render)
+        self.theme_settings.add_settings_listener(self.render)
 
         self.setLayout(self.container)
 

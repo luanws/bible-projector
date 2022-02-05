@@ -14,9 +14,12 @@ class VerseNumberLabel(QtWidgets.QLabel):
         self.setFixedWidth(24)
 
         self.apply_styles()
-        self.theme_settings.on_change_settings(self.apply_styles)
+        self.theme_settings.add_settings_listener(self.apply_styles)
 
     def apply_styles(self):
-        self.setStyleSheet(f"""
-            color: {styles.qss_vars['@verseNumberTextColor']};
-        """)
+        try:
+            self.setStyleSheet(f"""
+                color: {styles.qss_vars['@verseNumberTextColor']};
+            """)
+        except RuntimeError:
+            self.theme_settings.remove_settings_listener()

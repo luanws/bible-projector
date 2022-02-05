@@ -24,7 +24,7 @@ def main():
     styles.update_qss_dict_and_qss_vars()
     configure_app_theme(app)
     theme_settings = ThemeSettings()
-    theme_settings.on_change_settings(lambda: configure_app_theme(app))
+    theme_settings.add_settings_listener(lambda: configure_app_theme(app))
 
     main_window = MainWindow()
     main_window.showMaximized()

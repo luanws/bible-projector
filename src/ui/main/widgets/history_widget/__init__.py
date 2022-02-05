@@ -9,7 +9,7 @@ from .history_item_widget import HistoryItemWidget
 class HistoryWidget(QtWidgets.QWidget):
     __history: List[Verse]
     list_widget: QtWidgets.QListWidget
-    list_widget_item: QtWidgets.QListWidgetItem
+    history_item_widgets: List[HistoryItemWidget]
     __on_reference_click_callable: Optional[Callable[[Verse], None]]
     __on_remove_click_callable: Optional[Callable[[Verse], None]]
 
@@ -22,6 +22,7 @@ class HistoryWidget(QtWidgets.QWidget):
         super(HistoryWidget, self).__init__(parent)
 
         self.__history = []
+        self.history_item_widgets = []
         self.list_widget = list_widget
         self.__on_reference_click_callable = on_reference_click
         self.__on_remove_click_callable = on_remove_click
@@ -47,16 +48,20 @@ class HistoryWidget(QtWidgets.QWidget):
 
     def render(self):
         self.list_widget.clear()
+        for history_item_widget in self.history_item_widgets:
+            history_item_widget.deleteLater()
+        self.history_item_widgets = []
         for verse in self.history:
             list_widget_item = QtWidgets.QListWidgetItem(
                 self.list_widget)
-            history_widget = HistoryItemWidget(
+            history_item_widget = HistoryItemWidget(
                 verse=verse,
                 list_widget_item=list_widget_item,
                 on_reference_click=self.__on_reference_click_callable,
                 on_remove_click=self.on_remove,
             )
-            list_widget_item.setSizeHint(history_widget.sizeHint())
+            self.history_item_widgets.append(history_item_widget)
+            list_widget_item.setSizeHint(history_item_widget.sizeHint())
             self.list_widget.addItem(list_widget_item)
             self.list_widget.setItemWidget(
-                list_widget_item, history_widget)
+                list_widget_item, history_item_widget)
