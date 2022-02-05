@@ -56,7 +56,8 @@ class AdvancedSearchWindow(QMainWindow, Ui_MainWindow):
 
     def search(self):
         search_text: str = self.search_line_edit.text()
-        version = self.versions_combo_box.currentText()
-        book = self.books_combo_box.currentText()
-        verses = self.__view_model.search(search_text, book, version)
-        self.verse_list_widget.verses = verses
+        if search_text:
+            version = self.versions_combo_box.currentText()
+            book = self.books_combo_box.currentText()
+            verses = self.__view_model.search(search_text, book, version)
+            self.verse_list_widget.verses = verses
