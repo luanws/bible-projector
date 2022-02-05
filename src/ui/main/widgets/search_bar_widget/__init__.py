@@ -13,7 +13,7 @@ from .versions_combo_box import VersionsComboBox
 
 
 class SearchBarWidget(QtWidgets.QWidget):
-    theme_settings = ThemeSettings()
+    theme_settings: ThemeSettings
 
     def __init__(
         self, parent=None, *,
@@ -31,6 +31,7 @@ class SearchBarWidget(QtWidgets.QWidget):
         self.update_projector_text_callable = update_projector_text_callable
         self.on_change_current_version_callable = on_change_current_version_callable
 
+        self.theme_settings = ThemeSettings()
         self.container = Container()
 
         self.render()
