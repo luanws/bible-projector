@@ -13,12 +13,14 @@ class Command(enum.Enum):
 
 
 class Remote(QtCore.QObject):
-    commands: Dict[Command, Callable[[Any], None]] = {}
+    commands: Dict[Command, Callable[[Any], None]]
     __command_received = QtCore.pyqtSignal(Command, dict)
     remote_thread: threading.Thread
 
     def __init__(self, parent: Optional[QtCore.QObject] = None) -> None:
         super().__init__(parent=parent)
+        
+        self.commands = {}
         self.__command_received.connect(self.__on_command_received)
 
     def start(self) -> None:

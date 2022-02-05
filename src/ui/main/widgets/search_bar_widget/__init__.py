@@ -14,6 +14,7 @@ from .versions_combo_box import VersionsComboBox
 
 class SearchBarWidget(QtWidgets.QWidget):
     theme_settings: ThemeSettings
+    versions: List[Version]
 
     def __init__(
         self, parent=None, *,

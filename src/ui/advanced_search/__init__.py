@@ -27,12 +27,17 @@ class AdvancedSearchWindow(QMainWindow, Ui_MainWindow):
             list_widget=self.chapter_list_widget,
             on_click=self.on_verse_clicked
         )
-        self.versions_combo_box.addItems(
-            self.__view_model.get_all_version_options())
         self.books_combo_box.addItems(
             self.__view_model.get_all_book_options())
 
         self.configure_events()
+
+    def show(self) -> None:
+        self.__view_model.update_versions()
+        self.versions_combo_box.clear()
+        self.versions_combo_box.addItems(
+            self.__view_model.get_all_version_options())
+        return super().show()
 
     def configure_events(self):
         self.search_line_edit.returnPressed.connect(self.search)

@@ -18,8 +18,11 @@ class AdvancedSearchViewModel:
         self.version_dao = VersionDAO()
         self.book_dao = BookDAO()
 
-        self.__version_names = [v.version for v in self.version_dao.get_all()]
         self.__book_names = [b.name for b in self.book_dao.get_all()]
+        self.update_versions()
+
+    def update_versions(self) -> None:
+        self.__version_names = [v.version for v in self.version_dao.get_all()]
 
     def get_all_version_options(self) -> List[str]:
         return ['Todas'] + self.__version_names
