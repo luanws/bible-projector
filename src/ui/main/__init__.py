@@ -43,8 +43,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.projector_settings_window = ProjectorSettingsWindow()
         self.theme_settings_window = ThemeSettingsWindow()
         self.projector_window = ProjectorWindow()
-        self.advanced_search_window = AdvancedSearchWindow(
-            self.on_verse_clicked_advanced_search)
+        self.advanced_search_window = AdvancedSearchWindow()
         self.remote_control_window = RemoteControlWindow(
             main_window_control=self.main_window_control)
         self.about_dialog = AboutDialog()
@@ -87,8 +86,15 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.action_install_version.triggered.connect(self.install_version)
         self.action_remote.triggered.connect(self.show_remote_control)
 
+        self.advanced_search_window.verse_clicked.connect(
+            self.on_verse_clicked_advanced_search)
+
     def on_verse_clicked_advanced_search(self, verse: Verse):
         self.__view_model.current_verse = verse
+        self.__view_model.update_current_chapter(verse)
+        self.update_chapter()
+        self.select_current_verse_in_chapter()
+        self.chapter_widget.scroll_to_verse(verse)
 
     def on_change_current_version(self, version: str):
         self.__view_model.current_version = version

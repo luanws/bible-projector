@@ -1,6 +1,5 @@
-from typing import Callable, Optional
-
 from PyQt5 import QtGui, QtWidgets
+from PyQt5.QtCore import pyqtSignal
 from src.models.verse import Verse
 
 from .container import Container
@@ -12,19 +11,17 @@ class VerseWidget(QtWidgets.QWidget):
     verse: Verse
     list_widget_item: QtWidgets.QListWidgetItem
     list_widget: QtWidgets.QListWidget
-    __on_click_callable: Optional[Callable[[Verse], None]]
+    clicked = pyqtSignal(Verse)
 
     def __init__(
         self, parent=None, *,
         verse: Verse,
-        list_widget_item: QtWidgets.QListWidgetItem,
-        on_click: Optional[Callable[[Verse], None]] = None
+        list_widget_item: QtWidgets.QListWidgetItem
     ):
         super(VerseWidget, self).__init__(parent)
 
         self.verse = verse
         self.list_widget_item = list_widget_item
-        self.__on_click_callable = on_click
 
         self.container = Container()
         self.verse_text_label = VerseTextLabel()
@@ -44,5 +41,4 @@ class VerseWidget(QtWidgets.QWidget):
         self.mouseReleaseEvent = self.__on_click
 
     def __on_click(self, event: QtGui.QMouseEvent):
-        if self.__on_click_callable:
-            self.__on_click_callable(self.verse)
+        self.clicked.emit(self.verse)

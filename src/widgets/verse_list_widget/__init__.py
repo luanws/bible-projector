@@ -1,6 +1,7 @@
 from typing import Callable, List, Optional
 
 from PyQt5 import QtWidgets
+from PyQt5.QtCore import pyqtSignal
 from src.models.verse import Verse
 
 from .verse_widget import VerseWidget
@@ -10,17 +11,12 @@ class VerseListWidget(QtWidgets.QWidget):
     __verses: Optional[List[Verse]] = None
     verse_widgets: List[VerseWidget]
     list_widget: QtWidgets.QListWidget
-    on_click_verse_callable: Optional[Callable[[Verse], None]] = None
+    verse_clicked = pyqtSignal(Verse)
 
-    def __init__(
-        self, parent=None, *,
-        list_widget: QtWidgets.QListWidget,
-        on_click: Optional[Callable[[Verse], None]] = None
-    ):
+    def __init__(self, parent=None, *, list_widget: QtWidgets.QListWidget):
         super(VerseListWidget, self).__init__(parent)
 
         self.list_widget = list_widget
-        self.on_click_verse_callable = on_click
 
     @property
     def verses(self) -> Optional[List[Verse]]:
@@ -40,11 +36,14 @@ class VerseListWidget(QtWidgets.QWidget):
             verse_widget = VerseWidget(
                 verse=verse,
                 list_widget_item=list_widget_item,
-                on_click=self.on_click_verse_callable,
             )
+            verse_widget.clicked.connect(self.on_verse_clicked)
             list_widget_item.setSizeHint(verse_widget.sizeHint())
             self.list_widget.addItem(list_widget_item)
             self.list_widget.setItemWidget(
                 list_widget_item, verse_widget)
             verse_widgets.append(verse_widget)
         self.verse_widgets = verse_widgets
+
+    def on_verse_clicked(self, verse: Verse):
+        self.verse_clicked.emit(verse)
