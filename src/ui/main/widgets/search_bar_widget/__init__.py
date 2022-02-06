@@ -17,7 +17,7 @@ class SearchBarWidget(QtWidgets.QWidget):
     theme_settings: ThemeSettings
     versions: List[Version]
     update_clicked = pyqtSignal()
-    change_version = pyqtSignal()
+    change_version = pyqtSignal(str)
 
     def __init__(
         self, parent=None, *,
