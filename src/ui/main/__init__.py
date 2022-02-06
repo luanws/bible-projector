@@ -88,7 +88,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.search_bar_widget.update_clicked.connect(
             self.update_projector_text)
         self.search_bar_widget.change_version.connect(
-            self.on_change_current_verse)
+            self.on_change_current_version)
 
     def on_verse_clicked_advanced_search(self, verse: Verse):
         self.__view_model.current_verse = verse
@@ -99,6 +99,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     def on_change_current_version(self, version: str):
         self.__view_model.current_version = version
+        verse = self.__view_model.current_verse
+        if verse is not None:
+            self.search(str(verse.reference))
 
     def on_change_current_verse(self, verse: Verse):
         self.preview_text_edit.setText(f"{verse.text} ({verse.reference})")
