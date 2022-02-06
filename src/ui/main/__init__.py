@@ -99,6 +99,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     def on_change_current_version(self, version: str):
         self.__view_model.current_version = version
+        verse = self.__view_model.current_verse
+        if verse is not None:
+            self.search(str(verse.reference))
 
     def on_change_current_verse(self, verse: Verse):
         self.preview_text_edit.setText(f"{verse.text} ({verse.reference})")
