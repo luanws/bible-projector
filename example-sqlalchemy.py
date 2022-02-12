@@ -1,11 +1,15 @@
 import os
 import sqlite3
+from contextlib import suppress
 
 from sqlalchemy.event import listen
 
 from src.database import Database
 
-os.remove('test.db')
+with suppress(Exception):
+    os.remove('test.db')
+
+
 db = Database('sqlite:///test.db')
 
 
@@ -27,27 +31,19 @@ db.session.execute(
 db.session.commit()
 
 
-db_sqlite3 = sqlite3.connect('test.db')
-db_sqlite3.enable_load_extension(True)
-db_sqlite3.load_extension('./res/sqlite-extensions/spellfix.so')
-cursor = db_sqlite3.cursor()
+def search(search_text: str):
+    corrected_words: list[str] = []
+    for word in search_text.split():
+        spellfix_query = f"SELECT word FROM spellfix1data WHERE word MATCH '{word}' and top=1"
+        row = db.session.execute(spellfix_query).fetchone()
+        corrected_words.append(word if row is None else row[0])
 
-def search(query):
-    # Correcting each query term with spellfix table
-    correctedquery = []
-    for t in query.split():
-        spellfix_query = "SELECT word FROM spellfix1data WHERE word MATCH ? and top=1"
-        cursor.execute(spellfix_query, (t,))
-        r = cursor.fetchone()
-        # correct the word if any match in the spellfix table; if no match, keep the word spelled as it is (then the search will give no result!)
-        correctedquery.append(r[0] if r is not None else t)
+    corrected_search_text: str = ' '.join(corrected_words)
+    print(search_text, '->', corrected_search_text)
 
-    correctedquery = ' '.join(correctedquery)
-
-    # Now do the FTS
-    fts_query = 'SELECT * FROM texts WHERE description MATCH ?'
-    cursor.execute(fts_query, (correctedquery,))
-    return {'result': cursor.fetchall(), 'correctedquery': correctedquery, 'query': query}
+    fts_query = f"SELECT * FROM texts WHERE description MATCH '{corrected_search_text}'"
+    cursor = db.session.execute(fts_query)
+    return {'result': cursor.fetchall(), 'correctedquery': corrected_search_text, 'query': search_text}
 
 
 print(search('NUMBBERS carmickaeel'))
