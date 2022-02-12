@@ -1,4 +1,9 @@
+import os
 import sqlite3
+from contextlib import suppress
+
+with suppress(Exception):
+    os.remove('test.db')
 
 db = sqlite3.connect('test.db')
 
