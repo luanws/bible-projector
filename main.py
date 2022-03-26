@@ -9,6 +9,7 @@ from PyQt5.QtWidgets import QApplication, QSplashScreen
 from src.ui.main import MainWindow
 from src.utils import styles
 from src.utils.settings.theme_settings import ThemeSettings
+from src.database import db
 
 
 def configure_app_theme(app: QApplication):
@@ -21,6 +22,8 @@ def main():
     splash_screen = QSplashScreen(QPixmap('res/img/splash.png'))
     splash_screen.show()
 
+    db.run_migrations()
+    
     styles.update_qss_dict_and_qss_vars()
     configure_app_theme(app)
     theme_settings = ThemeSettings()

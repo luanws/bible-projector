@@ -2,8 +2,10 @@ from sqlalchemy import create_engine
 from sqlalchemy.engine.base import Engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
-from sqlalchemy.orm.session import Session
 from sqlalchemy.orm.decl_api import DeclarativeMeta
+from sqlalchemy.orm.session import Session
+
+from .migrations import migrations
 
 
 class Database:
@@ -18,6 +20,10 @@ class Database:
 
         session_maker = sessionmaker(bind=self.engine)
         self.session = session_maker()
+
+    def run_migrations(self):
+        for migration in migrations:
+            migration.up(self)
 
 
 db = Database('sqlite:///data/bible.db')
