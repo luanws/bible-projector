@@ -15,16 +15,16 @@ O projeto ainda está em desenvolvimento e as próximas atualizações serão vo
 - [ ] Encontrar versículos semelhantes ao procurado na pesquisa avançada.
 - [ ] Possibilitar outros tipos de conexão remota com o aplicativo mobile (Bluetooth).
 
+## 📥 Download
+
+Se você estiver usando o Windows, baixe o zip do [GitHub Releases](https://github.com/devs-7/bible-projector/releases/latest), extraia e execute o arquivo `Projetor bíblico.exe`.
+
 ## 💻 Pré-requisitos
 
 Antes de começar, verifique se você atendeu aos seguintes requisitos:
 
 * Você instalou o [Python 3.10](https://www.python.org/);
 * Você tem uma máquina `<Windows / Linux / Mac>`.
-
-## 📥 Download
-
-Se você estiver usando o Windows, baixe o zip do [GitHub Releases](https://github.com/devs-7/bible-projector/releases/latest), extraia e execute o arquivo `Projetor bíblico.exe`.
 
 ## 📦 Instalação
 
