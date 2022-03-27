@@ -1,5 +1,3 @@
-from typing import Callable, Optional
-
 from PyQt5 import QtGui, QtWidgets
 from PyQt5.QtCore import pyqtSignal
 from src.models.verse import Verse
