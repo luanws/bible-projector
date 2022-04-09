@@ -2,19 +2,20 @@ import json
 import os
 import re
 from contextlib import suppress
-from typing import Dict, List
 
 from src.utils.settings.theme_settings import ThemeSettings
 
-qss_dict: Dict[str, str] = {}
-qss_vars: Dict[str, str] = {}
+qss_dict: dict[str, str] = {}
+qss_vars: dict[str, str] = {}
+
+stylesheets_file_path = os.path.join('res', 'styles', 'stylesheets.json')
 
 
-def get_themes() -> List[str]:
+def get_themes() -> list[str]:
     return [os.path.splitext(file)[0] for file in os.listdir('res/styles') if file.endswith('.txt')]
 
 
-def get_stylesheet_vars() -> Dict[str, str]:
+def get_stylesheet_vars() -> dict[str, str]:
     theme_settings = ThemeSettings()
     theme: str = theme_settings.theme
     filename = f'{theme}.txt'
@@ -25,17 +26,16 @@ def get_stylesheet_vars() -> Dict[str, str]:
     return {group[0]: group[1] for group in groups}
 
 
-def apply_qss_vars(qss_vars: Dict[str, str], qss_stylesheet: str) -> str:
+def apply_qss_vars(qss_vars: dict[str, str], qss_stylesheet: str) -> str:
     stylesheet = qss_stylesheet
     for key, value in qss_vars.items():
         stylesheet = re.sub(fr'{key}\s*;', f'{value};', stylesheet)
     return stylesheet
 
 
-def get_qss_dict() -> Dict[str, str]:
-    file_path = os.path.join('res', 'styles', 'stylesheets.json')
+def get_qss_dict() -> dict[str, str]:
     with suppress(FileNotFoundError):
-        with open(file_path) as f:
+        with open(stylesheets_file_path) as f:
             return json.load(f)
     return {}
 
