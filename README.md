@@ -14,6 +14,7 @@ O projeto ainda está em desenvolvimento e as próximas atualizações serão vo
 - [x] Controle remoto (é possível controlar o software remotamente através de um aplicativo mobile conectado à mesma rede WI-FI).
 - [ ] Encontrar versículos semelhantes ao procurado na pesquisa avançada.
 - [ ] Possibilitar outros tipos de conexão remota com o aplicativo mobile (Bluetooth).
+- [ ] Atualizações automáticas.
 
 ## 📥 Download
 
