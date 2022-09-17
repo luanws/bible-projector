@@ -11,11 +11,9 @@ from scripts import Script
 
 application_name = 'Projetor bíblico'
 
-assets_path = os.path.join('data')
 dist_path = os.path.join('dist')
-portable_path = os.path.join(dist_path, application_name)
+portable_path = os.path.join(dist_path, f'{application_name} {version} portable', application_name)
 zip_path = os.path.join(dist_path, f'{application_name} {version}')
-
 
 assets_to_copy = [
     ('icon.ico', portable_path),
@@ -45,7 +43,7 @@ def copy_assets(assets: List[Tuple[str, str]]):
             shutil.copytree(source, target)
 
 
-def zip_portable(target_path: str, source_path: str):
+def make_zip(target_path: str, source_path: str):
     shutil.make_archive(target_path, 'zip', source_path)
 
 
@@ -65,7 +63,7 @@ def setup():
         remove_path(portable_path)
         run_pyinstaller(application_name, portable_path)
         copy_assets(assets_to_copy)
-        zip_portable(zip_path, portable_path)
+        make_zip(zip_path, os.path.join(portable_path, '..'))
     except:
         traceback.print_exc()
     finally:
