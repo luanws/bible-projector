@@ -10,7 +10,7 @@ from .server_address import ServerAddress
 
 class RemoteAPI(Remote):
     __app: Flask
-    __server: Server = None
+    __server: Optional[Server] = None
     __server_address: ServerAddress
     prefix_length: int
 
