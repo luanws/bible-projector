@@ -17,4 +17,5 @@ class VersionsComboBox(QtWidgets.QComboBox):
 
     def on_change_current_version(self):
         version = self.currentText()
-        self.change_version.emit(version)
+        if version:
+            self.change_version.emit(version)
