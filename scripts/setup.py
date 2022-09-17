@@ -16,32 +16,33 @@ dist_path = os.path.join('dist')
 portable_path = os.path.join(dist_path, application_name)
 zip_path = os.path.join(dist_path, f'{application_name} {version}')
 
-copy_files = [
-    ('icon.ico', portable_path),
-]
 
-copy_folders = [
+assets_to_copy = [
+    ('icon.ico', portable_path),
     ('data', os.path.join(portable_path, 'data')),
     ('res', os.path.join(portable_path, 'res')),
 ]
 
 
+def remove_path(path: str):
+    with suppress(FileNotFoundError):
+        if os.path.isfile(path):
+            os.remove(path)
+        elif os.path.isdir(path):
+            shutil.rmtree(path)
+
+
 def clear_build(application_name: str):
-    with suppress(FileNotFoundError):
-        shutil.rmtree('build')
-
-    with suppress(FileNotFoundError):
-        os.remove(f'{application_name}.spec')
+    remove_path('build')
+    remove_path(f'{application_name}.spec')
 
 
-def copy_assets(copy_files: List[Tuple[str, str]], copy_folders: List[Tuple[str, str]]):
-    for source, target in copy_files:
-        shutil.copy(source, target)
-
-    for source, target in copy_folders:
-        with suppress(FileNotFoundError):
-            shutil.rmtree(target)
-        shutil.copytree(source, target)
+def copy_assets(assets: List[Tuple[str, str]]):
+    for source, target in assets:
+        if os.path.isfile(source):
+            shutil.copy(source, target)
+        elif os.path.isdir(source):
+            shutil.copytree(source, target)
 
 
 def zip_portable(target_path: str, source_path: str):
@@ -61,8 +62,9 @@ def run_pyinstaller(application_name: str, dist_path: str):
 
 def setup():
     try:
+        remove_path(portable_path)
         run_pyinstaller(application_name, portable_path)
-        copy_assets(copy_files, copy_folders)
+        copy_assets(assets_to_copy)
         zip_portable(zip_path, portable_path)
     except:
         traceback.print_exc()
