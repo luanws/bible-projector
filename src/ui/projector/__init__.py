@@ -33,6 +33,16 @@ class ProjectorWindow(QMainWindow, Ui_MainWindow):
         if key == QtCore.Qt.Key_Escape:
             self.close()
 
+    def close(self) -> bool:
+        if self.text_label.text():
+            self.text_label.setText('')
+            return False
+        return super().close()
+
+    def show(self) -> None:
+        self.text_label.setText(self.text)
+        return super().show()
+
     def on_change_text(self, text: str):
         self.text_label.setText(text)
 
