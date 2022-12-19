@@ -21,5 +21,8 @@
         "qtawesome",
         "sqlalchemy",
         "werkzeug"
-    ]
+    ],
+    "python.linting.flake8Enabled": false,
+    "python.linting.mypyEnabled": true,
+    "python.linting.enabled": true
 }
