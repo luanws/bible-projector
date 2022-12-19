@@ -64,6 +64,8 @@ class MainViewModel:
         if search_text != '':
             while search_text.__contains__('  '):
                 search_text = search_text.replace('  ', ' ')
+            while search_text.endswith(' '):
+                search_text = search_text[:-1]
             version = self.current_version
             verse_reference = VerseReference.from_str(search_text, version)
             verse = self.verse_dao.get_by_verse_reference(verse_reference)
