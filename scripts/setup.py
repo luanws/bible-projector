@@ -1,14 +1,15 @@
 import os
+import re
 import shutil
+import subprocess
 import traceback
 from contextlib import suppress
 from typing import List, Tuple
-import subprocess
 
 import PyInstaller.__main__
-from src.version import version
 
 from scripts import Script
+from src.version import version
 
 application_name = 'Projetor bíblico'
 
@@ -68,9 +69,20 @@ def run_command(command: str) -> str:
     return stdout
 
 
+def update_version_in_inno_setup_script(path: str):
+    with open(path) as file:
+        content = file.read()
+        pattern = r'#define MyAppVersion "(.*)"'
+        new_content = re.sub(pattern, f'#define MyAppVersion "{version}"', content)
+    with open(path, 'w') as file:
+        file.write(new_content)
+
+
 def create_setup():
     print('Creating setup...')
-    result = run_command('iscc scripts/assets/setup.iss')
+    update_version_in_inno_setup_script('scripts/assets/setup.iss')
+    inno_setup_path = 'scripts/assets/setup.iss'
+    result = run_command(f'iscc {inno_setup_path}')
     print(result)
 
 
