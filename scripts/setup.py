@@ -3,6 +3,7 @@ import shutil
 import traceback
 from contextlib import suppress
 from typing import List, Tuple
+import subprocess
 
 import PyInstaller.__main__
 from src.version import version
@@ -58,12 +59,28 @@ def run_pyinstaller(application_name: str, dist_path: str):
     ])
 
 
+def run_command(command: str) -> str:
+    stdout = subprocess.run(command, shell=True, stdout=subprocess.PIPE).stdout
+    encodings = ['utf-8', 'cp1252', 'latin-1']
+    for encoding in encodings:
+        with suppress(UnicodeDecodeError):
+            return stdout.decode(encoding)
+    return stdout
+
+
+def create_setup():
+    print('Creating setup...')
+    result = run_command('iscc scripts/assets/setup.iss')
+    print(result)
+
+
 def setup():
     try:
         remove_path(portable_path)
         run_pyinstaller(application_name, portable_path)
         copy_assets(assets_to_copy)
         make_zip(zip_path, os.path.join(portable_path, '..'))
+        create_setup()
     except:
         traceback.print_exc()
     finally:
