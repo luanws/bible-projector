@@ -9,7 +9,7 @@ from typing import List, Tuple
 import PyInstaller.__main__
 
 from scripts import Script
-from src.version import version
+from version import version
 
 application_name = 'Projetor bíblico'
 

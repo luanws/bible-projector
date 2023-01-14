@@ -1,7 +1,7 @@
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QDialog, QLabel, QVBoxLayout
-from src.version import version
+from version import version
 
 
 class AboutDialog(QDialog):
