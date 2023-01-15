@@ -2,8 +2,6 @@ import subprocess
 from contextlib import suppress
 from typing import Dict, List
 
-from scripts import Script
-
 
 def get_installed_packages() -> List[str]:
     return subprocess.check_output(['pip', 'freeze']).decode('utf-8').splitlines()
@@ -53,22 +51,22 @@ def get_flags_from_args(args: List[str]) -> Dict[str, str]:
     return flags
 
 
-class InstallScript(Script):
-    def __str__(self) -> str:
-        return 'instalar dependências'
+def install():
+    filename = input('Digite o nome do arquivo de dependências [requirements.txt]: ') or 'requirements.txt'
+    log_only = input('Somente gerar log? [y/n]: ').lower() == 'y'
+    packages = get_packages(filename)
+    if not log_only:
+        install_packages(packages)
+    installed_packages = get_installed_packages()
+    not_installed_packages = [p for p in packages if p not in installed_packages]
+    extra_packages = [p for p in installed_packages if p not in packages]
+    success_packages = [p for p in packages if p in installed_packages]
+    save_log(f'{filename}.log', {
+        'Success packages'.upper(): success_packages,
+        'Not installed packages'.upper(): not_installed_packages,
+        'Extra packages'.upper(): extra_packages,
+    })
 
-    def __call__(self):
-        filename = input('Digite o nome do arquivo de dependências [requirements.txt]: ') or 'requirements.txt'
-        log_only = input('Somente gerar log? [y/n]: ').lower() == 'y'
-        packages = get_packages(filename)
-        if not log_only:
-            install_packages(packages)
-        installed_packages = get_installed_packages()
-        not_installed_packages = [p for p in packages if p not in installed_packages]
-        extra_packages = [p for p in installed_packages if p not in packages]
-        success_packages = [p for p in packages if p in installed_packages]
-        save_log(f'{filename}.log', {
-            'Success packages'.upper(): success_packages,
-            'Not installed packages'.upper(): not_installed_packages,
-            'Extra packages'.upper(): extra_packages,
-        })
+
+if __name__ == '__main__':
+    install()

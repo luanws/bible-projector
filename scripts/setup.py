@@ -8,7 +8,6 @@ from typing import List, Tuple
 
 import PyInstaller.__main__
 
-from scripts import Script
 from version import version
 
 application_name = 'Projetor bíblico'
@@ -99,9 +98,5 @@ def setup():
         clear_build(application_name)
 
 
-class SetupScript(Script):
-    def __str__(self) -> str:
-        return 'setup'
-
-    def __call__(self):
-        setup()
+if __name__ == '__main__':
+    setup()

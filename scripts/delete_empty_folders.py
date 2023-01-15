@@ -1,8 +1,7 @@
 import os
-from scripts import Script
-from typing import List
-from shutil import rmtree
 from contextlib import suppress
+from shutil import rmtree
+from typing import List
 
 
 def delete_empty_folders():
@@ -17,9 +16,5 @@ def delete_empty_folders():
     print('Pastas vazias removidas com sucesso')
 
 
-class DeleteEmptyFolders(Script):
-    def __str__(self) -> str:
-        return 'deletar pastas vazias'
-
-    def __call__(self):
-        delete_empty_folders()
+if __name__ == '__main__':
+    delete_empty_folders()

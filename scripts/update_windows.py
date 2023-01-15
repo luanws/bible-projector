@@ -4,8 +4,6 @@ from typing import List, Tuple
 
 from termcolor import cprint
 
-from scripts import Script
-
 
 def get_file_name_and_roots(directory: str, pattern: str) -> List[Tuple[str, str]]:
     file_name_and_roots: List[Tuple[str, str]] = []
@@ -27,16 +25,15 @@ def remove_comments_from_python_file(path: str):
         file.write(content)
 
 
-class UpdateWindowsScript(Script):
-    def __str__(self) -> str:
-        return 'atualizar janelas do PyQt'
+def update_windows():
+    for root, ui_file_name in get_file_name_and_roots('src', r'.+\.ui$'):
+        filename = os.path.splitext(ui_file_name)[0]
+        ui_file_path = os.path.join(root, ui_file_name)
+        py_file_path = os.path.join(root, f'{filename}.py')
+        os.system(f"pyuic5 {ui_file_path} -o {py_file_path}")
+        remove_comments_from_python_file(py_file_path)
+    cprint('Janelas atualizadas com sucesso', 'green')
 
-    def __call__(self):
-        for root, ui_file_name in get_file_name_and_roots('src', r'.+\.ui$'):
-            filename = os.path.splitext(ui_file_name)[0]
-            ui_file_path = os.path.join(root, ui_file_name)
-            py_file_path = os.path.join(root, f'{filename}.py')
-            os.system(f"pyuic5 {ui_file_path} -o {py_file_path}")
-            remove_comments_from_python_file(py_file_path)
 
-        cprint('Janelas atualizadas com sucesso', 'green')
+if __name__ == '__main__':
+    update_windows()

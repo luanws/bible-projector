@@ -1,7 +1,6 @@
 import json
 from typing import Dict, List
 
-from script import Script
 from src.dao.book_dao import BookDAO
 from src.dao.verse_dao import VerseDAO
 from src.models.book import Book
@@ -33,9 +32,5 @@ def generate_bible_shape():
         f.write(bible_shape_str)
 
 
-class GenerateBibleSapeScript(Script):
-    def __str__(self) -> str:
-        return 'gerar formato da bíblia em JSON'
-
-    def __call__(self) -> None:
-        generate_bible_shape()
+if __name__ == '__main__':
+    generate_bible_shape()

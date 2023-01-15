@@ -2,10 +2,9 @@ import json
 import os
 from typing import Dict, List
 
-from src.utils import styles
 from termcolor import colored, cprint
 
-from scripts import Script
+from src.utils import styles
 
 
 def get_all_file_paths_with_extension(extension: str) -> List[str]:
@@ -73,9 +72,5 @@ def generate_styles_file():
     cprint('Arquivos de estilos gerado com sucesso', 'green')
 
 
-class GenerateStylesFile(Script):
-    def __str__(self) -> str:
-        return 'gerar arquivo de estilos'
-
-    def __call__(self):
-        generate_styles_file()
+if __name__ == '__main__':
+    generate_styles_file()
