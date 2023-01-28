@@ -1,5 +1,6 @@
-from PyQt5 import QtGui
+from PyQt5 import QtCore, QtGui
 from PyQt5.QtWidgets import QMainWindow
+
 from src.ui.main.control import MainWindowControl
 from src.utils import qrcode
 
@@ -21,6 +22,7 @@ class RemoteControlWindow(QMainWindow, Ui_RemoteControlWindow):
     def generate_qr_code(self, text: str):
         pixmap = qrcode.make_pixmap(text)
         self.qr_code_label.setPixmap(pixmap)
+        self.qr_code_label.setAlignment(QtCore.Qt.AlignCenter)
         self.setFixedSize(pixmap.size())
 
     def showEvent(self, a0: QtGui.QShowEvent) -> None:
